@@ -37,7 +37,7 @@ namespace TVB.Game.Navigation
                 if (item == null)
                     continue;
 
-                Gizmos.color = Color.green;
+                Gizmos.color = Color.red;
                 Gizmos.DrawLine(transform.position, item.transform.position);
             }
         }

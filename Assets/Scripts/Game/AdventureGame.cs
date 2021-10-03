@@ -30,6 +30,18 @@
         public Dictionary<string, bool> Conditions             => m_Conditions;
         public List<string>             UnlockedAchievements   => m_UnlockedAchievements;
         public GraphManager             GraphManager           => m_GraphManager;
+        public Player Player
+        {
+            get
+            {
+                if (m_Player == null)
+                {
+                    m_Player = FindObjectOfType<Player>(true);
+                }
+
+                return m_Player;
+            }
+        }
         public bool                     IsBusy                 = false; 
 
         public bool GamePaused
@@ -68,6 +80,7 @@
         private bool                          m_GameEnded            = false;
         private bool                          m_GamePaused           = false;
         private GraphManager                  m_GraphManager         = null;
+        private Player                        m_Player = null;
 
         // GAME INTERFACE
 
@@ -93,6 +106,8 @@
             base.OnSceneLoaded();
 
             m_GraphManager.Initialize();
+            m_Player = FindObjectOfType<Player>();
+            
             //InitializeGraphManager();
         }
 

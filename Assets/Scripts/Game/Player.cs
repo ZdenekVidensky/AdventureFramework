@@ -9,10 +9,16 @@ namespace TVB.Game
         //[SerializeField]
         private SceneSettings m_SceneSettings;
 
+        // PUBLIC MEMBERS
+
+        public Vector3 Position => m_Transform.position;
+
         // PRIVATE MEMBERS
 
         private Transform     m_Transform;
         private float         m_ScaleLevelsDistance;
+        private bool          m_CanWalk;
+        private bool          m_IsBusy;
 
         void Awake()
         {

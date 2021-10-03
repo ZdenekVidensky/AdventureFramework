@@ -9,12 +9,30 @@ namespace TVB.Game.Navigation
         // PRIVATE MEMBERS
 
         private NavMesh[] m_NavMeshes = new NavMesh[0];
+        private PolygonCollider2D m_WalkableArea;
 
         // MONOBEHAVIOUR INTERFACE
 
         private void Awake()
         {
+            m_WalkableArea = GetComponentInChildren<PolygonCollider2D>(true);
             FillNavMeshes();
+        }
+
+        private void OnMouseDown()
+        {
+            if (AdventureGame.Instance.IsBusy == true)
+                return;
+
+            Player player = AdventureGame.Instance.Player;
+
+            if (player == null)
+            {
+                Debug.LogError("Player is not in the scene!");
+                return;
+            }
+
+            Debug.DrawLine(player.Position, Input.mousePosition);
         }
 
         // Update is called once per frame
