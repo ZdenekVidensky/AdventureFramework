@@ -17,7 +17,7 @@ namespace TVB.Game.Navigation
 
         // PUBLIC MEMBERS
 
-        public Vector3 Position => m_Transform.position;
+        public Vector2 Position => m_Transform.position;
 
 
         // MONOBEHAVIOUR INTERFACE

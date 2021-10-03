@@ -6,9 +6,9 @@ namespace TVB.Game.Navigation
 
     public static class AStar
     {
-        public static List<Vector3>Search(NavMesh startMesh, NavMesh destinationMesh)
+        public static List<Vector2>Search(NavMesh startMesh, NavMesh destinationMesh)
         {
-            List<Vector3> result = new List<Vector3>(16);
+            List<Vector2> result = new List<Vector2>(16);
 
             List<NavMesh> closedSet = new List<NavMesh>(16);
             List<NavMesh> openSet = new List<NavMesh>(16);
@@ -54,9 +54,9 @@ namespace TVB.Game.Navigation
             throw new System.Exception("No optimal way found!");
         }
 
-        public static List<Vector3> ReconstructPath(Dictionary<NavMesh, NavMesh> cameFrom, NavMesh current)
+        public static List<Vector2> ReconstructPath(Dictionary<NavMesh, NavMesh> cameFrom, NavMesh current)
         {
-            List<Vector3> result = new List<Vector3>();
+            List<Vector2> result = new List<Vector2>();
             result.Add(current.Position);
 
             while (cameFrom.Keys.Contains(current))
@@ -72,13 +72,13 @@ namespace TVB.Game.Navigation
 
         public static float GetDistance(NavMesh A, NavMesh B)
         {
-            return Vector3.Distance(A.Position, B.Position);
+            return Vector2.Distance(A.Position, B.Position);
         }
 
 
         public static float GetHeuristic(NavMesh A, NavMesh destinationMesh)
         {
-            return Vector3.Distance(A.Position, destinationMesh.Position);
+            return Vector2.Distance(A.Position, destinationMesh.Position);
         }
 
         public static float Function(NavMesh x, NavMesh startMesh, NavMesh destinationMesh)

@@ -1,10 +1,17 @@
 namespace TVB.Game
 {
+    using System.Collections;
+    using System.Collections.Generic;
     using UnityEngine;
 
     public class Player : MonoBehaviour
     {
         // CONFIGURATION
+
+        [SerializeField]
+        private float m_MovementSpeed = 5f;
+        [SerializeField]
+        private float m_StoppingDistance = 0.01f;
 
         //[SerializeField]
         private SceneSettings m_SceneSettings;
@@ -20,6 +27,9 @@ namespace TVB.Game
         private bool          m_CanWalk;
         private bool          m_IsBusy;
 
+        private List<Vector2> m_CurrentPath = null;
+        private int           m_CurrentPathIndex;
+
         void Awake()
         {
             m_Transform           = GetComponent<Transform>();
@@ -27,6 +37,7 @@ namespace TVB.Game
 
         void Update()
         {
+            UpdateMovement();
             UpdateScale();
         }
 
@@ -38,7 +49,53 @@ namespace TVB.Game
             m_ScaleLevelsDistance = Mathf.Abs(m_SceneSettings.BottomScale.YPosition - m_SceneSettings.TopScale.YPosition);
         }
 
+        public void GoTo(Vector2 destinationPoint)
+        {
+            m_CurrentPath = new List<Vector2>(1) { destinationPoint };
+            m_CurrentPathIndex = 0;
+        }
+
+        public void GoTo(List<Vector2> path)
+        {
+            m_CurrentPath = path;
+            m_CurrentPathIndex = 0;
+        }
+
         // PRIVATE METHODS
+
+        private void UpdateMovement()
+        {
+            if (m_CurrentPath == null)
+                return;
+
+            Vector3 destinationPoint = m_CurrentPath[m_CurrentPathIndex];
+            Vector3 direction = (destinationPoint - m_Transform.position);
+
+            m_Transform.position += direction.normalized * (m_MovementSpeed * Time.deltaTime);
+
+            if (Vector2.Distance(m_Transform.position, destinationPoint) <= m_StoppingDistance)
+            {
+                if (m_CurrentPathIndex == (m_CurrentPath.Count - 1))
+                {
+                    m_CurrentPath = null;
+                    m_CurrentPathIndex = 0;
+                }
+
+                m_CurrentPathIndex += 1;
+            }
+        }
+
+        private IEnumerator GoToPoint(Vector3 destinationPoint)
+        {
+            Debug.DrawLine(m_Transform.position, destinationPoint, Color.green, 20f);
+            Vector3 direction = destinationPoint - m_Transform.position;
+
+            while(Vector2.Distance(m_Transform.position, destinationPoint) > m_StoppingDistance)
+            {
+                m_Transform.position += direction * m_MovementSpeed;
+                yield return new WaitForEndOfFrame();
+            }
+        }
 
         private void UpdateScale()
         {
