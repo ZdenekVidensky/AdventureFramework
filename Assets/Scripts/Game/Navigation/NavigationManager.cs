@@ -1,13 +1,15 @@
 namespace TVB.Game.Navigation
 {
-    using Sirenix.OdinInspector;
     using System.Collections.Generic;
     using System.Linq;
     using UnityEngine;
+    using Sirenix.OdinInspector;
 
     [RequireComponent(typeof(PolygonCollider2D))]
     public class NavigationManager : MonoBehaviour
     {
+
+        private const string BLOCK_LAYER_NAME = "Block";
 
         // PRIVATE MEMBERS
 
@@ -15,11 +17,14 @@ namespace TVB.Game.Navigation
         private PolygonCollider2D m_WalkableArea;
         private Camera            m_MainCamera;
 
+        private Collider2D[]      m_Blocks = new Collider2D[0];
+
         // MONOBEHAVIOUR INTERFACE
 
         private void Awake()
         {
             m_WalkableArea = GetComponentInChildren<PolygonCollider2D>(true);
+            m_Blocks = GetComponentsInChildren<Collider2D>(true).Where(m => m.gameObject.layer == LayerMask.NameToLayer(BLOCK_LAYER_NAME)).ToArray();
             m_MainCamera   = Camera.main;
 
             FillNavMeshes();
@@ -39,6 +44,13 @@ namespace TVB.Game.Navigation
             }
 
             Vector3 destinationPoint = m_MainCamera.ScreenToWorldPoint(Input.mousePosition);
+
+            for (int idx = 0; idx < m_Blocks.Length; idx++)
+            {
+                Collider2D collider = m_Blocks[idx];
+
+                collider.
+            }
 
             NavMesh startNavMesh = GetClosesNavMeshToPoint(player.Position);
             NavMesh destinationNavMesh = GetClosesNavMeshToPoint(destinationPoint);
@@ -73,12 +85,6 @@ namespace TVB.Game.Navigation
             }
 
             return result;
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-        
         }
 
         // EDITOR
