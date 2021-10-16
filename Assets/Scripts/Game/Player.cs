@@ -19,6 +19,7 @@ namespace TVB.Game
         // PUBLIC MEMBERS
 
         public Vector3 Position => m_Transform.position;
+        public bool IsGoing     => m_CurrentPath != null;
 
         // PRIVATE MEMBERS
 

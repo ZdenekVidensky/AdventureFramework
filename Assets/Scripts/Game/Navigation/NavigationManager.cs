@@ -1,7 +1,6 @@
 namespace TVB.Game.Navigation
 {
     using System.Collections.Generic;
-    using System.Linq;
     using UnityEngine;
     using Sirenix.OdinInspector;
 
@@ -14,17 +13,12 @@ namespace TVB.Game.Navigation
         // PRIVATE MEMBERS
 
         private NavMesh[]         m_NavMeshes = new NavMesh[0];
-        private PolygonCollider2D m_WalkableArea;
         private Camera            m_MainCamera;
-
-        private Collider2D[]      m_Blocks = new Collider2D[0];
 
         // MONOBEHAVIOUR INTERFACE
 
         private void Awake()
         {
-            m_WalkableArea = GetComponentInChildren<PolygonCollider2D>(true);
-            m_Blocks = GetComponentsInChildren<Collider2D>(true).Where(m => m.gameObject.layer == LayerMask.NameToLayer(BLOCK_LAYER_NAME)).ToArray();
             m_MainCamera   = Camera.main;
 
             FillNavMeshes();
@@ -45,25 +39,37 @@ namespace TVB.Game.Navigation
 
             Vector3 destinationPoint = m_MainCamera.ScreenToWorldPoint(Input.mousePosition);
 
-            for (int idx = 0; idx < m_Blocks.Length; idx++)
+            GoTo(destinationPoint, player);
+        }
+
+        public void GoTo(Vector3 destinationPoint, Player player)
+        {
+            if (IsPathBlockingSomething(player.Position, destinationPoint) == true)
             {
-                Collider2D collider = m_Blocks[idx];
+                NavMesh startNavMesh = GetClosesNavMeshToPoint(player.Position);
+                NavMesh destinationNavMesh = GetClosesNavMeshToPoint(destinationPoint);
 
-                collider.
+                List<Vector2> path = AStar.Search(startNavMesh, destinationNavMesh);
+                path.Add(destinationPoint);
+
+                player.GoTo(path);
             }
+            else
+            {
+                player.GoTo(destinationPoint);
+            }
+        }
 
-            NavMesh startNavMesh = GetClosesNavMeshToPoint(player.Position);
-            NavMesh destinationNavMesh = GetClosesNavMeshToPoint(destinationPoint);
+        private static bool IsPathBlockingSomething(Vector3 playerPosition, Vector3 destination)
+        {
+            Vector3 direction = destination - playerPosition;
+            float distance = Vector3.Distance(playerPosition, destination);
+            int layerMask = LayerMask.GetMask(BLOCK_LAYER_NAME);
 
-            List<Vector2> path = AStar.Search(startNavMesh, destinationNavMesh);
-            path.Add(destinationPoint);
+            RaycastHit2D hit = Physics2D.Raycast(playerPosition, direction, distance, layerMask);
+            Debug.DrawRay(playerPosition, direction, Color.green, 3f);
 
-            player.GoTo(path);
-
-            //for (int idx = 0, count = path.Count - 1; idx < count; ++idx)
-            //{
-            //    Debug.DrawLine(path[idx], path[idx + 1], Color.green, 3f);                
-            //}
+            return hit.collider != null;
         }
 
         private NavMesh GetClosesNavMeshToPoint(Vector2 point)

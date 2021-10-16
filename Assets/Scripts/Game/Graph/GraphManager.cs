@@ -10,6 +10,7 @@
     using TVB.Game.GUI;
     using TVB.Game.Interactable;
     using TVB.Game.GameSignals;
+    using TVB.Game.Navigation;
 
     public class GraphManager : MonoBehaviour
 	{
@@ -17,6 +18,7 @@
 
 		//[SerializeField]
 		private GUIIngameView      m_IngameView;
+		private NavigationManager  m_NavigationManager;
 		private int                m_SelectedDecision = -1;
 		private IInteractable      m_InteractableObject;
 		private bool               m_SkipPerformed;
@@ -33,14 +35,16 @@
         private void OnDestroy()
         {
 			m_IngameView.SelectDecisionEvent.RemoveListener(OnSelectDecision);
-			m_IngameView = null;
+			m_IngameView       = null;
+			m_NavigationManager = null;
 		}
 
         // PUBLIC METHODS
 
         public void Initialize()
         {
-			m_IngameView = FindObjectOfType<GUIIngameView>();
+			m_IngameView       = FindObjectOfType<GUIIngameView>();
+			m_NavigationManager = FindObjectOfType<NavigationManager>();
 			m_IngameView.SelectDecisionEvent.AddListener(OnSelectDecision);
 		}
 
@@ -117,6 +121,9 @@
 					yield break;
 				case SetConditionNode setConditionNode:
 					SetCondition(setConditionNode);
+					break;
+				case GoToNode goToNode:
+					yield return GoTo(goToNode);
 					break;
 				case DecisionNode decisionNode:
 					m_SelectedDecision = -1;
@@ -209,6 +216,16 @@
 		private void SetCondition(SetConditionNode node)
         {
 			AdventureGame.Instance.SetCondition(node.ConditionName, node.BooleanValue);
+        }
+
+		private IEnumerator GoTo(GoToNode node)
+        {
+			Player player = AdventureGame.Instance.Player;
+
+			m_NavigationManager.GoTo(node.Destination, player);
+
+			while (player.IsGoing == true)
+				yield return null; // TODO
         }
 
 		private IEnumerator Condition(ConditionNode conditionNode)
