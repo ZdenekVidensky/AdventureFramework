@@ -42,6 +42,7 @@
                 return m_Player;
             }
         }
+
         public bool                     IsBusy                 = false; 
 
         public bool GamePaused

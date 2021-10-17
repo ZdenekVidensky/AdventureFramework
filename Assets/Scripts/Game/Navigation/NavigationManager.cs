@@ -9,11 +9,13 @@ namespace TVB.Game.Navigation
     {
 
         private const string BLOCK_LAYER_NAME = "Block";
+        private const float  DOUBLECLICK_DELAY = 0.3f;
 
         // PRIVATE MEMBERS
 
         private NavMesh[]         m_NavMeshes = new NavMesh[0];
         private Camera            m_MainCamera;
+        private float             m_LastClickTime;
 
         // MONOBEHAVIOUR INTERFACE
 
@@ -38,6 +40,14 @@ namespace TVB.Game.Navigation
             }
 
             Vector3 destinationPoint = m_MainCamera.ScreenToWorldPoint(Input.mousePosition);
+
+            if (Time.timeSinceLevelLoad - m_LastClickTime < DOUBLECLICK_DELAY)
+            {
+                player.SkipTo(destinationPoint);
+                return;
+            }
+
+            m_LastClickTime = Time.timeSinceLevelLoad;
 
             GoTo(destinationPoint, player);
         }

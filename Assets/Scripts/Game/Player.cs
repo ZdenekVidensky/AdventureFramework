@@ -62,6 +62,12 @@ namespace TVB.Game
             m_CurrentPathIndex = 0;
         }
 
+        public void SkipTo(Vector2 destinationPoint)
+        {
+            m_CurrentPath = null;
+            m_Transform.position = destinationPoint;
+        }
+
         // PRIVATE METHODS
 
         private void UpdateMovement()

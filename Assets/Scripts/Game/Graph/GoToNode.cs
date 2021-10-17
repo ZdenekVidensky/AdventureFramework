@@ -11,5 +11,15 @@ namespace TVB.Game.Graph
         [Output] public BaseInteractiveNode Output;
 
         public Vector2 Destination;
+
+        [Button("Set Player position")]
+        private void SetPlayerPosition()
+        {
+            Player player = FindObjectOfType<Player>(true);
+            if (player == null)
+                return;
+
+            Destination = player.transform.position;
+        }
     }
 }
