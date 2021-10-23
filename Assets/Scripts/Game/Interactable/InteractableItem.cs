@@ -13,6 +13,8 @@
         private int                      m_CustomTextID;
         [SerializeField]
         private InteractiveGraph         m_InteractiveGraph;
+        [SerializeField]
+        private int                      m_ItemNameID;
 
         EInteractableAction IInteractable.ActionType         => m_InteractableAction;
         int IInteractable.CustomTextID                       => m_CustomTextID;
@@ -56,12 +58,24 @@
 
         private void OnMouseEnter()
         {
+            if (AdventureGame.Instance.IsBusy == true)
+                return;
+
+            if (AdventureGame.Instance.IsInventoryOpen == true)
+                return;
+
             Signals.GUISignals.SetItemDescription.Emit($"Vzít {gameObject.name}");
             Signals.GUISignals.ShowItemDescription.Emit(true);
         }
 
         private void OnMouseExit()
         {
+            if (AdventureGame.Instance.IsBusy == true)
+                return;
+
+            if (AdventureGame.Instance.IsInventoryOpen == true)
+                return;
+
             Signals.GUISignals.ShowItemDescription.Emit(false);
         }
 

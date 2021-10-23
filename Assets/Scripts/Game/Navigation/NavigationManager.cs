@@ -31,6 +31,9 @@ namespace TVB.Game.Navigation
             if (AdventureGame.Instance.IsBusy == true)
                 return;
 
+            if (AdventureGame.Instance.IsInventoryOpen == true)
+                return;
+
             AdventureGame.Instance.GraphManager.ForceStopProcessing();
 
             Player player = AdventureGame.Instance.Player;

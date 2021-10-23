@@ -597,7 +597,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Language: 0
   AchievementsDatabase: []
-  IsBusy: 0
 --- !u!4 &836131671
 Transform:
   m_ObjectHideFlags: 0
@@ -1678,6 +1677,7 @@ MonoBehaviour:
   m_InteractableAction: 2
   m_CustomTextID: 0
   m_InteractiveGraph: {fileID: 11400000, guid: 577673a16486e084d820a52fbd957077, type: 2}
+  m_ItemNameID: 0
   m_InteractableWithItems: []
 --- !u!61 &1974912298
 BoxCollider2D:
@@ -1718,7 +1718,7 @@ GameObject:
   - component: {fileID: 2006938434}
   - component: {fileID: 2006938436}
   m_Layer: 0
-  m_Name: Scroll
+  m_Name: Lighter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1755,7 +1755,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.6, y: 0.6}
+    oldSize: {x: 0.4, y: 0.75}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -1804,7 +1804,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 9a9a16cd0e403264581ae456a29ad014, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d3a1b47729dc68447923e3e344f6cd7e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1830,6 +1830,7 @@ MonoBehaviour:
   m_InteractableAction: 4
   m_CustomTextID: 0
   m_InteractiveGraph: {fileID: 11400000, guid: baee73cf591cb7c4696ee7485e52a6b1, type: 2}
+  m_ItemNameID: 0
   m_InteractableWithItems: []
 --- !u!1 &2087635206
 GameObject:

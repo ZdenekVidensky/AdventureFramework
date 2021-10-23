@@ -119,7 +119,7 @@
 				case EndGameNode _:
 					Signals.GameplaySignals.EndGame.Emit();
 					yield break;
-				case DialogueLineNode dialogueNode:
+				case TalkNode dialogueNode:
 					yield return Talk(dialogueNode);
 					break;
 				case TakeItemNode takeItemNode:
@@ -305,7 +305,7 @@
 			m_IngameView.SetInventoryData(inventory.Items);
 		}
 
-		private IEnumerator Talk(DialogueLineNode dialogueNode)
+		private IEnumerator Talk(TalkNode dialogueNode)
 		{
 			yield return null; // Wait one frame for processing skip
 			m_Talking = true;

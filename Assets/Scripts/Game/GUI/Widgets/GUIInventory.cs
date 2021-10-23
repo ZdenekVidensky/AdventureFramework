@@ -7,6 +7,7 @@
 
     using TVB.Core.GUI;
     using TVB.Core.Attributes;
+    using TVB.Game.GameSignals;
 
     public class GUIInventory : GUIComponent
     {
@@ -69,7 +70,10 @@
 
         private void OnToggleInventory()
         {
-            m_MainFrame.SetActive(!m_MainFrame.gameObject.activeSelf);
+            bool inventoryActive = !m_MainFrame.gameObject.activeSelf;
+            m_MainFrame.SetActive(inventoryActive);
+
+            AdventureGame.Instance.IsInventoryOpen = inventoryActive;
         }
     }
 

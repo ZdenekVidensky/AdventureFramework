@@ -22,14 +22,14 @@
         private ELanguage m_Language = ELanguage.Czech;
 
         [SerializeField]
-        private List<Achievement> AchievementsDatabase;
+        private List<Achievement> AchievementsDatabase = new List<Achievement>(32);
 
         // PUBLIC MEMBERS
 
-        public Inventory                Inventory              => m_Inventory;
-        public Dictionary<string, bool> Conditions             => m_Conditions;
-        public List<string>             UnlockedAchievements   => m_UnlockedAchievements;
-        public GraphManager             GraphManager           => m_GraphManager;
+        public Inventory Inventory => m_Inventory;
+        public Dictionary<string, bool> Conditions => m_Conditions;
+        public List<string> UnlockedAchievements => m_UnlockedAchievements;
+        public GraphManager GraphManager => m_GraphManager;
         public Player Player
         {
             get
@@ -43,7 +43,26 @@
             }
         }
 
-        public bool                     IsBusy                 = false; 
+
+        public bool IsBusy
+        {
+            get
+            {
+                return m_IsBusy;
+            }
+
+            set
+            {
+                Signals.GUISignals.GameBusyChanged.Emit(value);
+                m_IsBusy = value;
+            }
+        }
+
+        public bool IsInventoryOpen
+        {
+            get => m_IsInventoryOpen;
+            set => m_IsInventoryOpen = value;
+        }
 
         public bool GamePaused
         {
@@ -81,7 +100,9 @@
         private bool                          m_GameEnded            = false;
         private bool                          m_GamePaused           = false;
         private GraphManager                  m_GraphManager         = null;
-        private Player                        m_Player = null;
+        private Player                        m_Player               = null;
+        private bool                          m_IsBusy               = false;
+        private bool                          m_IsInventoryOpen      = false;
 
         // GAME INTERFACE
 
@@ -92,6 +113,7 @@
             TextDatabase.InitializeLanguage(m_Language);
             InitializeGraphManager();
 
+            // TODO:
             //Cursor.SetCursor(m_GUISettings.CursorIcon, Vector2.zero, CursorMode.ForceSoftware);
         }
 
@@ -108,8 +130,6 @@
 
             m_GraphManager.Initialize();
             m_Player = FindObjectOfType<Player>();
-            
-            //InitializeGraphManager();
         }
 
         // PUBLIC METHODS

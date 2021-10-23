@@ -2,12 +2,13 @@
 {
     using UnityEngine;
     using UnityEngine.UI;
+    using UnityEngine.EventSystems;
 
     using TVB.Core.GUI;
     using TVB.Core.Attributes;
-    using UnityEngine.EventSystems;
+    using TVB.Game.GameSignals;
 
-    public class GUIInventoryItem : GUIComponent, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
+    public class GUIInventoryItem : GUIComponent, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler
     {
         [GetComponent(true), SerializeField, HideInInspector]
         private Image         m_Image;
@@ -22,6 +23,23 @@
             base.OnInitialized();
 
             m_ParentRectTransform = this.transform.parent.GetComponent<RectTransform>();
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            if (AdventureGame.Instance.IsBusy == true)
+                return;
+
+            Signals.GUISignals.SetItemDescription.Emit($"Vzít {gameObject.name}");
+            Signals.GUISignals.ShowItemDescription.Emit(true);
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            if (AdventureGame.Instance.IsBusy == true)
+                return;
+
+            Signals.GUISignals.ShowItemDescription.Emit(false);
         }
 
         public void SetData(InventoryItem item)

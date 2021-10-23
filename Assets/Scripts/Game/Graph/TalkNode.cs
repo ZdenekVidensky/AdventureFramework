@@ -4,8 +4,8 @@
     using Sirenix.OdinInspector;
     using TVB.Core.Localization;
 
-    [CreateNodeMenu("Dialogue Node"), NodeTint("#4564e9"), NodeWidth(300)]
-    class DialogueLineNode : BaseInteractiveNode
+    [CreateNodeMenu("Talk Node"), NodeTint("#4564e9"), NodeWidth(300)]
+    class TalkNode : BaseInteractiveNode
     {
         [Input] public BaseInteractiveNode  Input;
         [Output] public BaseInteractiveNode Output;
@@ -14,7 +14,7 @@
         public int         TextID;
         public bool        PlayTalkAnimation = true;
 
-        [MultiLineProperty(5), DisableInEditorMode, DisableInPlayMode, ShowInInspector,]
+        [MultiLineProperty(5), DisableInEditorMode, DisableInPlayMode, ShowInInspector]
         public string      Text => TextDatabase.Localize[TextID];
     }
 

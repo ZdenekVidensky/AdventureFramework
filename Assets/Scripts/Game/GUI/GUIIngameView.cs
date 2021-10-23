@@ -28,7 +28,7 @@
         [GetComponentInChildren("ItemDescription", true), SerializeField, HideInInspector]
         private GUIText       m_ItemDescription;
 
-        private Camera        m_MainCamera;
+        private RectTransform m_ItemDescriptionRectTransform;
 
         // Decisions
         [GetComponentInChildren("Decisions", true), SerializeField, HideInInspector]
@@ -54,6 +54,62 @@
 
         [HideInInspector]
         public SelectDecision SelectDecisionEvent = new SelectDecision();
+
+        // GUIVIEW INTERFACE
+
+        public override void OnInitialized()
+        {
+            base.OnInitialized();
+
+            m_Decision1Button.onClick.AddListener(OnDecision1ButtonClick);
+            m_Decision2Button.onClick.AddListener(OnDecision2ButtonClick);
+            m_Decision3Button.onClick.AddListener(OnDecision3ButtonClick);
+            m_Decision4Button.onClick.AddListener(OnDecision4ButtonClick);
+
+            m_ItemDescription.SetActive(false);
+
+            Signals.GUISignals.SetItemDescription.Connect(SetItemDescription);
+            Signals.GUISignals.ShowItemDescription.Connect(ShowItemDescription);
+            Signals.GUISignals.GameBusyChanged.Connect(OnGameIsBusyChanged);
+
+            m_ItemDescriptionRectTransform = m_ItemDescription.rectTransform;
+        }
+
+        public override void OnDeinitialized()
+        {
+
+            m_Decision1Button.onClick.RemoveListener(OnDecision1ButtonClick);
+            m_Decision2Button.onClick.RemoveListener(OnDecision2ButtonClick);
+            m_Decision3Button.onClick.RemoveListener(OnDecision3ButtonClick);
+            m_Decision4Button.onClick.RemoveListener(OnDecision4ButtonClick);
+
+            Signals.GUISignals.GameBusyChanged.Disconnect(OnGameIsBusyChanged);
+            Signals.GUISignals.SetItemDescription.DisconnectAll();
+            Signals.GUISignals.ShowItemDescription.DisconnectAll();
+
+            base.OnDeinitialized();
+        }
+
+        public override void OnUpdate()
+        {
+            base.OnUpdate();
+
+            if (m_ItemDescription.IsActive() == false)
+                return;
+
+            if (AdventureGame.Instance.IsBusy == true)
+                return;
+
+            m_ItemDescriptionRectTransform.position = Input.mousePosition;
+        }
+
+        public override void OnOpen()
+        {
+            base.OnOpen();
+
+            SetSubtitlesVisibility(false);
+            DisplayDecisions(false);
+        }
 
         // PUBLIC METHODS
 
@@ -120,75 +176,6 @@
             m_Decisions.SetActive(state);
         }
 
-        // SIGNAL HANDLERS
-
-        private void SetItemDescription(string description)
-        {
-            m_ItemDescription.text = description;
-        }
-
-        private void ShowItemDescription(bool active)
-        {
-            if (AdventureGame.Instance.IsBusy == true && active == true)
-                return;
-
-            m_ItemDescription.SetActive(active);
-        }
-
-        // GUIVIEW INTERFACE
-
-        public override void OnInitialized()
-        {
-            base.OnInitialized();
-
-            m_Decision1Button.onClick.AddListener(OnDecision1ButtonClick);
-            m_Decision2Button.onClick.AddListener(OnDecision2ButtonClick);
-            m_Decision3Button.onClick.AddListener(OnDecision3ButtonClick);
-            m_Decision4Button.onClick.AddListener(OnDecision4ButtonClick);
-
-            m_ItemDescription.SetActive(false);
-
-            Signals.GUISignals.SetItemDescription.Connect(SetItemDescription);
-            Signals.GUISignals.ShowItemDescription.Connect(ShowItemDescription);
-
-            m_MainCamera = Camera.main;
-        }
-
-        public override void OnDeinitialized()
-        {
-
-            m_Decision1Button.onClick.RemoveListener(OnDecision1ButtonClick);
-            m_Decision2Button.onClick.RemoveListener(OnDecision2ButtonClick);
-            m_Decision3Button.onClick.RemoveListener(OnDecision3ButtonClick);
-            m_Decision4Button.onClick.RemoveListener(OnDecision4ButtonClick);
-
-            Signals.GUISignals.SetItemDescription.DisconnectAll();
-            Signals.GUISignals.ShowItemDescription.DisconnectAll();
-
-            base.OnDeinitialized();
-        }
-
-        public override void OnUpdate()
-        {
-            base.OnUpdate();
-
-            if (m_ItemDescription.IsActive() == false)
-                return;
-
-            if (AdventureGame.Instance.IsBusy == true)
-                return;
-
-            m_ItemDescription.rectTransform.position = Input.mousePosition;
-        }
-
-        public override void OnOpen()
-        {
-            base.OnOpen();
-
-            SetSubtitlesVisibility(false);
-            DisplayDecisions(false);
-        }
-
         // HANDLERS
 
         private void OnDecision1ButtonClick()
@@ -208,6 +195,26 @@
         private void OnDecision4ButtonClick()
         {
             SelectDecisionEvent.Invoke(3);
+        }
+
+        // GUI SIGNALS
+
+        private void SetItemDescription(string description)
+        {
+            m_ItemDescription.text = description;
+        }
+
+        private void ShowItemDescription(bool active)
+        {
+            m_ItemDescription.SetActive(active);
+        }
+
+        private void OnGameIsBusyChanged(bool busy)
+        {
+            if (busy == true && m_ItemDescription.IsActive() == true)
+            {
+                m_ItemDescription.SetActive(false);
+            }
         }
     }
 }
