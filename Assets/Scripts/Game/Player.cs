@@ -25,8 +25,6 @@ namespace TVB.Game
 
         private Transform     m_Transform;
         private float         m_ScaleLevelsDistance;
-        private bool          m_CanWalk;
-        private bool          m_IsBusy;
 
         private List<Vector2> m_CurrentPath = null;
         private int           m_CurrentPathIndex;
