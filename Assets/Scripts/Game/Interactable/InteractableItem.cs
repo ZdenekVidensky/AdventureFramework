@@ -3,6 +3,7 @@
     using UnityEngine;
 
     using TVB.Game.Graph;
+    using TVB.Game.GameSignals;
 
     public class InteractableItem : MonoBehaviour, IInteractable
     {
@@ -52,6 +53,17 @@
         }
 
         // PRIVATE METHODS
+
+        private void OnMouseEnter()
+        {
+            Signals.GUISignals.SetItemDescription.Emit($"Vzít {gameObject.name}");
+            Signals.GUISignals.ShowItemDescription.Emit(true);
+        }
+
+        private void OnMouseExit()
+        {
+            Signals.GUISignals.ShowItemDescription.Emit(false);
+        }
 
         private void OnMouseDown()
         {

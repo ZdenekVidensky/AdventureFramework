@@ -1957,6 +1957,46 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1919958233}
     m_Modifications:
+    - target: {fileID: 3005246231492197974, guid: deab62797e0dd1f45948813e3b1c894b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3005246231492197974, guid: deab62797e0dd1f45948813e3b1c894b, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3005246231492197974, guid: deab62797e0dd1f45948813e3b1c894b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3005246231492197974, guid: deab62797e0dd1f45948813e3b1c894b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5842480763869434851, guid: deab62797e0dd1f45948813e3b1c894b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5842480763869434851, guid: deab62797e0dd1f45948813e3b1c894b, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5842480763869434851, guid: deab62797e0dd1f45948813e3b1c894b, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 140
+      objectReference: {fileID: 0}
+    - target: {fileID: 5842480763869434851, guid: deab62797e0dd1f45948813e3b1c894b, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 140
+      objectReference: {fileID: 0}
+    - target: {fileID: 5842480763869434851, guid: deab62797e0dd1f45948813e3b1c894b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 130
+      objectReference: {fileID: 0}
+    - target: {fileID: 5842480763869434851, guid: deab62797e0dd1f45948813e3b1c894b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -100
+      objectReference: {fileID: 0}
     - target: {fileID: 5842480764073660420, guid: deab62797e0dd1f45948813e3b1c894b, type: 3}
       propertyPath: m_BlockingMask.m_Bits
       value: 247
@@ -2048,6 +2088,10 @@ PrefabInstance:
     - target: {fileID: 5842480764073660424, guid: deab62797e0dd1f45948813e3b1c894b, type: 3}
       propertyPath: m_Name
       value: IngameView
+      objectReference: {fileID: 0}
+    - target: {fileID: 6615297093344574903, guid: deab62797e0dd1f45948813e3b1c894b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: deab62797e0dd1f45948813e3b1c894b, type: 3}

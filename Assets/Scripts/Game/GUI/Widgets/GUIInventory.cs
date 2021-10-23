@@ -3,6 +3,7 @@
     using System.Collections.Generic;
 
     using UnityEngine;
+    using UnityEngine.UI;
 
     using TVB.Core.GUI;
     using TVB.Core.Attributes;
@@ -14,6 +15,12 @@
         [GetComponentInChildren("Item", true), SerializeField, HideInInspector]
         private GUIInventoryItem m_Item;
 
+        [GetComponentInChildren("MainFrame", true), SerializeField, HideInInspector]
+        private RectTransform m_MainFrame;
+
+        [SerializeField]
+        private Button m_InventoryToggleButton;
+
         public override void OnInitialized()
         {
             base.OnInitialized();
@@ -21,7 +28,17 @@
             m_Item.SetActive(false);
             m_Items.Add(m_Item);
 
+            m_InventoryToggleButton.onClick.AddListener(OnToggleInventory);
+            m_MainFrame.SetActive(false);
+
             SetData(AdventureGame.Instance.Inventory.Items);
+        }
+
+        public override void OnDeinitialized()
+        {
+            m_InventoryToggleButton.onClick.RemoveAllListeners();
+
+            base.OnDeinitialized();
         }
 
         public void SetData(List<InventoryItem> data)
@@ -46,6 +63,13 @@
                     m_Items[idx].SetActive(true);
                 }
             }
+        }
+
+        // HANDLERS
+
+        private void OnToggleInventory()
+        {
+            m_MainFrame.SetActive(!m_MainFrame.gameObject.activeSelf);
         }
     }
 

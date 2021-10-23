@@ -49,6 +49,12 @@
         private event Action<int, T> m_EventHandler;
         private event Action<T> m_EventHandlerWithoutID;
 
+        public void DisconnectAll()
+        {
+            m_EventHandler = null;
+            m_EventHandlerWithoutID = null;
+        }
+
         public void Connect(Action<T> action)
         {
             m_EventHandlerWithoutID += action;

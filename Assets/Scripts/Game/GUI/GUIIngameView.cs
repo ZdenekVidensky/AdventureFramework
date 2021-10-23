@@ -23,8 +23,12 @@
 
         [GetComponentInChildren("Subtitles", true), SerializeField, HideInInspector]
         private GUIText       m_Subtitles;
-        [GetComponentInChildren("Inventory", true), SerializeField/*, HideInInspector*/]
+        [GetComponentInChildren("Inventory", true), SerializeField, HideInInspector]
         private GUIInventory  m_Inventory;
+        [GetComponentInChildren("ItemDescription", true), SerializeField, HideInInspector]
+        private GUIText       m_ItemDescription;
+
+        private Camera        m_MainCamera;
 
         // Decisions
         [GetComponentInChildren("Decisions", true), SerializeField, HideInInspector]
@@ -116,6 +120,21 @@
             m_Decisions.SetActive(state);
         }
 
+        // SIGNAL HANDLERS
+
+        private void SetItemDescription(string description)
+        {
+            m_ItemDescription.text = description;
+        }
+
+        private void ShowItemDescription(bool active)
+        {
+            if (AdventureGame.Instance.IsBusy == true && active == true)
+                return;
+
+            m_ItemDescription.SetActive(active);
+        }
+
         // GUIVIEW INTERFACE
 
         public override void OnInitialized()
@@ -126,6 +145,13 @@
             m_Decision2Button.onClick.AddListener(OnDecision2ButtonClick);
             m_Decision3Button.onClick.AddListener(OnDecision3ButtonClick);
             m_Decision4Button.onClick.AddListener(OnDecision4ButtonClick);
+
+            m_ItemDescription.SetActive(false);
+
+            Signals.GUISignals.SetItemDescription.Connect(SetItemDescription);
+            Signals.GUISignals.ShowItemDescription.Connect(ShowItemDescription);
+
+            m_MainCamera = Camera.main;
         }
 
         public override void OnDeinitialized()
@@ -136,7 +162,23 @@
             m_Decision3Button.onClick.RemoveListener(OnDecision3ButtonClick);
             m_Decision4Button.onClick.RemoveListener(OnDecision4ButtonClick);
 
+            Signals.GUISignals.SetItemDescription.DisconnectAll();
+            Signals.GUISignals.ShowItemDescription.DisconnectAll();
+
             base.OnDeinitialized();
+        }
+
+        public override void OnUpdate()
+        {
+            base.OnUpdate();
+
+            if (m_ItemDescription.IsActive() == false)
+                return;
+
+            if (AdventureGame.Instance.IsBusy == true)
+                return;
+
+            m_ItemDescription.rectTransform.position = Input.mousePosition;
         }
 
         public override void OnOpen()

@@ -16,6 +16,13 @@
 
         private Vector3       m_Position;
         private string        m_ItemID;
+        private RectTransform m_ParentRectTransform;
+        public override void OnInitialized()
+        {
+            base.OnInitialized();
+
+            m_ParentRectTransform = this.transform.parent.GetComponent<RectTransform>();
+        }
 
         public void SetData(InventoryItem item)
         {
@@ -37,6 +44,8 @@
         void IEndDragHandler.OnEndDrag(PointerEventData eventData)
         {
             m_RectTransform.position = m_Position;
+
+            LayoutRebuilder.ForceRebuildLayoutImmediate(m_ParentRectTransform);
 
             AdventureGame.Instance.TryToUseItem(m_ItemID);
         }

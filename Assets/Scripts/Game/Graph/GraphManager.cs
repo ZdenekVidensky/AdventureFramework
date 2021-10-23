@@ -24,8 +24,6 @@
 		private bool                 m_BackPerformed;
 		private bool                 m_Talking;
 		private IEnumerator          m_MainCoroutine;
-		private List<IEnumerator>    m_NestedCoroutines = new List<IEnumerator>(16);
-		private List<WaitForSeconds> m_NestedWaitsCoroutines = new List<WaitForSeconds>(16);
 		private bool                 m_SkipProcessingPerformed;
 
         // MONOBEHAVIOUR INTERFACE
@@ -104,9 +102,6 @@
 			if (node == null)
 				yield break;
 
-			IEnumerator nestedCoroutine;
-			WaitForSeconds nestedWaitCoroutine;
-
 			switch (node)
 			{
 				case DestroyObjectNode _:
@@ -119,10 +114,7 @@
 					(m_InteractableObject as MonoBehaviour).Invoke(specialNode.MethodName, specialNode.Delay);
 					break;
 				case WaitForSecondsNode waitNode:
-
-					nestedWaitCoroutine = new WaitForSeconds(waitNode.Seconds);
-					m_NestedWaitsCoroutines.Add(nestedWaitCoroutine);
-					yield return nestedWaitCoroutine;
+					yield return new WaitForSeconds(waitNode.Seconds);
 					break;
 				case EndGameNode _:
 					Signals.GameplaySignals.EndGame.Emit();
