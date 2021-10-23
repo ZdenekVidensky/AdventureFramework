@@ -144,6 +144,49 @@ MonoBehaviour:
   Character: 0
   TextID: 600022
   PlayTalkAnimation: 1
+--- !u!114 &-1186637115727174367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c881ff4023fc76448ab5709a17c8c3dc, type: 3}
+  m_Name: Go To
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -804.5, y: -55}
+  ports:
+    keys:
+    - Input
+    - Output
+    values:
+    - _fieldName: Input
+      _node: {fileID: -1186637115727174367}
+      _typeQualifiedName: TVB.Game.Graph.BaseInteractiveNode, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Output
+      _node: {fileID: -1186637115727174367}
+      _typeQualifiedName: TVB.Game.Graph.BaseInteractiveNode, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: Input
+        node: {fileID: 2160233314964774315}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  Input: {fileID: 0}
+  Output: {fileID: 0}
+  Destination: {x: 1.96, y: -1.1}
 --- !u!114 &-823288853010716067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,6 +281,7 @@ MonoBehaviour:
   - {fileID: -7720710571444866525}
   - {fileID: 5817153872669983366}
   - {fileID: -7864497556685551794}
+  - {fileID: -1186637115727174367}
 --- !u!114 &2160233314964774315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,7 +305,10 @@ MonoBehaviour:
       _node: {fileID: 2160233314964774315}
       _typeQualifiedName: TVB.Game.Graph.BaseInteractiveNode, Assembly-CSharp, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
-      connections: []
+      connections:
+      - fieldName: Output
+        node: {fileID: -1186637115727174367}
+        reroutePoints: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0

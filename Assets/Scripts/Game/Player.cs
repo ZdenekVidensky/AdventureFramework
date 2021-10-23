@@ -92,18 +92,6 @@ namespace TVB.Game
             }
         }
 
-        private IEnumerator GoToPoint(Vector3 destinationPoint)
-        {
-            Debug.DrawLine(m_Transform.position, destinationPoint, Color.green, 20f);
-            Vector3 direction = destinationPoint - m_Transform.position;
-
-            while(Vector2.Distance(m_Transform.position, destinationPoint) > m_StoppingDistance)
-            {
-                m_Transform.position += direction * m_MovementSpeed;
-                yield return new WaitForEndOfFrame();
-            }
-        }
-
         private void UpdateScale()
         {
             if (m_SceneSettings == null)

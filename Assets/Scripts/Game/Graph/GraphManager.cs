@@ -16,14 +16,17 @@
 	{
 		// PRIVATE MEMBERS
 
-		//[SerializeField]
-		private GUIIngameView      m_IngameView;
-		private NavigationManager  m_NavigationManager;
-		private int                m_SelectedDecision = -1;
-		private IInteractable      m_InteractableObject;
-		private bool               m_SkipPerformed;
-		private bool               m_BackPerformed;
-		private bool               m_Talking;
+		private GUIIngameView        m_IngameView;
+		private NavigationManager    m_NavigationManager;
+		private int                  m_SelectedDecision = -1;
+		private IInteractable        m_InteractableObject;
+		private bool                 m_SkipTalkPerformed;
+		private bool                 m_BackPerformed;
+		private bool                 m_Talking;
+		private IEnumerator          m_MainCoroutine;
+		private List<IEnumerator>    m_NestedCoroutines = new List<IEnumerator>(16);
+		private List<WaitForSeconds> m_NestedWaitsCoroutines = new List<WaitForSeconds>(16);
+		private bool                 m_SkipProcessingPerformed;
 
         // MONOBEHAVIOUR INTERFACE
 
@@ -52,6 +55,8 @@
         {
 			AdventureGame.Instance.IsBusy = true;
 
+			//ForceStopProcessing();
+
 			m_InteractableObject          = interactableObject;
 			BaseInteractiveNode firstNode = interactiveGraph.GetFirstNode() as BaseInteractiveNode;
 
@@ -61,8 +66,22 @@
 				yield break;
 			}
 
+			m_MainCoroutine = ProcessNode(firstNode);
 
-			yield return ProcessNode(firstNode);
+			while (m_MainCoroutine.MoveNext() == true && m_SkipProcessingPerformed == false)
+				yield return m_MainCoroutine.Current;
+
+			m_SkipProcessingPerformed     = false;
+			m_MainCoroutine               = null;
+			AdventureGame.Instance.IsBusy = false;
+		}
+
+		public void ForceStopProcessing()
+        {
+			if (m_MainCoroutine == null)
+				return;
+
+			m_SkipProcessingPerformed = true;
 		}
 
 		public void OnSkipPerformed()
@@ -70,7 +89,7 @@
 			if (m_Talking == false)
 				return;
 
-			m_SkipPerformed = true;
+			m_SkipTalkPerformed = true;
 		}
 
 		public void OnBackPerformed()
@@ -85,6 +104,9 @@
 			if (node == null)
 				yield break;
 
+			IEnumerator nestedCoroutine;
+			WaitForSeconds nestedWaitCoroutine;
+
 			switch (node)
 			{
 				case DestroyObjectNode _:
@@ -97,7 +119,10 @@
 					(m_InteractableObject as MonoBehaviour).Invoke(specialNode.MethodName, specialNode.Delay);
 					break;
 				case WaitForSecondsNode waitNode:
-					yield return new WaitForSeconds(waitNode.Seconds);
+
+					nestedWaitCoroutine = new WaitForSeconds(waitNode.Seconds);
+					m_NestedWaitsCoroutines.Add(nestedWaitCoroutine);
+					yield return nestedWaitCoroutine;
 					break;
 				case EndGameNode _:
 					Signals.GameplaySignals.EndGame.Emit();
@@ -221,12 +246,15 @@
 		private IEnumerator GoTo(GoToNode node)
         {
 			Player player = AdventureGame.Instance.Player;
+			AdventureGame.Instance.IsBusy = false;
 
 			m_NavigationManager.GoTo(node.Destination, player);
 
-			while (player.IsGoing == true)
-				yield return null; // TODO
-        }
+			while (player.IsGoing == true && m_SkipProcessingPerformed == false)
+				yield return null;
+
+			AdventureGame.Instance.IsBusy = true;
+		}
 
 		private IEnumerator Condition(ConditionNode conditionNode)
         {
@@ -314,9 +342,9 @@
 			}
 
 			float secondsDelay = Mathf.Clamp(text.Length / 10f, 1f, 2.5f);
-			m_SkipPerformed = false;
-			yield return new WaitForSecondsAndPredicate(secondsDelay, () => m_SkipPerformed == false);
-			m_SkipPerformed = false;
+			m_SkipTalkPerformed = false;
+			yield return new WaitForSecondsAndPredicate(secondsDelay, () => m_SkipTalkPerformed == false);
+			m_SkipTalkPerformed = false;
 
 			if (playTalkAnimation == true)
 			{
