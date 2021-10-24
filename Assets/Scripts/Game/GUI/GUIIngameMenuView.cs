@@ -9,7 +9,8 @@
     using TVB.Game.GameSignals;
 
     public class GUIIngameMenuView : GUIView
-    {        // CONFIGURATION
+    {       
+        // CONFIGURATION
 
         [SerializeField]
         private AudioClip m_ButtonSound;

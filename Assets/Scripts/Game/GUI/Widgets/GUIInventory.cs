@@ -42,6 +42,18 @@
             base.OnDeinitialized();
         }
 
+        public override void OnUpdate()
+        {
+            base.OnUpdate();
+
+
+            if (Input.GetMouseButtonDown(1) == true && AdventureGame.Instance.IsInventoryOpen == true)
+            {
+                m_MainFrame.SetActive(false);
+                AdventureGame.Instance.IsInventoryOpen = false;
+            }
+        }
+
         public void SetData(List<InventoryItem> data)
         {
             int dataCount = data.Count;

@@ -1,5 +1,6 @@
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
+using Sirenix.Utilities.Editor;
 using System.Collections;
 using System.Collections.Generic;
 using TVB.Game;
@@ -36,6 +37,26 @@ public class ItemsEditorWindow : OdinMenuEditorWindow
         {
             DestroyImmediate(m_CreateNewItemInstance.Item);
         }
+    }
+
+    protected override void OnBeginDrawEditors()
+    {
+        base.OnBeginDrawEditors();
+
+        OdinMenuTreeSelection selected = this.MenuTree.Selection;
+
+
+        SirenixEditorGUI.BeginHorizontalToolbar();
+        {
+            if (SirenixEditorGUI.ToolbarButton("Delete current") == true)
+            {
+                InventoryItem asset = selected.SelectedValue as InventoryItem;
+                string path = AssetDatabase.GetAssetPath(asset);
+                AssetDatabase.DeleteAsset(path);
+                AssetDatabase.SaveAssets();
+            }
+        }
+        SirenixEditorGUI.EndHorizontalToolbar();
     }
 
     public class CreateNewItem

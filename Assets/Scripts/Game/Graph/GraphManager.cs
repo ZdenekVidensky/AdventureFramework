@@ -66,7 +66,7 @@
 
 			m_MainCoroutine = ProcessNode(firstNode);
 
-			while (m_MainCoroutine.MoveNext() == true && m_SkipProcessingPerformed == false)
+			while (m_MainCoroutine != null && m_MainCoroutine.MoveNext() == true && m_SkipProcessingPerformed == false)
 				yield return m_MainCoroutine.Current;
 
 			m_SkipProcessingPerformed     = false;

@@ -1,9 +1,11 @@
 ﻿namespace TVB.Game.Interactable
 {
     using UnityEngine;
+    using Sirenix.OdinInspector;
 
     using TVB.Game.Graph;
     using TVB.Game.GameSignals;
+    using TVB.Core.Localization;
 
     public class InteractableItem : MonoBehaviour, IInteractable
     {
@@ -11,10 +13,14 @@
         private EInteractableAction      m_InteractableAction;
         [SerializeField]
         private int                      m_CustomTextID;
+        [DisableInEditorMode, DisableInPlayMode, ShowInInspector]
+        public string CustomTextID => TextDatabase.Localize[m_CustomTextID];
         [SerializeField]
         private InteractiveGraph         m_InteractiveGraph;
         [SerializeField]
         private int                      m_ItemNameID;
+        [DisableInEditorMode, DisableInPlayMode, ShowInInspector]
+        public string ItemName => TextDatabase.Localize[m_ItemNameID];
 
         EInteractableAction IInteractable.ActionType         => m_InteractableAction;
         int IInteractable.CustomTextID                       => m_CustomTextID;
@@ -22,7 +28,7 @@
         string IInteractable.Name                            => gameObject.name;
 
 
-        [SerializeField]
+        [SerializeField, TableList]
         private InteractableWithItem[] m_InteractableWithItems;
 
         public void OnLeave()
@@ -64,7 +70,32 @@
             if (AdventureGame.Instance.IsInventoryOpen == true)
                 return;
 
-            Signals.GUISignals.SetItemDescription.Emit($"Vzít {gameObject.name}");
+            string selectedItem = AdventureGame.Instance.SelectedItemID;
+            string actionText;
+
+            if (selectedItem != null)
+            {
+                InteractableWithItem interactableWith = GetInteractableWithItem(selectedItem);
+
+                if (interactableWith.CustomTextID > 0)
+                {
+                    actionText = TextDatabase.Localize[interactableWith.CustomTextID];
+                }
+                else
+                {
+                    actionText = TextDatabase.Localize[m_ItemNameID];
+                }
+            }
+            else if (m_CustomTextID > 0)
+            {
+                actionText = TextDatabase.Localize[m_CustomTextID];
+            }
+            else
+            {
+                actionText = TextDatabase.Localize[m_ItemNameID];
+            }
+
+            Signals.GUISignals.SetItemDescription.Emit(actionText);
             Signals.GUISignals.ShowItemDescription.Emit(true);
         }
 
@@ -111,13 +142,26 @@
             {
                 InteractableWithItem item = m_InteractableWithItems[idx];
 
-                if (item.ID == itemID)
+                if (item.ItemID == itemID)
                 {
                     return item.InteractiveGraph;
                 }
             }
 
             return null;
+        }
+
+        private InteractableWithItem GetInteractableWithItem(string itemID)
+        {
+            for (int idx = 0; idx < m_InteractableWithItems.Length; idx++)
+            {
+                InteractableWithItem item = m_InteractableWithItems[idx];
+
+                if (item.ItemID == itemID)
+                    return item;
+            }
+
+            return default;
         }
     }
 }

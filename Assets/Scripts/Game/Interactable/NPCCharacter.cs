@@ -3,15 +3,25 @@
     using UnityEngine;
 
     using TVB.Game.Graph;
+    using TVB.Core.Localization;
+    using Sirenix.OdinInspector;
+    using TVB.Game.GameSignals;
 
     public class NPCCharacter : MonoBehaviour, IInteractable, ITalkable
     {
         // CONFIGURATION
 
         [SerializeField]
+        private int                      m_NameTextID;
+
+        [DisableInEditorMode, DisableInPlayMode, ShowInInspector]
+        public string NameText => TextDatabase.Localize[m_NameTextID];
+        [SerializeField]
         private EInteractableAction      m_InteractableAction;
         [SerializeField]
         private int                      m_CustomTextID;
+        [DisableInEditorMode, DisableInPlayMode, ShowInInspector]
+        public string CustomTextID => TextDatabase.Localize[m_CustomTextID];
         [SerializeField]
         private InteractiveGraph         m_InteractiveGraph;
         [SerializeField]
@@ -22,7 +32,7 @@
         // STATIC MEMBERS
 
         private static int TALKING_PARAMETER      = Animator.StringToHash("Talking");
-        private static int TALK_VARIANT_PARAMETER = Animator.StringToHash("TalkVariant");
+        private static readonly int TALK_VARIANT_PARAMETER = Animator.StringToHash("TalkVariant");
         private static int INTERACT_PARAMETER     = Animator.StringToHash("Interact");
         private static int LEAVE_PARAMETER        = Animator.StringToHash("Leave");
 
@@ -77,12 +87,62 @@
             StartCoroutine(AdventureGame.Instance.GraphManager.ProcessInteractiveGraph(this, graph));
         }
 
+        // MONOBEHAVIOUR
+
         private void OnMouseDown()
         {
             if (AdventureGame.Instance.IsBusy == true)
                 return;
 
             (this as IInteractable).OnInteract();
+        }
+
+        private void OnMouseEnter()
+        {
+            if (AdventureGame.Instance.IsBusy == true)
+                return;
+
+            if (AdventureGame.Instance.IsInventoryOpen == true)
+                return;
+
+            string selectedItem = AdventureGame.Instance.SelectedItemID;
+            string actionText;
+            
+            if (selectedItem != null)
+            {
+                InteractableWithItem interactableWith = GetInteractableWithItem(selectedItem);
+
+                if (interactableWith.CustomTextID > 0)
+                {
+                    actionText = TextDatabase.Localize[interactableWith.CustomTextID];
+                }
+                else
+                {
+                    actionText = TextDatabase.Localize[m_NameTextID];
+                }
+            }
+            else if (m_CustomTextID > 0)
+            {
+                actionText = TextDatabase.Localize[m_CustomTextID];
+            }
+            else
+            {
+                actionText = TextDatabase.Localize[m_NameTextID];
+            }
+
+            Signals.GUISignals.SetItemDescription.Emit(actionText);
+            Signals.GUISignals.ShowItemDescription.Emit(true);
+        }
+
+        private void OnMouseExit()
+        {
+            if (AdventureGame.Instance.IsBusy == true)
+                return;
+
+            if (AdventureGame.Instance.IsInventoryOpen == true)
+                return;
+
+            Signals.GUISignals.ShowItemDescription.Emit(false);
         }
 
         // HELPERS
@@ -93,13 +153,26 @@
             {
                 InteractableWithItem item = m_InteractableWithItems[idx];
 
-                if (item.ID == itemID)
+                if (item.ItemID == itemID)
                 {
                     return item.InteractiveGraph;
                 }
             }
 
             return null;
+        }
+
+        private InteractableWithItem GetInteractableWithItem(string itemID)
+        {
+            for (int idx = 0; idx < m_InteractableWithItems.Length; idx++)
+            {
+                InteractableWithItem item = m_InteractableWithItems[idx];
+
+                if (item.ItemID == itemID)
+                    return item;
+            }
+
+            return default;
         }
     }
 }

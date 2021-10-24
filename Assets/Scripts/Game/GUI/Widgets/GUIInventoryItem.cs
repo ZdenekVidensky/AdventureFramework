@@ -7,6 +7,7 @@
     using TVB.Core.GUI;
     using TVB.Core.Attributes;
     using TVB.Game.GameSignals;
+    using TVB.Core.Localization;
 
     public class GUIInventoryItem : GUIComponent, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler
     {
@@ -15,9 +16,15 @@
         [GetComponent(true), SerializeField, HideInInspector]
         private RectTransform m_RectTransform;
 
+        [SerializeField]
+        private Transform m_View;
+
         private Vector3       m_Position;
         private string        m_ItemID;
+        private int           m_ItemNameID;
         private RectTransform m_ParentRectTransform;
+        private Transform     m_OriginalParent;
+
         public override void OnInitialized()
         {
             base.OnInitialized();
@@ -30,7 +37,10 @@
             if (AdventureGame.Instance.IsBusy == true)
                 return;
 
-            Signals.GUISignals.SetItemDescription.Emit($"Vzít {gameObject.name}");
+            if (AdventureGame.Instance.IsInventoryOpen == false)
+                return;
+
+            Signals.GUISignals.SetItemDescription.Emit(TextDatabase.Localize[m_ItemNameID]);
             Signals.GUISignals.ShowItemDescription.Emit(true);
         }
 
@@ -47,11 +57,15 @@
             m_Image.sprite = item.Sprite;
             m_Position     = m_RectTransform.position;
             m_ItemID       = item.ID;
+            m_ItemNameID   = item.NameID;
         }
 
         void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)
         {
-            
+            m_OriginalParent = this.transform.parent;
+            this.transform.SetParent(m_View);
+
+            AdventureGame.Instance.SelectedItemID = m_ItemID;
         }
 
         void IDragHandler.OnDrag(PointerEventData eventData)
@@ -61,11 +75,13 @@
 
         void IEndDragHandler.OnEndDrag(PointerEventData eventData)
         {
+            this.transform.SetParent(m_OriginalParent);
             m_RectTransform.position = m_Position;
 
             LayoutRebuilder.ForceRebuildLayoutImmediate(m_ParentRectTransform);
 
             AdventureGame.Instance.TryToUseItem(m_ItemID);
+            AdventureGame.Instance.SelectedItemID = null;
         }
 
         void IPointerDownHandler.OnPointerDown(PointerEventData eventData)

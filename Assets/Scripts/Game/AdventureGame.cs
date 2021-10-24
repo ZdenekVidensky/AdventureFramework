@@ -60,8 +60,29 @@
 
         public bool IsInventoryOpen
         {
-            get => m_IsInventoryOpen;
-            set => m_IsInventoryOpen = value;
+            get
+            {
+                return m_IsInventoryOpen;
+            }
+
+            set
+            {
+                m_IsInventoryOpen = value;
+                Signals.GUISignals.SetInventoryOpen.Emit(value);
+            }
+        }
+
+        public string SelectedItemID
+        {
+            get
+            {
+                return m_SelectedItem;
+            }
+
+            set
+            {
+                m_SelectedItem = value;
+            }
         }
 
         public bool GamePaused
@@ -103,6 +124,7 @@
         private Player                        m_Player               = null;
         private bool                          m_IsBusy               = false;
         private bool                          m_IsInventoryOpen      = false;
+        private string                        m_SelectedItem         = null;
 
         // GAME INTERFACE
 

@@ -26,7 +26,8 @@ namespace TVB.Game.Navigation
             FillNavMeshes();
         }
 
-        private void OnMouseDown()
+
+        private void OnMouseUp()
         {
             if (AdventureGame.Instance.IsBusy == true)
                 return;

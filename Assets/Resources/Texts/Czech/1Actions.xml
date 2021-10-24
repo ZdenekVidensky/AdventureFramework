@@ -1,7 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <entries>
-  <text id="100001">Promluvit</text>
-  <text id="100002">Použít</text>
-  <text id="100003">Prozkoumat</text>
-  <text id="100004">Vzít</text>
+  <text id="100001">Duch bude asi nehořlavý Riki!</text>
+  <text id="100002">Zapalovač</text>
+  <text id="100003">Podpálit ducha</text>
+  <text id="100004">Duch</text>
+  <text id="100005">Promluvit s duchem</text>
+  <text id="100006">Jít ven</text>
+  <text id="100007">Dveře</text>
+  <text id="100008">Vzít zapalovač</text>
+  <text id="100009">Dobrý večer.</text>
+  <text id="100010">Dobrý den.</text>
+  <text id="100011">Co tu dělá?</text>
+  <text id="100012">Ukončit dialog</text>
+  <text id="100013">Co tu děláte?</text>
+  <text id="100014">NIC!</text>
+  <text id="100015">Nashle.</text>
+  <text id="100016">Sbohem.</text>
 </entries>

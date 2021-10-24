@@ -144,7 +144,7 @@ MonoBehaviour:
   Character: 0
   TextID: 600022
   PlayTalkAnimation: 1
---- !u!114 &-1186637115727174367
+--- !u!114 &-2799986126889470936
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -153,32 +153,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c881ff4023fc76448ab5709a17c8c3dc, type: 3}
-  m_Name: Go To
+  m_Script: {fileID: 11500000, guid: 35eea188a3f99a148ba0bf25134ba7cb, type: 3}
+  m_Name: Talk
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -804.5, y: -55}
+  position: {x: 296, y: -152}
   ports:
     keys:
     - Input
     - Output
     values:
     - _fieldName: Input
-      _node: {fileID: -1186637115727174367}
+      _node: {fileID: -2799986126889470936}
       _typeQualifiedName: TVB.Game.Graph.BaseInteractiveNode, Assembly-CSharp, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
-      connections: []
+      connections:
+      - fieldName: Output
+        node: {fileID: 2536969877716603477}
+        reroutePoints: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
     - _fieldName: Output
-      _node: {fileID: -1186637115727174367}
+      _node: {fileID: -2799986126889470936}
       _typeQualifiedName: TVB.Game.Graph.BaseInteractiveNode, Assembly-CSharp, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Input
-        node: {fileID: 2160233314964774315}
+        node: {fileID: -823288853010716067}
         reroutePoints: []
       _direction: 1
       _connectionType: 0
@@ -186,7 +189,54 @@ MonoBehaviour:
       _dynamic: 0
   Input: {fileID: 0}
   Output: {fileID: 0}
-  Destination: {x: 1.96, y: -1.1}
+  Character: 1
+  TextID: 100010
+  PlayTalkAnimation: 1
+--- !u!114 &-1214630809800979975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35eea188a3f99a148ba0bf25134ba7cb, type: 3}
+  m_Name: Talk
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 1480, y: 136}
+  ports:
+    keys:
+    - Input
+    - Output
+    values:
+    - _fieldName: Input
+      _node: {fileID: -1214630809800979975}
+      _typeQualifiedName: TVB.Game.Graph.BaseInteractiveNode, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: Output
+        node: {fileID: 2951509183787356837}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Output
+      _node: {fileID: -1214630809800979975}
+      _typeQualifiedName: TVB.Game.Graph.BaseInteractiveNode, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  Input: {fileID: 0}
+  Output: {fileID: 0}
+  Character: 1
+  TextID: 100016
+  PlayTalkAnimation: 1
 --- !u!114 &-823288853010716067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,7 +250,7 @@ MonoBehaviour:
   m_Name: Decision
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 504, y: -136}
+  position: {x: 760, y: -200}
   ports:
     keys:
     - Input
@@ -214,10 +264,16 @@ MonoBehaviour:
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Output
-        node: {fileID: -8757732154995093570}
+        node: {fileID: 0}
         reroutePoints: []
       - fieldName: Output
-        node: {fileID: -7864497556685551794}
+        node: {fileID: 0}
+        reroutePoints: []
+      - fieldName: Output
+        node: {fileID: -2799986126889470936}
+        reroutePoints: []
+      - fieldName: Output
+        node: {fileID: 8760412534424750565}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
@@ -238,7 +294,7 @@ MonoBehaviour:
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Input
-        node: {fileID: -7720710571444866525}
+        node: {fileID: 8127341724241543181}
         reroutePoints: []
       _direction: 1
       _connectionType: 0
@@ -250,7 +306,7 @@ MonoBehaviour:
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Input
-        node: {fileID: 5817153872669983366}
+        node: {fileID: 2951509183787356837}
         reroutePoints: []
       _direction: 1
       _connectionType: 0
@@ -258,9 +314,9 @@ MonoBehaviour:
       _dynamic: 1
   Input: {fileID: 0}
   Decisions:
-  - TextID: 600020
+  - TextID: 100011
     Condition: 
-  - TextID: 600021
+  - TextID: 100012
     Condition: 
 --- !u!114 &11400000
 MonoBehaviour:
@@ -275,13 +331,14 @@ MonoBehaviour:
   m_Name: TestNPC
   m_EditorClassIdentifier: 
   nodes:
-  - {fileID: 2160233314964774315}
-  - {fileID: -8757732154995093570}
+  - {fileID: 5921401427834939274}
+  - {fileID: 2536969877716603477}
+  - {fileID: -2799986126889470936}
   - {fileID: -823288853010716067}
-  - {fileID: -7720710571444866525}
-  - {fileID: 5817153872669983366}
-  - {fileID: -7864497556685551794}
-  - {fileID: -1186637115727174367}
+  - {fileID: 8127341724241543181}
+  - {fileID: 8760412534424750565}
+  - {fileID: 2951509183787356837}
+  - {fileID: -1214630809800979975}
 --- !u!114 &2160233314964774315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -307,7 +364,7 @@ MonoBehaviour:
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Output
-        node: {fileID: -1186637115727174367}
+        node: {fileID: 0}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
@@ -330,6 +387,102 @@ MonoBehaviour:
   Character: 0
   TextID: 600018
   PlayTalkAnimation: 0
+--- !u!114 &2536969877716603477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35eea188a3f99a148ba0bf25134ba7cb, type: 3}
+  m_Name: Talk
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -136, y: -152}
+  ports:
+    keys:
+    - Input
+    - Output
+    values:
+    - _fieldName: Input
+      _node: {fileID: 2536969877716603477}
+      _typeQualifiedName: TVB.Game.Graph.BaseInteractiveNode, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: Output
+        node: {fileID: 5921401427834939274}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Output
+      _node: {fileID: 2536969877716603477}
+      _typeQualifiedName: TVB.Game.Graph.BaseInteractiveNode, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: Input
+        node: {fileID: -2799986126889470936}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  Input: {fileID: 0}
+  Output: {fileID: 0}
+  Character: 0
+  TextID: 100009
+  PlayTalkAnimation: 1
+--- !u!114 &2951509183787356837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35eea188a3f99a148ba0bf25134ba7cb, type: 3}
+  m_Name: Talk
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 1048, y: 120}
+  ports:
+    keys:
+    - Input
+    - Output
+    values:
+    - _fieldName: Input
+      _node: {fileID: 2951509183787356837}
+      _typeQualifiedName: TVB.Game.Graph.BaseInteractiveNode, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: Decisions 1
+        node: {fileID: -823288853010716067}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Output
+      _node: {fileID: 2951509183787356837}
+      _typeQualifiedName: TVB.Game.Graph.BaseInteractiveNode, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: Input
+        node: {fileID: -1214630809800979975}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  Input: {fileID: 0}
+  Output: {fileID: 0}
+  Character: 0
+  TextID: 100015
+  PlayTalkAnimation: 1
 --- !u!114 &5817153872669983366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -374,4 +527,143 @@ MonoBehaviour:
   Output: {fileID: 0}
   Character: 0
   TextID: 600024
+  PlayTalkAnimation: 1
+--- !u!114 &5921401427834939274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c881ff4023fc76448ab5709a17c8c3dc, type: 3}
+  m_Name: Go To
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -488, y: -56}
+  ports:
+    keys:
+    - Input
+    - Output
+    values:
+    - _fieldName: Input
+      _node: {fileID: 5921401427834939274}
+      _typeQualifiedName: TVB.Game.Graph.BaseInteractiveNode, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Output
+      _node: {fileID: 5921401427834939274}
+      _typeQualifiedName: TVB.Game.Graph.BaseInteractiveNode, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: Input
+        node: {fileID: 2536969877716603477}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  Input: {fileID: 0}
+  Output: {fileID: 0}
+  Destination: {x: 1.48, y: -0.54}
+--- !u!114 &8127341724241543181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35eea188a3f99a148ba0bf25134ba7cb, type: 3}
+  m_Name: Talk
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 1080, y: -232}
+  ports:
+    keys:
+    - Input
+    - Output
+    values:
+    - _fieldName: Input
+      _node: {fileID: 8127341724241543181}
+      _typeQualifiedName: TVB.Game.Graph.BaseInteractiveNode, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: Decisions 0
+        node: {fileID: -823288853010716067}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Output
+      _node: {fileID: 8127341724241543181}
+      _typeQualifiedName: TVB.Game.Graph.BaseInteractiveNode, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: Input
+        node: {fileID: 8760412534424750565}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  Input: {fileID: 0}
+  Output: {fileID: 0}
+  Character: 0
+  TextID: 100013
+  PlayTalkAnimation: 1
+--- !u!114 &8760412534424750565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35eea188a3f99a148ba0bf25134ba7cb, type: 3}
+  m_Name: Talk
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 1480, y: -232}
+  ports:
+    keys:
+    - Input
+    - Output
+    values:
+    - _fieldName: Input
+      _node: {fileID: 8760412534424750565}
+      _typeQualifiedName: TVB.Game.Graph.BaseInteractiveNode, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: Output
+        node: {fileID: 8127341724241543181}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Output
+      _node: {fileID: 8760412534424750565}
+      _typeQualifiedName: TVB.Game.Graph.BaseInteractiveNode, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: Input
+        node: {fileID: -823288853010716067}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  Input: {fileID: 0}
+  Output: {fileID: 0}
+  Character: 1
+  TextID: 100014
   PlayTalkAnimation: 1

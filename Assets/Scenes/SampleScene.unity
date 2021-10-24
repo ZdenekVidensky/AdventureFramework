@@ -330,7 +330,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 182320691}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.89, y: -1.32, z: 0}
+  m_LocalPosition: {x: -8.69, y: -2.32, z: 0}
   m_LocalScale: {x: 3.2, y: 3.2, z: 3.2}
   m_Children: []
   m_Father: {fileID: 1746700160}
@@ -394,6 +394,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Neighbours: []
+--- !u!224 &332408312 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5842480762933790005, guid: deab62797e0dd1f45948813e3b1c894b, type: 3}
+  m_PrefabInstance: {fileID: 5842480763147454445}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1334,13 +1339,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d638379dd65531f4f8a3336cd1967f61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_NameTextID: 100004
   m_InteractableAction: 1
-  m_CustomTextID: 0
+  m_CustomTextID: 100005
   m_InteractiveGraph: {fileID: 11400000, guid: 86203b66034483d4c8f439dabb0dd496, type: 2}
   m_Animator: {fileID: 0}
   m_InteractableWithItems:
-  - ID: testingItem
+  - ItemID: Lighter
     InteractiveGraph: {fileID: 11400000, guid: 54456b5453bbebf4fb0e4ae424a13b26, type: 2}
+    CustomTextID: 100003
 --- !u!61 &1900760540
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1675,9 +1682,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_InteractableAction: 2
-  m_CustomTextID: 0
+  m_CustomTextID: 100006
   m_InteractiveGraph: {fileID: 11400000, guid: 577673a16486e084d820a52fbd957077, type: 2}
-  m_ItemNameID: 0
+  m_ItemNameID: 100007
   m_InteractableWithItems: []
 --- !u!61 &1974912298
 BoxCollider2D:
@@ -1755,7 +1762,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.4, y: 0.75}
+    oldSize: {x: 0.7, y: 0.7}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -1828,9 +1835,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_InteractableAction: 4
-  m_CustomTextID: 0
+  m_CustomTextID: 100008
   m_InteractiveGraph: {fileID: 11400000, guid: baee73cf591cb7c4696ee7485e52a6b1, type: 2}
-  m_ItemNameID: 0
+  m_ItemNameID: 100002
   m_InteractableWithItems: []
 --- !u!1 &2087635206
 GameObject:
@@ -1974,6 +1981,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4928514443931348720, guid: deab62797e0dd1f45948813e3b1c894b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1.2780762
+      objectReference: {fileID: 0}
+    - target: {fileID: 5842480763869434850, guid: deab62797e0dd1f45948813e3b1c894b, type: 3}
+      propertyPath: m_View
+      value: 
+      objectReference: {fileID: 332408312}
     - target: {fileID: 5842480763869434851, guid: deab62797e0dd1f45948813e3b1c894b, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1

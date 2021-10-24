@@ -13,6 +13,7 @@
     using TVB.Game.GameSignals;
     
     using GUIText = TMPro.TextMeshProUGUI;
+    using System;
 
     public class GUIIngameView : GUIView
     {
@@ -71,6 +72,7 @@
             Signals.GUISignals.SetItemDescription.Connect(SetItemDescription);
             Signals.GUISignals.ShowItemDescription.Connect(ShowItemDescription);
             Signals.GUISignals.GameBusyChanged.Connect(OnGameIsBusyChanged);
+            Signals.GUISignals.SetInventoryOpen.Connect(OnSetInventoryOpen);
 
             m_ItemDescriptionRectTransform = m_ItemDescription.rectTransform;
         }
@@ -84,6 +86,8 @@
             m_Decision4Button.onClick.RemoveListener(OnDecision4ButtonClick);
 
             Signals.GUISignals.GameBusyChanged.Disconnect(OnGameIsBusyChanged);
+            Signals.GUISignals.SetInventoryOpen.Disconnect(OnSetInventoryOpen);
+
             Signals.GUISignals.SetItemDescription.DisconnectAll();
             Signals.GUISignals.ShowItemDescription.DisconnectAll();
 
@@ -204,9 +208,9 @@
             m_ItemDescription.text = description;
         }
 
-        private void ShowItemDescription(bool active)
+        private void ShowItemDescription(bool visible)
         {
-            m_ItemDescription.SetActive(active);
+            m_ItemDescription.SetActive(visible);
         }
 
         private void OnGameIsBusyChanged(bool busy)
@@ -214,6 +218,14 @@
             if (busy == true && m_ItemDescription.IsActive() == true)
             {
                 m_ItemDescription.SetActive(false);
+            }
+        }
+
+        private void OnSetInventoryOpen(bool open)
+        {
+            if (open == false)
+            {
+                ShowItemDescription(false);
             }
         }
     }
