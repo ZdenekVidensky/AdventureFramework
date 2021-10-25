@@ -1,8 +1,8 @@
 ﻿namespace TVB.Core.Localization
 {
     using System.Collections.Generic;
-    using System.Xml;
-
+    using System.IO;
+    using UnityEditor;
     using UnityEngine;
 
     public class TextDatabase
@@ -11,6 +11,15 @@
 
         private static TextDatabase m_Instance;
         public static System.Action OnLanguageChanged;
+        private const string ITEMS_PATH = "Assets/Prefabs/Localization/";
+
+        public static string CurrentLanguage
+        {
+            get
+            {
+                return GetInstance().m_CurrentLanguage.ToString();
+            }
+        }
 
         public static TextDatabase Localize
         {
@@ -37,8 +46,9 @@
 
         // PRIVATE MEMBERS
 
-        private Dictionary<int, string> m_Translations = new Dictionary<int, string>(255);
-        private ELanguage               m_CurrentLanguage;
+        private Dictionary<int, string>    m_Translations = new Dictionary<int, string>(255);
+        private Dictionary<int, AudioClip> m_TranslatedAudioClips = new Dictionary<int, AudioClip>(255);
+        private ELanguage                  m_CurrentLanguage;
 
         // PUBLIC METHODS
 
@@ -52,15 +62,26 @@
             m_Translations.Clear();
             m_CurrentLanguage = language;
 
-            var textObjects = Resources.LoadAll($"Texts/{language}");
+            string[] files = Directory.GetFiles(ITEMS_PATH, "*.asset");
 
-            for (int idx = 0, count = textObjects.Length; idx < count; idx++)
+            for (int idx = 0; idx < files.Length; idx++)
             {
-                var translations = ExtractTranslations(textObjects[idx] as TextAsset);
+                LocalizedTexts asset = AssetDatabase.LoadAssetAtPath<LocalizedTexts>(files[idx]);
 
-                foreach (var translation in translations)
+                if (asset == null)
+                    continue;
+
+                for (int jdx = 0, count = asset.Items.Count; jdx < count; jdx++)
                 {
-                    AddTranslation(translation.key, translation.value);
+                    LocalizedTextData localizedData = asset.Items[jdx];
+                    LocalizedTextDataItem localizedDataItem = localizedData.GetTranslatedData(language);
+
+                    m_Translations.Add(localizedData.TextID, localizedDataItem.Text);
+                    
+                    if (localizedDataItem.VoiceoverAudioClip != null)
+                    {
+                        m_TranslatedAudioClips.Add(localizedData.TextID, localizedDataItem.VoiceoverAudioClip);
+                    }
                 }
             }
         }
@@ -86,36 +107,6 @@
             }
 
             return m_Instance;
-        }
-
-        private List<(int key, string value)> ExtractTranslations(TextAsset textAsset)
-        {
-            var result = new List<(int key, string value)>();
-
-            XmlDocument xml = new XmlDocument();
-            xml.LoadXml(textAsset.text);
-
-            XmlNodeList nodesList = xml.SelectNodes("/entries/text");
-
-            foreach (XmlNode node in nodesList)
-            {
-                result.Add((int.Parse(node.Attributes["id"].Value), node.InnerText));
-            }
-
-            return result;
-        }
-
-        private void AddTranslation(int key, string value)
-        {
-            m_Translations.TryGetValue(key, out var storedValue);
-
-            if (storedValue != null)
-            {
-                Debug.LogError($"Translation with key {key} already exists!");
-                return;
-            }
-
-            m_Translations.Add(key, value);
         }
 
         private string Get(int key)
