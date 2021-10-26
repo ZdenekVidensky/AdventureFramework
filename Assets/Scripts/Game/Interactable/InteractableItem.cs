@@ -62,7 +62,7 @@
 
         // PRIVATE METHODS
 
-        private void OnMouseEnter()
+        private void OnMouseOver()
         {
             if (AdventureGame.Instance.IsBusy == true)
                 return;

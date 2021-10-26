@@ -113,6 +113,8 @@
 
             SetSubtitlesVisibility(false);
             DisplayDecisions(false);
+
+            SetInventoryData(AdventureGame.Instance.Inventory.Items);
         }
 
         // PUBLIC METHODS

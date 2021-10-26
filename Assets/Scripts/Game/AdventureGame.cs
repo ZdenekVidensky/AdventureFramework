@@ -24,6 +24,12 @@
         [SerializeField]
         private List<Achievement> AchievementsDatabase = new List<Achievement>(32);
 
+        [Header("Cheats")]
+        [SerializeField]
+        private bool m_EnableCheats = true;
+        [SerializeField]
+        private List<InventoryItem> m_StartingItems;
+
         // PUBLIC MEMBERS
 
         public Inventory Inventory => m_Inventory;
@@ -134,6 +140,11 @@
 
             TextDatabase.InitializeLanguage(m_Language);
             InitializeGraphManager();
+
+            if (m_EnableCheats == true)
+            {
+                Inventory.AddItems(m_StartingItems);
+            }
 
             // TODO:
             //Cursor.SetCursor(m_GUISettings.CursorIcon, Vector2.zero, CursorMode.ForceSoftware);

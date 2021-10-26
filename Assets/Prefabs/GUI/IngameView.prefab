@@ -1122,6 +1122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Item: {fileID: 0}
   m_MainFrame: {fileID: 0}
+  m_ContentTransform: {fileID: 0}
   m_InventoryToggleButton: {fileID: 130956511234096828}
 --- !u!1 &5842480764442049274
 GameObject:

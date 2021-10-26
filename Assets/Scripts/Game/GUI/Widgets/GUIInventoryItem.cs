@@ -1,5 +1,7 @@
 ﻿namespace TVB.Game.GUI
 {
+    using System.Collections.Generic;
+
     using UnityEngine;
     using UnityEngine.UI;
     using UnityEngine.EventSystems;
@@ -12,18 +14,19 @@
     public class GUIInventoryItem : GUIComponent, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler
     {
         [GetComponent(true), SerializeField, HideInInspector]
-        private Image         m_Image;
+        private Image                  m_Image;
         [GetComponent(true), SerializeField, HideInInspector]
-        private RectTransform m_RectTransform;
+        private RectTransform          m_RectTransform;
 
         [SerializeField]
-        private Transform m_View;
+        private Transform              m_View;
 
-        private Vector3       m_Position;
-        private string        m_ItemID;
-        private int           m_ItemNameID;
-        private RectTransform m_ParentRectTransform;
-        private Transform     m_OriginalParent;
+        private Vector3                m_Position;
+        private string                 m_ItemID;
+        private int                    m_ItemNameID;
+        private RectTransform          m_ParentRectTransform;
+        private Transform              m_OriginalParent;
+        private List<InteractableWith> m_InteractableWithItems;
 
         public override void OnInitialized()
         {
@@ -54,10 +57,11 @@
 
         public void SetData(InventoryItem item)
         {
-            m_Image.sprite = item.Sprite;
-            m_Position     = m_RectTransform.position;
-            m_ItemID       = item.ID;
-            m_ItemNameID   = item.NameID;
+            m_Image.sprite          = item.Sprite;
+            m_Position              = m_RectTransform.position;
+            m_ItemID                = item.ID;
+            m_ItemNameID            = item.NameID;
+            m_InteractableWithItems = item.InteractableWithItems;
         }
 
         void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)
@@ -68,9 +72,19 @@
             AdventureGame.Instance.SelectedItemID = m_ItemID;
         }
 
+        private void OnGUI()
+        {
+            if (m_RectTransform.rect.Contains)
+        }
+
         void IDragHandler.OnDrag(PointerEventData eventData)
         {
             m_RectTransform.position = Input.mousePosition;
+
+            if (AdventureGame.Instance.SelectedItemID == m_ItemID)
+            {
+
+            }
         }
 
         void IEndDragHandler.OnEndDrag(PointerEventData eventData)
@@ -78,7 +92,10 @@
             this.transform.SetParent(m_OriginalParent);
             m_RectTransform.position = m_Position;
 
-            LayoutRebuilder.ForceRebuildLayoutImmediate(m_ParentRectTransform);
+            if (m_ParentRectTransform != null)
+            {
+                LayoutRebuilder.ForceRebuildLayoutImmediate(m_ParentRectTransform);
+            }
 
             AdventureGame.Instance.TryToUseItem(m_ItemID);
             AdventureGame.Instance.SelectedItemID = null;

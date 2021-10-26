@@ -142,3 +142,27 @@ MonoBehaviour:
     - Language: 1
       Text: 
       VoiceoverAudioClip: {fileID: 0}
+  - TextID: 100017
+    Translates:
+    - Language: 0
+      Text: Hovno
+      VoiceoverAudioClip: {fileID: 0}
+    - Language: 1
+      Text: 
+      VoiceoverAudioClip: {fileID: 0}
+  - TextID: 100018
+    Translates:
+    - Language: 0
+      Text: Baterie
+      VoiceoverAudioClip: {fileID: 0}
+    - Language: 1
+      Text: 
+      VoiceoverAudioClip: {fileID: 0}
+  - TextID: 100019
+    Translates:
+    - Language: 0
+      Text: Namatlat hovno na baterky
+      VoiceoverAudioClip: {fileID: 0}
+    - Language: 1
+      Text: 
+      VoiceoverAudioClip: {fileID: 0}

@@ -14,13 +14,15 @@
         private List<GUIInventoryItem> m_Items = new List<GUIInventoryItem>(20);
 
         [GetComponentInChildren("Item", true), SerializeField, HideInInspector]
-        private GUIInventoryItem m_Item;
+        private GUIInventoryItem       m_Item;
 
         [GetComponentInChildren("MainFrame", true), SerializeField, HideInInspector]
-        private RectTransform m_MainFrame;
+        private RectTransform          m_MainFrame;
+        [GetComponentInChildren("Content", true), SerializeField, HideInInspector]
+        private Transform              m_ContentTransform;
 
         [SerializeField]
-        private Button m_InventoryToggleButton;
+        private Button                 m_InventoryToggleButton;
 
         public override void OnInitialized()
         {
@@ -60,7 +62,7 @@
 
             if (dataCount > m_Items.Count)
             {
-                GUIInventoryItem newItem = Instantiate(m_Item, transform);
+                GUIInventoryItem newItem = Instantiate(m_Item, m_ContentTransform);
                 m_Items.Add(newItem);
             }
 

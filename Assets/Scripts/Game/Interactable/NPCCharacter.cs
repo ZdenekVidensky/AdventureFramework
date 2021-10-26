@@ -97,7 +97,8 @@
             (this as IInteractable).OnInteract();
         }
 
-        private void OnMouseEnter()
+
+        private void OnMouseOver()
         {
             if (AdventureGame.Instance.IsBusy == true)
                 return;

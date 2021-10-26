@@ -1,11 +1,11 @@
 using UnityEditor;
 using UnityEngine;
+using System;
 
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities.Editor;
 using TVB.Core.Localization;
-using System;
 
 public class LocalizationEditorWindow : OdinMenuEditorWindow
 {
