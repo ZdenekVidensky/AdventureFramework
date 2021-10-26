@@ -1,9 +1,15 @@
 ﻿namespace TVB.Core.GUI
 {
+    using TVB.Core.Attributes;
     using UnityEngine;
     
     public class GUIComponent : MonoBehaviour
     {
+        // PUBLIC MEMBERS
+
+        [GetComponent(true), SerializeField, HideInInspector]
+        public RectTransform RectTransform;
+
         // PROTECTED MEMBERS
 
         protected Frontend Frontend { get; private set; }

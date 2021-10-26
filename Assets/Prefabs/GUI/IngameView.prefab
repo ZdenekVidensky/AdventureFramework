@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6496059751923445456}
   - component: {fileID: 6286571499599186700}
+  - component: {fileID: 8900393462376000576}
   m_Layer: 0
   m_Name: Content
   m_TagString: Untagged
@@ -44,7 +45,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2325791162231107420}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
   m_Name: 
@@ -61,6 +62,28 @@ MonoBehaviour:
   m_Spacing: {x: 105.36, y: 70}
   m_Constraint: 0
   m_ConstraintCount: 2
+--- !u!114 &8900393462376000576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2325791162231107420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16e6414d864375543b71019f4ce24798, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    Left: 103
+    Right: 0
+    Top: 73
+    Bottom: 0
+  CellSizeX: 140
+  CellSizeY: 140
+  SpacingX: 150
+  SpacingY: 180
+  ItemsPerRow: 5
 --- !u!1 &3073755679449333175
 GameObject:
   m_ObjectHideFlags: 0
@@ -586,10 +609,10 @@ RectTransform:
   m_Father: {fileID: 6496059751923445456}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 173, y: -143}
+  m_SizeDelta: {x: 140, y: 140}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5842480763869434850
 MonoBehaviour:
@@ -603,8 +626,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab7c903a4bcbd6c49b9531b920743ea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RectTransform: {fileID: 0}
   m_Image: {fileID: 0}
-  m_RectTransform: {fileID: 0}
   m_View: {fileID: 0}
 --- !u!222 &5842480763869434876
 CanvasRenderer:
@@ -1120,6 +1143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 505d39676ec1a0547bf5b5541a22d55b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RectTransform: {fileID: 0}
   m_Item: {fileID: 0}
   m_MainFrame: {fileID: 0}
   m_ContentTransform: {fileID: 0}

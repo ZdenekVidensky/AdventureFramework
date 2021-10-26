@@ -15,8 +15,6 @@
     {
         [GetComponent(true), SerializeField, HideInInspector]
         private Image                  m_Image;
-        [GetComponent(true), SerializeField, HideInInspector]
-        private RectTransform          m_RectTransform;
 
         [SerializeField]
         private Transform              m_View;
@@ -58,7 +56,7 @@
         public void SetData(InventoryItem item)
         {
             m_Image.sprite          = item.Sprite;
-            m_Position              = m_RectTransform.position;
+            m_Position              = RectTransform.position;
             m_ItemID                = item.ID;
             m_ItemNameID            = item.NameID;
             m_InteractableWithItems = item.InteractableWithItems;
@@ -72,14 +70,9 @@
             AdventureGame.Instance.SelectedItemID = m_ItemID;
         }
 
-        private void OnGUI()
-        {
-            if (m_RectTransform.rect.Contains)
-        }
-
         void IDragHandler.OnDrag(PointerEventData eventData)
         {
-            m_RectTransform.position = Input.mousePosition;
+            RectTransform.position = Input.mousePosition;
 
             if (AdventureGame.Instance.SelectedItemID == m_ItemID)
             {
@@ -90,7 +83,7 @@
         void IEndDragHandler.OnEndDrag(PointerEventData eventData)
         {
             this.transform.SetParent(m_OriginalParent);
-            m_RectTransform.position = m_Position;
+            RectTransform.position = m_Position;
 
             if (m_ParentRectTransform != null)
             {

@@ -20,6 +20,8 @@
         private RectTransform          m_MainFrame;
         [GetComponentInChildren("Content", true), SerializeField, HideInInspector]
         private Transform              m_ContentTransform;
+        [GetComponentInChildren("Content", true), SerializeField, HideInInspector]
+        private GUIGridLayout          m_GridLayout;
 
         [SerializeField]
         private Button                 m_InventoryToggleButton;
@@ -78,6 +80,8 @@
                     m_Items[idx].SetActive(true);
                 }
             }
+
+            m_GridLayout.Rearrange();
         }
 
         // HANDLERS
