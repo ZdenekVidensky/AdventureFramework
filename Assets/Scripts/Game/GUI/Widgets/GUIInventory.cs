@@ -4,12 +4,11 @@
 
     using UnityEngine;
     using UnityEngine.UI;
-    using UnityEngine.EventSystems;
 
     using TVB.Core.GUI;
     using TVB.Core.Attributes;
 
-    public class GUIInventory : GUIComponent, IPointerExitHandler
+    public class GUIInventory : GUIComponent
     {
         private List<GUIInventoryItem> m_Items = new List<GUIInventoryItem>(20);
 
@@ -92,17 +91,6 @@
             m_MainFrame.SetActive(inventoryActive);
 
             AdventureGame.Instance.IsInventoryOpen = inventoryActive;
-        }
-
-        public void OnPointerExit(PointerEventData eventData)
-        {
-            // TODO
-            if (AdventureGame.Instance.IsInventoryOpen == true && AdventureGame.Instance.SelectedItemID != null)
-            {
-                m_MainFrame.SetActive(false);
-
-                AdventureGame.Instance.IsInventoryOpen = false;
-            }
         }
     }
 

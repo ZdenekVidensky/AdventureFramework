@@ -41,8 +41,17 @@
             if (AdventureGame.Instance.IsInventoryOpen == false)
                 return;
 
-            Signals.GUISignals.SetItemDescription.Emit(TextDatabase.Localize[m_ItemNameID]);
-            Signals.GUISignals.ShowItemDescription.Emit(true);
+
+            if (AdventureGame.Instance.SelectedItemID != null)
+            {
+                Signals.GUISignals.SetItemDescription.Emit(GetInteractingWithText(AdventureGame.Instance.SelectedItemID));
+                Signals.GUISignals.ShowItemDescription.Emit(true);
+            }
+            else
+            {
+                Signals.GUISignals.SetItemDescription.Emit(TextDatabase.Localize[m_ItemNameID]);
+                Signals.GUISignals.ShowItemDescription.Emit(true);
+            }
         }
 
         public void OnPointerExit(PointerEventData eventData)
@@ -67,17 +76,14 @@
             m_OriginalParent = this.transform.parent;
             this.transform.SetParent(m_View);
 
+            m_Image.raycastTarget = false;
+
             AdventureGame.Instance.SelectedItemID = m_ItemID;
         }
 
         void IDragHandler.OnDrag(PointerEventData eventData)
         {
             RectTransform.position = Input.mousePosition;
-
-            if (AdventureGame.Instance.SelectedItemID == m_ItemID)
-            {
-
-            }
         }
 
         void IEndDragHandler.OnEndDrag(PointerEventData eventData)
@@ -85,10 +91,13 @@
             this.transform.SetParent(m_OriginalParent);
             RectTransform.position = m_Position;
 
-            if (m_ParentRectTransform != null)
-            {
-                LayoutRebuilder.ForceRebuildLayoutImmediate(m_ParentRectTransform);
-            }
+            //if (m_ParentRectTransform != null)
+            //{
+            //    LayoutRebuilder.ForceRebuildLayoutImmediate(m_ParentRectTransform);
+            //}
+
+            m_Image.raycastTarget = true;
+
 
             AdventureGame.Instance.TryToUseItem(m_ItemID);
             AdventureGame.Instance.SelectedItemID = null;
@@ -97,5 +106,18 @@
         void IPointerDownHandler.OnPointerDown(PointerEventData eventData)
         {
         } 
+
+        private string GetInteractingWithText(string otherItemID)
+        {
+            for (int idx = 0, count = m_InteractableWithItems.Count; idx < count; idx++)
+            {
+                InteractableWith item = m_InteractableWithItems[idx];
+
+                if (item.OtherItemID == otherItemID)
+                    return TextDatabase.Localize[item.TextID];
+            }
+
+            return null;
+        }
     }
 }

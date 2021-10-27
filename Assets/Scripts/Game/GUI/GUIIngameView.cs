@@ -75,6 +75,8 @@
             Signals.GUISignals.SetInventoryOpen.Connect(OnSetInventoryOpen);
 
             m_ItemDescriptionRectTransform = m_ItemDescription.rectTransform;
+         
+            SetInventoryData(AdventureGame.Instance.Inventory.Items);
         }
 
         public override void OnDeinitialized()
@@ -113,8 +115,6 @@
 
             SetSubtitlesVisibility(false);
             DisplayDecisions(false);
-
-            SetInventoryData(AdventureGame.Instance.Inventory.Items);
         }
 
         // PUBLIC METHODS
