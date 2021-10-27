@@ -250,7 +250,7 @@ MonoBehaviour:
   m_Name: Decision
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 760, y: -200}
+  position: {x: 760, y: -216}
   ports:
     keys:
     - Input
@@ -541,7 +541,7 @@ MonoBehaviour:
   m_Name: Go To
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -488, y: -56}
+  position: {x: -456, y: -136}
   ports:
     keys:
     - Input

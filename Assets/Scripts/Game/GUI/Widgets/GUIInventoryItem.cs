@@ -10,8 +10,9 @@
     using TVB.Core.Attributes;
     using TVB.Game.GameSignals;
     using TVB.Core.Localization;
+    using TVB.Game.Graph;
 
-    public class GUIInventoryItem : GUIComponent, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler
+    public class GUIInventoryItem : GUIComponent, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler
     {
         [GetComponent(true), SerializeField, HideInInspector]
         private Image                  m_Image;
@@ -41,6 +42,7 @@
             if (AdventureGame.Instance.IsInventoryOpen == false)
                 return;
 
+            AdventureGame.Instance.HoveredItemID = m_ItemID;
 
             if (AdventureGame.Instance.SelectedItemID != null)
             {
@@ -59,6 +61,7 @@
             if (AdventureGame.Instance.IsBusy == true)
                 return;
 
+            AdventureGame.Instance.HoveredItemID = null;
             Signals.GUISignals.ShowItemDescription.Emit(false);
         }
 
@@ -91,21 +94,29 @@
             this.transform.SetParent(m_OriginalParent);
             RectTransform.position = m_Position;
 
-            //if (m_ParentRectTransform != null)
-            //{
-            //    LayoutRebuilder.ForceRebuildLayoutImmediate(m_ParentRectTransform);
-            //}
+            if (AdventureGame.Instance.IsInventoryOpen == true)
+            {
+                string selectedItemID = AdventureGame.Instance.SelectedItemID;
+                string hoveredItemID = AdventureGame.Instance.HoveredItemID;
+
+                if (selectedItemID != null && m_ItemID != hoveredItemID)
+                {
+                    InteractiveGraph graph = GetInteractiveGraphWithItem(hoveredItemID);
+
+                    if (graph != null)
+                    {
+                        StartCoroutine(AdventureGame.Instance.GraphManager.ProcessInteractiveGraph(null, graph));
+                    }
+                }
+            }
+            else
+            {
+                AdventureGame.Instance.TryToUseItem(m_ItemID);
+            }
 
             m_Image.raycastTarget = true;
-
-
-            AdventureGame.Instance.TryToUseItem(m_ItemID);
             AdventureGame.Instance.SelectedItemID = null;
         }
-
-        void IPointerDownHandler.OnPointerDown(PointerEventData eventData)
-        {
-        } 
 
         private string GetInteractingWithText(string otherItemID)
         {
@@ -115,6 +126,19 @@
 
                 if (item.OtherItemID == otherItemID)
                     return TextDatabase.Localize[item.TextID];
+            }
+
+            return null;
+        }
+
+        private InteractiveGraph GetInteractiveGraphWithItem(string otherItemID)
+        {
+            for (int idx = 0, count = m_InteractableWithItems.Count; idx < count; idx++)
+            {
+                InteractableWith item = m_InteractableWithItems[idx];
+
+                if (item.OtherItemID == otherItemID)
+                    return item.InteractiveGraph;
             }
 
             return null;

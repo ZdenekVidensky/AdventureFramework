@@ -87,6 +87,9 @@
 
         private void OnToggleInventory()
         {
+            if (AdventureGame.Instance.IsBusy == true)
+                return;
+
             bool inventoryActive = !m_MainFrame.gameObject.activeSelf;
             m_MainFrame.SetActive(inventoryActive);
 

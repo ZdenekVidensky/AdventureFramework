@@ -91,6 +91,19 @@
             }
         }
 
+        public string HoveredItemID
+        {
+            get
+            {
+                return m_HoveredItem;
+            }
+
+            set
+            {
+                m_HoveredItem = value;
+            }
+        }
+
         public bool GamePaused
         {
             get => m_GamePaused;
@@ -131,6 +144,7 @@
         private bool                          m_IsBusy               = false;
         private bool                          m_IsInventoryOpen      = false;
         private string                        m_SelectedItem         = null;
+        private string                        m_HoveredItem          = null;
 
         // GAME INTERFACE
 

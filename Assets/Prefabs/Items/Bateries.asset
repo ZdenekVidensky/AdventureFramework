@@ -18,4 +18,4 @@ MonoBehaviour:
   InteractableWithItems:
   - OtherItemID: Shit
     TextID: 100019
-    InteractiveGraph: {fileID: 0}
+    InteractiveGraph: {fileID: 11400000, guid: 485eda2dc40d88247971feb9e06b9575, type: 2}
