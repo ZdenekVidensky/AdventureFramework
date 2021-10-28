@@ -7,6 +7,7 @@
 
     using TVB.Core.GUI;
     using TVB.Core.Attributes;
+    using TVB.Game.GameSignals;
 
     public class GUIInventory : GUIComponent
     {
@@ -33,14 +34,16 @@
             m_Items.Add(m_Item);
 
             m_InventoryToggleButton.onClick.AddListener(OnToggleInventory);
-            m_MainFrame.SetActive(false);
+            Signals.GUISignals.SetInventoryOpen.Connect(OnSetInventoryIsOpen);
 
+            m_MainFrame.SetActive(false);
             SetData(AdventureGame.Instance.Inventory.Items);
         }
 
         public override void OnDeinitialized()
         {
             m_InventoryToggleButton.onClick.RemoveAllListeners();
+            Signals.GUISignals.SetInventoryOpen.Disconnect(OnSetInventoryIsOpen);
 
             base.OnDeinitialized();
         }
@@ -91,9 +94,12 @@
                 return;
 
             bool inventoryActive = !m_MainFrame.gameObject.activeSelf;
-            m_MainFrame.SetActive(inventoryActive);
-
             AdventureGame.Instance.IsInventoryOpen = inventoryActive;
+        }
+
+        private void OnSetInventoryIsOpen(bool open)
+        {
+            m_MainFrame.SetActive(open);
         }
     }
 

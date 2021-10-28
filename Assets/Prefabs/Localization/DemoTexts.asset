@@ -174,3 +174,11 @@ MonoBehaviour:
     - Language: 1
       Text: 
       VoiceoverAudioClip: {fileID: 0}
+  - TextID: 100021
+    Translates:
+    - Language: 0
+      Text: Vy jste ale prase!
+      VoiceoverAudioClip: {fileID: 0}
+    - Language: 1
+      Text: 
+      VoiceoverAudioClip: {fileID: 0}

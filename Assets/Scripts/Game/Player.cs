@@ -3,7 +3,9 @@ namespace TVB.Game
     using System.Collections.Generic;
     using UnityEngine;
 
-    public class Player : MonoBehaviour
+    using TVB.Game.Interactable;
+
+    public class Player : MonoBehaviour, ITalkable
     {
         // CONFIGURATION
 
@@ -19,6 +21,8 @@ namespace TVB.Game
 
         public Vector3 Position => m_Transform.position;
         public bool IsGoing     => m_CurrentPath != null;
+
+        ETalkableCharacter ITalkable.Character => ETalkableCharacter.Player;
 
         // PRIVATE MEMBERS
 
@@ -98,6 +102,11 @@ namespace TVB.Game
             float scale = Mathf.Lerp(m_SceneSettings.BottomScale.Scale, m_SceneSettings.TopScale.Scale, percent);
 
             m_Transform.localScale = new Vector3(scale, scale, m_Transform.localScale.z);
+        }
+
+        void ITalkable.SetIsTalking(bool state)
+        {
+            // TODO: talking animation
         }
     }
 }

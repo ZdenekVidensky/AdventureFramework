@@ -181,6 +181,11 @@
 
         // PUBLIC METHODS
 
+        public void ProcessInteractiveGraph(InteractiveGraph graph, IInteractable interactableObject = null)
+        {
+           StartCoroutine(m_GraphManager.ProcessInteractiveGraph(graph, interactableObject));
+        }
+
         public void InitializeGraphManager()
         {
             m_GraphManager = GetComponent<GraphManager>();

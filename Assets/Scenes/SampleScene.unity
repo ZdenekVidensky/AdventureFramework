@@ -1345,6 +1345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_NameTextID: 100004
+  m_TalkableCharacter: 1
   m_InteractableAction: 1
   m_CustomTextID: 100005
   m_InteractiveGraph: {fileID: 11400000, guid: 86203b66034483d4c8f439dabb0dd496, type: 2}

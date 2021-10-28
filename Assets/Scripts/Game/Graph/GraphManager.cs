@@ -1,62 +1,72 @@
 ﻿namespace TVB.Game.Graph
 {
 	using System.Collections;
-    using System.Collections.Generic;
-    using System.Linq;
+	using System.Collections.Generic;
+	using System.Linq;
 
 	using UnityEngine;
 	using XNode;
 
-    using TVB.Core.Coroutines;
-    using TVB.Game.GUI;
-    using TVB.Game.Interactable;
-    using TVB.Game.GameSignals;
-    using TVB.Game.Navigation;
+	using TVB.Core.Coroutines;
+	using TVB.Game.GUI;
+	using TVB.Game.Interactable;
+	using TVB.Game.GameSignals;
+	using TVB.Game.Navigation;
 
-    public class GraphManager : MonoBehaviour
+	public class GraphManager : MonoBehaviour
 	{
 		// PRIVATE MEMBERS
 
-		private GUIIngameView        m_IngameView;
-		private NavigationManager    m_NavigationManager;
-		private int                  m_SelectedDecision = -1;
-		private IInteractable        m_InteractableObject;
-		private bool                 m_SkipTalkPerformed;
-		private bool                 m_BackPerformed;
-		private bool                 m_Talking;
-		private IEnumerator          m_MainCoroutine;
-		private bool                 m_SkipProcessingPerformed;
+		private GUIIngameView                             m_IngameView;
+		private NavigationManager                         m_NavigationManager;
+		private int                                       m_SelectedDecision = -1;
+		private IInteractable                             m_InteractableObject;
+		private bool                                      m_SkipTalkPerformed;
+		private bool                                      m_BackPerformed;
+		private bool                                      m_Talking;
+		private IEnumerator                               m_MainCoroutine;
+		private bool                                      m_SkipProcessingPerformed;
 
-        // MONOBEHAVIOUR INTERFACE
+		private Dictionary<ETalkableCharacter, ITalkable> m_TalkableCharacters = new Dictionary<ETalkableCharacter, ITalkable>(8);
 
-        private void Awake()
-        {
+		// MONOBEHAVIOUR INTERFACE
+
+		private void Awake()
+		{
 			Initialize();
-        }
+		}
 
-        private void OnDestroy()
-        {
+		private void OnDestroy()
+		{
 			m_IngameView.SelectDecisionEvent.RemoveListener(OnSelectDecision);
-			m_IngameView       = null;
+			m_IngameView = null;
 			m_NavigationManager = null;
 		}
 
-        // PUBLIC METHODS
+		// PUBLIC METHODS
 
-        public void Initialize()
-        {
-			m_IngameView       = FindObjectOfType<GUIIngameView>();
+		public void Initialize()
+		{
+			m_IngameView = FindObjectOfType<GUIIngameView>();
 			m_NavigationManager = FindObjectOfType<NavigationManager>();
 			m_IngameView.SelectDecisionEvent.AddListener(OnSelectDecision);
+
+
+			m_TalkableCharacters.Clear();
+			IEnumerable talkableObjects = FindObjectsOfType<MonoBehaviour>(true).OfType<ITalkable>();
+			foreach(ITalkable talkable in talkableObjects)
+            {
+				m_TalkableCharacters.Add(talkable.Character, talkable);
+			}
 		}
 
-		public IEnumerator ProcessInteractiveGraph(IInteractable interactableObject, InteractiveGraph interactiveGraph)
-        {
+		public IEnumerator ProcessInteractiveGraph(InteractiveGraph interactiveGraph, IInteractable interactableObject = null)
+		{
 			AdventureGame.Instance.IsBusy = true;
 
 			//ForceStopProcessing();
 
-			m_InteractableObject          = interactableObject;
+			m_InteractableObject = interactableObject;
 			BaseInteractiveNode firstNode = interactiveGraph.GetFirstNode() as BaseInteractiveNode;
 
 			if (firstNode == null)
@@ -70,13 +80,13 @@
 			while (m_MainCoroutine != null && m_MainCoroutine.MoveNext() == true && m_SkipProcessingPerformed == false)
 				yield return m_MainCoroutine.Current;
 
-			m_SkipProcessingPerformed     = false;
-			m_MainCoroutine               = null;
+			m_SkipProcessingPerformed = false;
+			m_MainCoroutine = null;
 			AdventureGame.Instance.IsBusy = false;
 		}
 
 		public void ForceStopProcessing()
-        {
+		{
 			if (m_MainCoroutine == null)
 				return;
 
@@ -84,7 +94,7 @@
 		}
 
 		public void OnSkipPerformed()
-        {
+		{
 			if (m_Talking == false)
 				return;
 
@@ -174,9 +184,9 @@
 			}
 
 			NodePort output = node.GetPort("Output")?.Connection;
-			
+
 			if (output == null) // End of graph
-            {
+			{
 				m_IngameView.EndedInteraction();
 				AdventureGame.Instance.IsBusy = false;
 				yield break;
@@ -216,7 +226,7 @@
 			if (conditionName.StartsWith("!") == true)
 			{
 				conditionName = conditionName.Substring(1);
-				isNegative    = true;
+				isNegative = true;
 			}
 
 			if (conditionName.StartsWith("HasItem(") == true)
@@ -232,12 +242,12 @@
 		}
 
 		private void SetCondition(SetConditionNode node)
-        {
+		{
 			AdventureGame.Instance.SetCondition(node.ConditionName, node.BooleanValue);
-        }
+		}
 
 		private IEnumerator GoTo(GoToNode node)
-        {
+		{
 			Player player = AdventureGame.Instance.Player;
 			AdventureGame.Instance.IsBusy = false;
 
@@ -250,12 +260,12 @@
 		}
 
 		private IEnumerator Condition(ConditionNode conditionNode)
-        {
+		{
 			bool conditionSatisfied = false;
-			bool condition          = AdventureGame.Instance.GetCondition(conditionNode.ConditionName);
+			bool condition = AdventureGame.Instance.GetCondition(conditionNode.ConditionName);
 
-            switch (conditionNode.ConditionType)
-            {
+			switch (conditionNode.ConditionType)
+			{
 				case EConditionType.HasItem:
 					conditionSatisfied = AdventureGame.Instance.Inventory.HasItem(conditionNode.Item.ID) == true;
 					break;
@@ -277,31 +287,31 @@
 		}
 
 		private void DropItem(DropItemNode dropItemNode)
-        {
+		{
 			AdventureGame.Instance.Inventory.RemoveItem(dropItemNode.Item);
 			UpdateInventoryGUI();
 		}
 
 		private void TakeItem(TakeItemNode takeItemNode)
-        {
+		{
 			if (takeItemNode.Item == null)
-            {
+			{
 				Debug.LogError("There is no item assigned to this node!");
 				return;
-            }
+			}
 
 			AdventureGame.Instance.Inventory.AddItem(takeItemNode.Item);
 			UpdateInventoryGUI();
-			
+
 			if (takeItemNode.DestroyAfterTake == true)
 			{
 				AdventureGame.Instance.SetCondition($"{m_InteractableObject.Name}-takencondition", true);
 				m_InteractableObject.Destroy();
 			}
-        }
+		}
 
 		private void UpdateInventoryGUI()
-        {
+		{
 			Inventory inventory = AdventureGame.Instance.Inventory;
 			m_IngameView.SetInventoryData(inventory.Items);
 		}
@@ -310,8 +320,8 @@
 		{
 			yield return null; // Wait one frame for processing skip
 			m_Talking = true;
-			string text            = dialogueNode.Text;
-			ECharacter character   = dialogueNode.Character;
+			string text = dialogueNode.Text;
+			ETalkableCharacter character = dialogueNode.Character;
 			bool playTalkAnimation = dialogueNode.PlayTalkAnimation;
 
 			if (text == null)
@@ -325,12 +335,10 @@
 
 			if (playTalkAnimation == true)
 			{
-				if (character == ECharacter.This)
-				{
-					if (m_InteractableObject is ITalkable talkable)
-					{
-						talkable.SetIsTalking(true);
-					}
+				ITalkable talkable = m_TalkableCharacters[character];
+				if (talkable != null)
+                {
+					talkable.SetIsTalking(true);
 				}
 			}
 
@@ -341,12 +349,10 @@
 
 			if (playTalkAnimation == true)
 			{
-				if (character == ECharacter.This)
+				ITalkable talkable = m_TalkableCharacters[character];
+				if (talkable != null)
 				{
-					if (m_InteractableObject is ITalkable talkable)
-					{
-						talkable.SetIsTalking(false);
-					}
+					talkable.SetIsTalking(false);
 				}
 			}
 
@@ -357,8 +363,12 @@
 		// HANDLERS
 
 		private void OnSelectDecision(int index)
-        {
+		{
 			m_SelectedDecision = index;
-        }
+		}
+
+		// HELPERS
+
+
 	}
 }

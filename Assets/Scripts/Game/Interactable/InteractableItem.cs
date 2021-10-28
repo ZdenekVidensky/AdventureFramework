@@ -46,7 +46,7 @@
         {
             if (m_InteractiveGraph != null)
             {
-                StartCoroutine(AdventureGame.Instance.GraphManager.ProcessInteractiveGraph(this, m_InteractiveGraph));
+                StartCoroutine(AdventureGame.Instance.GraphManager.ProcessInteractiveGraph(m_InteractiveGraph, this));
             }
         }
 
@@ -131,7 +131,7 @@
                 return;
             }
 
-            StartCoroutine(AdventureGame.Instance.GraphManager.ProcessInteractiveGraph(this, graph));
+            StartCoroutine(AdventureGame.Instance.GraphManager.ProcessInteractiveGraph(graph, this));
         }
 
         // HELPERS

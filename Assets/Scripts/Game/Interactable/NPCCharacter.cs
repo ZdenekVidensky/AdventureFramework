@@ -12,22 +12,25 @@
         // CONFIGURATION
 
         [SerializeField]
-        private int                      m_NameTextID;
+        private int                                         m_NameTextID;
+
+        [SerializeField]
+        private ETalkableCharacter                          m_TalkableCharacter;
 
         [DisableInEditorMode, DisableInPlayMode, ShowInInspector]
-        public string NameText => TextDatabase.Localize[m_NameTextID];
+        public string NameText => TextDatabase.Localize[    m_NameTextID];
         [SerializeField]
-        private EInteractableAction      m_InteractableAction;
+        private EInteractableAction                         m_InteractableAction;
         [SerializeField]
-        private int                      m_CustomTextID;
+        private int                                         m_CustomTextID;
         [DisableInEditorMode, DisableInPlayMode, ShowInInspector]
         public string CustomTextID => TextDatabase.Localize[m_CustomTextID];
         [SerializeField]
-        private InteractiveGraph         m_InteractiveGraph;
+        private InteractiveGraph                            m_InteractiveGraph;
         [SerializeField]
-        private Animator                 m_Animator;
+        private Animator                                    m_Animator;
         [SerializeField]
-        private InteractableWithItem[]   m_InteractableWithItems;
+        private InteractableWithItem[]                      m_InteractableWithItems;
 
         // STATIC MEMBERS
 
@@ -52,11 +55,13 @@
 
             if (m_InteractiveGraph != null)
             {
-                StartCoroutine(AdventureGame.Instance.GraphManager.ProcessInteractiveGraph(this, m_InteractiveGraph));
+                StartCoroutine(AdventureGame.Instance.GraphManager.ProcessInteractiveGraph(m_InteractiveGraph, this));
             }
         }
 
         void IInteractable.Destroy() {}
+
+        ETalkableCharacter ITalkable.Character { get => m_TalkableCharacter; }
 
         void ITalkable.SetIsTalking(bool state)
         {
@@ -84,7 +89,7 @@
                 return;
             }
 
-            StartCoroutine(AdventureGame.Instance.GraphManager.ProcessInteractiveGraph(this, graph));
+            StartCoroutine(AdventureGame.Instance.GraphManager.ProcessInteractiveGraph(graph, this));
         }
 
         // MONOBEHAVIOUR

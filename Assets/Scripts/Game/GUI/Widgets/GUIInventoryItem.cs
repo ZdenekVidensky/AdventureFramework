@@ -105,8 +105,10 @@
 
                     if (graph != null)
                     {
-                        StartCoroutine(AdventureGame.Instance.GraphManager.ProcessInteractiveGraph(null, graph));
+                        AdventureGame.Instance.ProcessInteractiveGraph(graph);
                     }
+
+                    AdventureGame.Instance.IsInventoryOpen = false;
                 }
             }
             else
