@@ -182,3 +182,11 @@ MonoBehaviour:
     - Language: 1
       Text: 
       VoiceoverAudioClip: {fileID: 0}
+  - TextID: 100022
+    Translates:
+    - Language: 0
+      Text: "J\xEDt zp\u011Bt do kancel\xE1\u0159e"
+      VoiceoverAudioClip: {fileID: 0}
+    - Language: 1
+      Text: 
+      VoiceoverAudioClip: {fileID: 0}

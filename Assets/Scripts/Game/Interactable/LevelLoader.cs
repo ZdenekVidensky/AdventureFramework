@@ -30,7 +30,7 @@ public class LevelLoader : MonoBehaviour, IInteractable
 
     void IInteractable.OnInteract()
     {
-        StartCoroutine(AdventureGame.Instance.LoadSceneAsync(m_SceneName));
+        AdventureGame.Instance.LoadSceneAsync(m_SceneName);
     }
 
     void IInteractable.OnUseItem(string itemID)

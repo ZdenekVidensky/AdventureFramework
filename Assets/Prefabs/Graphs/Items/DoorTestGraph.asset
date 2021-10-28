@@ -59,7 +59,51 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodes:
   - {fileID: 3758921303351551400}
-  - {fileID: -3034454048433076942}
+  - {fileID: 0}
+  - {fileID: 1402644264472228125}
+--- !u!114 &1402644264472228125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edef48ed574ee984785b1669dc0bf52c, type: 3}
+  m_Name: Change Scene
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 57.5, y: -27}
+  ports:
+    keys:
+    - Input
+    - Output
+    values:
+    - _fieldName: Input
+      _node: {fileID: 1402644264472228125}
+      _typeQualifiedName: TVB.Game.Graph.BaseInteractiveNode, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: Output
+        node: {fileID: 3758921303351551400}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Output
+      _node: {fileID: 1402644264472228125}
+      _typeQualifiedName: TVB.Game.Graph.BaseInteractiveNode, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  Input: {fileID: 0}
+  Output: {fileID: 0}
+  SceneName: SampleScene2
 --- !u!114 &3758921303351551400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,7 +138,7 @@ MonoBehaviour:
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Input
-        node: {fileID: -3034454048433076942}
+        node: {fileID: 1402644264472228125}
         reroutePoints: []
       _direction: 1
       _connectionType: 0
@@ -102,4 +146,4 @@ MonoBehaviour:
       _dynamic: 0
   Input: {fileID: 0}
   Output: {fileID: 0}
-  Destination: {x: -9.11, y: -1.07}
+  Destination: {x: -9.26, y: 4.9}

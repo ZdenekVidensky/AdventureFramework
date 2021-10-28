@@ -153,6 +153,9 @@
 				case GoToNode goToNode:
 					yield return GoTo(goToNode);
 					break;
+				case ChangeSceneNode changeSceneNode:
+					AdventureGame.Instance.LoadSceneAsync(changeSceneNode.SceneName);
+					yield break;
 				case DecisionNode decisionNode:
 					m_SelectedDecision = -1;
 

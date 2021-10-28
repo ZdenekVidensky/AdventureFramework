@@ -8,6 +8,9 @@ namespace TVB.Game
         [Header("Scales")]
         public ScaleLevel TopScale;
         public ScaleLevel BottomScale;
+
+        [Header("Previous scene")]
+        public PreviousSceneLocation[] PreviousSceneLocations;
     }
 
     [System.Serializable]
@@ -17,6 +20,13 @@ namespace TVB.Game
         public float Scale;
     }
 
+    [System.Serializable]
+    public struct PreviousSceneLocation
+    {
+        public string SceneName;
+        public Vector2 Position;
+        // TODO: Direction
+    }
+
     // TODO: Music, Ambient
-    // TODO: Location based on previous scenes
 }

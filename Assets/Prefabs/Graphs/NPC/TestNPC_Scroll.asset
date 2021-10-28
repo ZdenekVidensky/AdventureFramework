@@ -145,5 +145,4 @@ MonoBehaviour:
   m_Name: TestNPC_Scroll
   m_EditorClassIdentifier: 
   nodes:
-  - {fileID: 0}
   - {fileID: -1125709189496552177}

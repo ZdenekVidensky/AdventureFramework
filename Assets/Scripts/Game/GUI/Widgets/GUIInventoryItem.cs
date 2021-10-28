@@ -23,15 +23,12 @@
         private Vector3                m_Position;
         private string                 m_ItemID;
         private int                    m_ItemNameID;
-        private RectTransform          m_ParentRectTransform;
         private Transform              m_OriginalParent;
         private List<InteractableWith> m_InteractableWithItems;
 
         public override void OnInitialized()
         {
             base.OnInitialized();
-
-            m_ParentRectTransform = this.transform.parent.GetComponent<RectTransform>();
         }
 
         public void OnPointerEnter(PointerEventData eventData)
@@ -106,9 +103,8 @@
                     if (graph != null)
                     {
                         AdventureGame.Instance.ProcessInteractiveGraph(graph);
+                        AdventureGame.Instance.IsInventoryOpen = false;
                     }
-
-                    AdventureGame.Instance.IsInventoryOpen = false;
                 }
             }
             else

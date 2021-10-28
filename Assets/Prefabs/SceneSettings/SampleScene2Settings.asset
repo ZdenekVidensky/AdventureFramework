@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe65c6abda02294409521a4cd569bbe1, type: 3}
-  m_Name: SampleSceneSettings
+  m_Name: SampleScene2Settings
   m_EditorClassIdentifier: 
   TopScale:
-    YPosition: 7.7493
-    Scale: 2.6
+    YPosition: 5.17
+    Scale: 2.1
   BottomScale:
-    YPosition: 1
-    Scale: 3.6
+    YPosition: 0
+    Scale: 3
   PreviousSceneLocations:
-  - SceneName: SampleScene2
-    Position: {x: -9.26, y: 4.9}
+  - SceneName: SampleScene
+    Position: {x: -4.09, y: 4.88}

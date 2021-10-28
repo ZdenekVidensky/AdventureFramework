@@ -70,6 +70,8 @@
                 m_Items.Add(newItem);
             }
 
+            m_GridLayout.Rearrange();
+
             for (int idx = 0, count = m_Items.Count; idx < count; idx++)
             {
                 if (idx >= dataCount)
@@ -82,8 +84,6 @@
                     m_Items[idx].SetActive(true);
                 }
             }
-
-            m_GridLayout.Rearrange();
         }
 
         // HANDLERS

@@ -11,9 +11,8 @@
         protected bool        m_Initialized;
         private Frontend      m_Frontend;
         private SceneObject[] m_SceneObjects = new SceneObject[0];
-        
-        [SerializeField]
-        private string m_DebugName;
+
+        public string SceneName;
 
         // PUBLIC METHODS
 

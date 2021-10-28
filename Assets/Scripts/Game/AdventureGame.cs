@@ -124,6 +124,11 @@
             }
         }
 
+        public string PreviousScene
+        {
+            get => m_PreviousScene;
+        }
+
         public static new AdventureGame Instance
         {
             get
@@ -145,6 +150,7 @@
         private bool                          m_IsInventoryOpen      = false;
         private string                        m_SelectedItem         = null;
         private string                        m_HoveredItem          = null;
+        private string                        m_PreviousScene        = null;
 
         // GAME INTERFACE
 
@@ -246,7 +252,12 @@
             }
         }
 
-        public IEnumerator LoadSceneAsync(string sceneName)
+        public void LoadSceneAsync(string sceneName)
+        {
+            StartCoroutine(LoadSceneAsync_Coroutine(sceneName));
+        }
+
+        private IEnumerator LoadSceneAsync_Coroutine(string sceneName)
         {
             IsBusy = true;
 
@@ -258,6 +269,7 @@
                 if (asyncLoad.progress >= 0.9f)
                 {
                     AdventureScene scene = Scene as AdventureScene;
+                    m_PreviousScene = scene.SceneName;
                     yield return scene.FadeOut(0.3f);
                     scene.Deinitialize();
                     asyncLoad.allowSceneActivation = true;
