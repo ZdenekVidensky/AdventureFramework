@@ -9,7 +9,7 @@ using TVB.Core.Localization;
 
 public class LocalizationEditorWindow : OdinMenuEditorWindow
 {
-    private const string ITEMS_PATH = "Assets/Prefabs/Localization/";
+    private const string ITEMS_PATH = "Assets/Resources/Localization/";
     private CreateNewItem m_CreateNewItemInstance;
 
     public string m_FileName;

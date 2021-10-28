@@ -111,7 +111,6 @@ namespace TVB.Game.Navigation
 
         // EDITOR
 
-#if UNITY_EDITOR
         [Button("Find and fill all NavMeshes neighbours")]
         private void FillNavMeshes()
         {
@@ -130,7 +129,6 @@ namespace TVB.Game.Navigation
                 }
             }
         }
-#endif
     }
 }
 

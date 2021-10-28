@@ -11,7 +11,7 @@
 
         private static TextDatabase m_Instance;
         public static System.Action OnLanguageChanged;
-        private const string ITEMS_PATH = "Assets/Prefabs/Localization/";
+        private const string ITEMS_PATH = "Localization";
 
         public static string CurrentLanguage
         {
@@ -62,11 +62,12 @@
             m_Translations.Clear();
             m_CurrentLanguage = language;
 
-            string[] files = Directory.GetFiles(ITEMS_PATH, "*.asset");
+            LocalizedTexts[] assets = Resources.LoadAll<LocalizedTexts>(ITEMS_PATH);
 
-            for (int idx = 0; idx < files.Length; idx++)
+            for (int idx = 0; idx < assets.Length; idx++)
             {
-                LocalizedTexts asset = AssetDatabase.LoadAssetAtPath<LocalizedTexts>(files[idx]);
+                //LocalizedTexts asset = AssetDatabase.LoadAssetAtPath<LocalizedTexts>(files[idx]);
+                LocalizedTexts asset = assets[idx];
 
                 if (asset == null)
                     continue;

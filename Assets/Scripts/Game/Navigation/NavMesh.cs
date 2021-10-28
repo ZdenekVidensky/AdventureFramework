@@ -41,6 +41,6 @@ namespace TVB.Game.Navigation
                 Gizmos.DrawLine(transform.position, item.transform.position);
             }
         }
-    }
 #endif
+    }
 }
