@@ -1147,6 +1147,7 @@ MonoBehaviour:
   m_Item: {fileID: 0}
   m_MainFrame: {fileID: 0}
   m_ContentTransform: {fileID: 0}
+  m_GridLayout: {fileID: 0}
   m_InventoryToggleButton: {fileID: 130956511234096828}
 --- !u!1 &5842480764442049274
 GameObject:
@@ -1964,8 +1965,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 803.5796, y: -538.524}
-  m_SizeDelta: {x: 400, y: 50}
+  m_AnchoredPosition: {x: 783.437, y: -538.524}
+  m_SizeDelta: {x: 651.783, y: 50}
   m_Pivot: {x: -0.08, y: 0.5}
 --- !u!222 &205699692326190427
 CanvasRenderer:

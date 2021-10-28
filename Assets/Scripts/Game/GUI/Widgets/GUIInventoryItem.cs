@@ -74,7 +74,7 @@
         void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)
         {
             m_OriginalParent = this.transform.parent;
-            this.transform.SetParent(m_View);
+            RectTransform.SetParent(m_View);
 
             m_Image.raycastTarget = false;
 

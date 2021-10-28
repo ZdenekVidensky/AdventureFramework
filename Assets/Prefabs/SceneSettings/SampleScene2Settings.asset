@@ -21,3 +21,5 @@ MonoBehaviour:
   PreviousSceneLocations:
   - SceneName: SampleScene
     Position: {x: -4.09, y: 4.88}
+  BackgroundMusic: {fileID: 8300000, guid: f9b1c26a7d27703469b049c5162789b3, type: 3}
+  AmbientMusic: {fileID: 8300000, guid: 561caad8f58809a4faa8b4867a5ab039, type: 3}

@@ -10,7 +10,7 @@
     {
         // CONSTANTS
 
-        private const float MAX_MUSIC_VOLUME = 0.4f; // TODO: Remove
+        private const float MAX_MUSIC_VOLUME = 1f; // TODO: Remove
 
         // CONFIGURATION
 
@@ -33,6 +33,12 @@
         public void PlayMusic(AudioClip clip)
         {
             if (m_Disabled == true)
+                return;
+
+            if (m_MusicAudioSourceA.isPlaying == true && m_MusicAudioSourceA.clip == clip)
+                return;
+
+            if (m_MusicAudioSourceB.isPlaying == true && m_MusicAudioSourceB.clip == clip)
                 return;
 
             if (m_MusicAudioSourceA.isPlaying == false)

@@ -67,6 +67,7 @@
                 Debug.LogError("There is no active Scene object in current scene!");
                 return;
             }
+
             m_Scene.Initialize();
         }
 

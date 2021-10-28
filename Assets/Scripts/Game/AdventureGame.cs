@@ -10,9 +10,11 @@
 
     using TVB.Core;
     using TVB.Core.Localization;
+    using TVB.Core.Audio;
     using TVB.Game.GameSignals;
     using TVB.Game.Graph;
     using TVB.Game.Interactable;
+    using TVB.Core.Attributes;
 
     public class AdventureGame : Game
     {
@@ -20,15 +22,18 @@
 
         [SerializeField]
         private ELanguage m_Language = ELanguage.Czech;
+        [SerializeField]
+        private AudioManager        m_AudioManager;
 
         [SerializeField]
         private List<Achievement> AchievementsDatabase = new List<Achievement>(32);
 
         [Header("Cheats")]
         [SerializeField]
-        private bool m_EnableCheats = true;
-        [SerializeField]
+        private bool                m_EnableCheats = true;
+        [GetComponent(), SerializeField, HideInInspector]
         private List<InventoryItem> m_StartingItems;
+
 
         // PUBLIC MEMBERS
 
@@ -48,6 +53,7 @@
                 return m_Player;
             }
         }
+        public AudioManager AudioManager => m_AudioManager;
 
 
         public bool IsBusy
@@ -284,7 +290,7 @@
 
         private void UpdateInput()
         {
-            if (Input.GetMouseButtonDown(0) == true)
+            if (Input.GetMouseButtonUp(0) == true)
             {
                 m_GraphManager.OnSkipPerformed();
             }

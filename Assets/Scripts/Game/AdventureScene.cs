@@ -50,6 +50,25 @@
 
             Frontend.OpenScreen<GUIIngameView>();
             StartCoroutine(m_Fader.FadeIn(0.3f, OnFadeInCompleted));
+
+
+            if (m_SceneSettings.BackgroundMusic != null)
+            {
+                AdventureGame.Instance.AudioManager.PlayMusic(m_SceneSettings.BackgroundMusic);
+            }
+            else
+            {
+                AdventureGame.Instance.AudioManager.StopMusic();
+            }
+
+            if (m_SceneSettings.AmbientMusic != null)
+            {
+                AdventureGame.Instance.AudioManager.PlayAmbient(m_SceneSettings.AmbientMusic);
+            }
+            else
+            {
+                AdventureGame.Instance.AudioManager.StopAmbient();
+            }
         }
 
         public override void OnUpdate()
@@ -62,6 +81,9 @@
             Signals.GameplaySignals.EndGame.Disconnect(OnEndGame);
             Signals.GameplaySignals.NewGame.Disconnect(OnNewGame);
             Signals.GUISignals.UnlockAchievement.Disconnect(OnAchievementUnlocked);
+
+            //AdventureGame.Instance.AudioManager.StopAmbient();
+            //AdventureGame.Instance.AudioManager.StopMusic();
 
             base.OnDeinitialized();
         }

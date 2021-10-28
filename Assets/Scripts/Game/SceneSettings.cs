@@ -11,6 +11,10 @@ namespace TVB.Game
 
         [Header("Previous scene")]
         public PreviousSceneLocation[] PreviousSceneLocations;
+
+        [Header("Music")]
+        public AudioClip BackgroundMusic;
+        public AudioClip AmbientMusic;
     }
 
     [System.Serializable]
