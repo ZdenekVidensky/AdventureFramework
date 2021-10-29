@@ -15,6 +15,7 @@
     using TVB.Game.Graph;
     using TVB.Game.Interactable;
     using TVB.Core.Attributes;
+    using TVB.Game.Save;
     
     using Scene = Core.Scene;
 
@@ -28,13 +29,16 @@
         private AudioManager        m_AudioManager;
 
         [SerializeField]
-        private List<Achievement> AchievementsDatabase = new List<Achievement>(32);
+        private List<Achievement> m_AchievementsDatabase = new List<Achievement>(32);
+        [SerializeField]
+        private List<InventoryItem> m_InventoryItemsDatabase;
 
         [Header("Cheats")]
         [SerializeField]
         private bool                m_EnableCheats = true;
         [GetComponent(), SerializeField, HideInInspector]
         private List<InventoryItem> m_StartingItems;
+
 
 
         // PUBLIC MEMBERS
@@ -159,6 +163,7 @@
         private string                        m_SelectedItem         = null;
         private string                        m_HoveredItem          = null;
         private string                        m_PreviousScene        = null;
+        private SaveData                      m_PendingSaveData      = null;
 
         // GAME INTERFACE
 
@@ -191,6 +196,12 @@
 
             m_GraphManager.Initialize();
             m_Player = FindObjectOfType<Player>();
+
+            if (m_PendingSaveData != null)
+            {
+                Player.transform.position = new Vector3(m_PendingSaveData.PositionX, m_PendingSaveData.PositionY, Player.Position.z);
+                m_PendingSaveData = null;
+            }
         }
 
         // PUBLIC METHODS
@@ -226,7 +237,7 @@
 
         public void UnlockAchievement(string ID)
         {
-            Achievement achievement = AchievementsDatabase.FirstOrDefault(m => m.ID == ID);
+            Achievement achievement = m_AchievementsDatabase.FirstOrDefault(m => m.ID == ID);
 
             if (achievement == null)
             {
@@ -265,7 +276,7 @@
             StartCoroutine(LoadSceneAsync_Coroutine(sceneName));
         }
 
-        private IEnumerator LoadSceneAsync_Coroutine(string sceneName)
+        private IEnumerator LoadSceneAsync_Coroutine(string sceneName, SaveData saveData = null)
         {
             IsBusy = true;
 
@@ -280,6 +291,13 @@
                     m_PreviousScene = scene.SceneName;
                     yield return scene.FadeOut(0.3f);
                     scene.Deinitialize();
+
+                    if (saveData != null)
+                    {
+                        ApplySaveData(saveData);
+                        m_PendingSaveData = saveData; // Save save data for scene (player)
+                    }
+
                     asyncLoad.allowSceneActivation = true;
                     break;
                 }
@@ -290,11 +308,56 @@
 
         // PRIVATE METHODS
 
+        private void ApplySaveData(SaveData saveData)
+        {
+            Conditions.Clear();
+
+            for (int idx = 0; idx < saveData.Conditions.Length; idx++)
+            {
+                ConditionSaveData item = saveData.Conditions[idx];
+                Conditions[item.Name] = item.Value;
+            }
+
+            Inventory.Items.Clear();
+            // TODO: Refresh inventory GUI
+
+            for (int idx = 0; idx < saveData.InventoryItems.Length; idx++)
+            {
+                string itemID = saveData.InventoryItems[idx];
+
+                InventoryItem item = m_InventoryItemsDatabase.FirstOrDefault(m => m.ID == itemID);
+
+                if (item == null)
+                {
+                    Debug.LogError($"Item with ID ${itemID} is not in the database!");
+                    continue;
+                }
+
+                Inventory.AddItem(item);
+            }
+        }
+
         private void UpdateInput()
         {
             if (Input.GetMouseButtonUp(0) == true)
             {
                 m_GraphManager.OnSkipPerformed();
+            }
+
+            if (Input.GetButtonDown("QuickSave") == true)
+            {
+                Conditions.Add("test", false);
+                SaveSystem.SaveGame(Player.Position, Inventory.Items, Conditions, Scene.SceneName, "quicksave");
+                Debug.LogError("Saved!");
+            }
+
+            if (Input.GetButtonDown("QuickLoad") == true)
+            {
+                SaveData saveData = SaveSystem.LoadGame("quicksave");
+
+                StartCoroutine(LoadSceneAsync_Coroutine(saveData.SceneName, saveData));
+
+                Debug.LogError("Loaded!");
             }
         }
 
