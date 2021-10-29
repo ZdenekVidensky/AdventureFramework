@@ -1,9 +1,16 @@
 ﻿namespace TVB.Core
 {
+    using System.Collections;
+
     using UnityEngine;
 
     using TVB.Core.GUI;
-    
+    using TVB.Core.Attributes;
+    using TVB.Core.Audio;
+    using TVB.Game;
+    using TVB.Game.GUI;
+    using TVB.Game.DebugTools;
+
     public class Scene : MonoBehaviour
     {
         public Frontend Frontend { get => m_Frontend; }
@@ -13,6 +20,14 @@
         private SceneObject[] m_SceneObjects = new SceneObject[0];
 
         public string SceneName;
+
+        // PROTECTED MEMBERS
+
+        [GetComponent(true), SerializeField, HideInInspector]
+        protected SceneCheatManager m_CheatManager;
+        [GetComponent(true), SerializeField, HideInInspector]
+        protected AudioManager m_AudioManager;
+        protected GUIFader m_Fader;
 
         // PUBLIC METHODS
 
@@ -31,6 +46,15 @@
             {
                 m_SceneObjects[idx].Initialize();
             }
+
+            if (m_CheatManager.DisplayDevelopmentView == true)
+            {
+                GUIDevelopmentView devView = Frontend.OpenScreen<GUIDevelopmentView>();
+                devView.DisplayFPS(m_CheatManager.DisplayFPS);
+            }
+
+            m_Fader = FindObjectOfType<GUIFader>();
+            m_Fader.SetActive(true);
 
             OnInitialized();
         }
@@ -80,5 +104,16 @@
         }
 
         public virtual void OnDeinitialized() { }
+
+        public IEnumerator FadeOut(float duration)
+        {
+            yield return m_Fader.FadeOut(duration);
+        }
+
+        // PRIVATE MEMBERS
+        protected void OnFadeInCompleted()
+        {
+            AdventureGame.Instance.IsBusy = false;
+        }
     }
 }

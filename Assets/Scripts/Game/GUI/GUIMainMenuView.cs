@@ -17,6 +17,8 @@
 
         // PRIVATE MEMBERS
 
+        [GetComponentInChildren("ContinueGameButton", true), SerializeField, HideInInspector]
+        private Button m_ContinueButton;
         [GetComponentInChildren("NewGameButton", true), SerializeField, HideInInspector]
         private Button  m_NewGameButton;
         [GetComponentInChildren("EndGameButton", true), SerializeField, HideInInspector]
@@ -42,9 +44,7 @@
         {
             base.OnOpen();
 
-            EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(m_NewGameButton.gameObject);
-
+            m_ContinueButton.interactable = true;
             m_NewGameButton.interactable = true;
             m_EndGameButton.interactable = true;
         }

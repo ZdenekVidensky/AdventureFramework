@@ -15,6 +15,8 @@
     using TVB.Game.Graph;
     using TVB.Game.Interactable;
     using TVB.Core.Attributes;
+    
+    using Scene = Core.Scene;
 
     public class AdventureGame : Game
     {
@@ -274,7 +276,7 @@
             {
                 if (asyncLoad.progress >= 0.9f)
                 {
-                    AdventureScene scene = Scene as AdventureScene;
+                    Scene scene = Scene;
                     m_PreviousScene = scene.SceneName;
                     yield return scene.FadeOut(0.3f);
                     scene.Deinitialize();

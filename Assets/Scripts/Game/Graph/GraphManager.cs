@@ -38,7 +38,11 @@
 
 		private void OnDestroy()
 		{
-			m_IngameView.SelectDecisionEvent.RemoveListener(OnSelectDecision);
+			if (m_IngameView != null)
+            {
+				m_IngameView.SelectDecisionEvent.RemoveListener(OnSelectDecision);
+            }
+
 			m_IngameView = null;
 			m_NavigationManager = null;
 		}
@@ -49,8 +53,11 @@
 		{
 			m_IngameView = FindObjectOfType<GUIIngameView>();
 			m_NavigationManager = FindObjectOfType<NavigationManager>();
-			m_IngameView.SelectDecisionEvent.AddListener(OnSelectDecision);
 
+			if (m_IngameView != null)
+            {
+				m_IngameView.SelectDecisionEvent.AddListener(OnSelectDecision);
+            }
 
 			m_TalkableCharacters.Clear();
 			IEnumerable talkableObjects = FindObjectsOfType<MonoBehaviour>(true).OfType<ITalkable>();

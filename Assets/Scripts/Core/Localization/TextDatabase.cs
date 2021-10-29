@@ -66,7 +66,6 @@
 
             for (int idx = 0; idx < assets.Length; idx++)
             {
-                //LocalizedTexts asset = AssetDatabase.LoadAssetAtPath<LocalizedTexts>(files[idx]);
                 LocalizedTexts asset = assets[idx];
 
                 if (asset == null)
