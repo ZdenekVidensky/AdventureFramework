@@ -4,41 +4,53 @@ namespace TVB.Game
     using UnityEngine;
 
     using TVB.Game.Interactable;
+    using TVB.Core.Attributes;
+    using Sirenix.OdinInspector;
 
     public class Player : MonoBehaviour, ITalkable
     {
         // CONFIGURATION
 
         [SerializeField]
-        private float m_MovementSpeed = 5f;
+        private float          m_MovementSpeed = 5f;
         [SerializeField]
-        private float m_StoppingDistance = 0.01f;
-
-        //[SerializeField]
-        private SceneSettings m_SceneSettings;
+        private float          m_StoppingDistance = 0.01f;
 
         // PUBLIC MEMBERS
 
         public Vector3 Position => m_Transform.position;
         public bool IsGoing     => m_CurrentPath != null;
 
+        // ANIMATOR PARAMETERS
+
+        private static int DIRECTION_ANIMATOR_PARAMETER = Animator.StringToHash("Direction");
+
         ETalkableCharacter ITalkable.Character => ETalkableCharacter.Player;
 
         // PRIVATE MEMBERS
 
-        private Transform     m_Transform;
-        private float         m_ScaleLevelsDistance;
 
-        private List<Vector2> m_CurrentPath = null;
-        private int           m_CurrentPathIndex;
+        private float          m_ScaleLevelsDistance;
+        private SceneSettings  m_SceneSettings;
 
-        void Awake()
-        {
-            m_Transform           = GetComponent<Transform>();
-        }
+        private List<Vector2>  m_CurrentPath = null;
+        private int            m_CurrentPathIndex;
+        private Vector3        m_CurrentDestinationPoint;
+        private Vector3        m_CurrentDirection;
+
+        private EDirection     m_Direction;
+        [GetComponent(true), SerializeField, HideInInspector]
+        private Transform      m_Transform;
+        [GetComponent(true), SerializeField, HideInInspector]
+        private Animator       m_Animator;
+        [GetComponent(true), SerializeField, HideInInspector]
+        private SpriteRenderer m_SpriteRenderer;
 
         void Update()
         {
+            if (AdventureGame.Instance.IsInventoryOpen == true)
+                return;
+
             UpdateMovement();
             UpdateScale();
         }
@@ -59,26 +71,51 @@ namespace TVB.Game
                 if (item.SceneName == AdventureGame.Instance.PreviousScene)
                 {
                     m_Transform.position = item.Position;
+                    SetDirection(item.Direction);
                 }
             }
         }
 
         public void GoTo(Vector2 destinationPoint)
         {
-            m_CurrentPath      = new List<Vector2>(1) { destinationPoint };
-            m_CurrentPathIndex = 0;
+            List<Vector2> path        = new List<Vector2>(1) { destinationPoint };
+            m_CurrentPathIndex        = 0;
+            m_CurrentDestinationPoint = path[m_CurrentPathIndex];
+            m_CurrentDirection        = (m_CurrentDestinationPoint - m_Transform.position);
+
+            SetDirection(CalculateNewDirection(m_CurrentDirection));
+
+            m_CurrentPath = path;
         }
 
         public void GoTo(List<Vector2> path)
         {
-            m_CurrentPath        = path;
-            m_CurrentPathIndex   = 0;
+            m_CurrentPathIndex        = 0;
+            m_CurrentDestinationPoint = path[m_CurrentPathIndex];
+            m_CurrentDirection        = (m_CurrentDestinationPoint - m_Transform.position);
+
+            SetDirection(CalculateNewDirection(m_CurrentDirection));
+            m_CurrentPath             = path;
         }
 
-        public void SkipTo(Vector2 destinationPoint)
+        public void SkipTo(Vector3 destinationPoint)
         {
-            m_CurrentPath        = null;
-            m_Transform.position = destinationPoint;
+            m_Transform.position      = destinationPoint;
+            m_CurrentDirection        = (destinationPoint - m_Transform.position);
+
+            SetDirection(CalculateNewDirection(m_CurrentDirection));
+
+            m_CurrentPath             = null;
+            m_CurrentDestinationPoint = Vector3.zero;
+            m_CurrentDestinationPoint = Vector3.zero;
+        }
+
+        public void SetDirection(EDirection newDirection)
+        {
+            m_Direction = newDirection;
+
+            m_SpriteRenderer.flipX = m_Direction == EDirection.Right;
+            m_Animator.SetInteger(DIRECTION_ANIMATOR_PARAMETER, (int)m_Direction);
         }
 
         // PRIVATE METHODS
@@ -88,21 +125,50 @@ namespace TVB.Game
             if (m_CurrentPath == null)
                 return;
 
-            Vector3 destinationPoint = m_CurrentPath[m_CurrentPathIndex];
-            Vector3 direction        = (destinationPoint - m_Transform.position);
+            m_Transform.position += m_CurrentDirection.normalized * (m_MovementSpeed * Time.deltaTime);
 
-            m_Transform.position += direction.normalized * (m_MovementSpeed * Time.deltaTime);
-
-            if (Vector2.Distance(m_Transform.position, destinationPoint) <= m_StoppingDistance)
+            if (Vector2.Distance(m_Transform.position, m_CurrentDestinationPoint) <= m_StoppingDistance)
             {
                 if (m_CurrentPathIndex == (m_CurrentPath.Count - 1))
                 {
                     m_CurrentPath = null;
                     m_CurrentPathIndex = 0;
                 }
-
-                m_CurrentPathIndex += 1;
+                else
+                {
+                    m_CurrentPathIndex       += 1;
+                    m_CurrentDestinationPoint = m_CurrentPath[m_CurrentPathIndex];
+                    m_CurrentDirection        = (m_CurrentDestinationPoint - m_Transform.position);
+                    SetDirection(CalculateNewDirection(m_CurrentDirection));
+                }
             }
+        }
+
+        private EDirection CalculateNewDirection(Vector3 direction)
+        {
+            float absX = Mathf.Abs(direction.x);
+            float absY = Mathf.Abs(direction.y);
+
+            if (absX > absY)
+            {
+                // Left or right
+
+                if (direction.x > 0)
+                    return EDirection.Right;
+                else if (direction.x < 0)
+                    return EDirection.Left;
+            }
+            else
+            {
+                // Up or down
+
+                if (direction.y > 0)
+                    return EDirection.Up;
+                else if (direction.y < 0)
+                    return EDirection.Down;
+            }
+
+            return EDirection.Down;
         }
 
         private void UpdateScale()
@@ -120,5 +186,13 @@ namespace TVB.Game
         {
             // TODO: talking animation
         }
+    }
+
+    public enum EDirection
+    {
+        Down,
+        Up,
+        Left,
+        Right
     }
 }

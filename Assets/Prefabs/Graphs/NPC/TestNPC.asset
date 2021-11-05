@@ -339,6 +339,8 @@ MonoBehaviour:
   - {fileID: 8760412534424750565}
   - {fileID: 2951509183787356837}
   - {fileID: -1214630809800979975}
+  - {fileID: 0}
+  - {fileID: 5549100808343436263}
 --- !u!114 &2160233314964774315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -412,7 +414,7 @@ MonoBehaviour:
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Output
-        node: {fileID: 5921401427834939274}
+        node: {fileID: 5549100808343436263}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
@@ -483,6 +485,52 @@ MonoBehaviour:
   Character: 0
   TextID: 100015
   PlayTalkAnimation: 1
+--- !u!114 &5549100808343436263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaf2cb738c8eef54d9451fcc0752ac3e, type: 3}
+  m_Name: Set Direction
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -440, y: -56}
+  ports:
+    keys:
+    - Input
+    - Output
+    values:
+    - _fieldName: Input
+      _node: {fileID: 5549100808343436263}
+      _typeQualifiedName: TVB.Game.Graph.BaseInteractiveNode, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: Output
+        node: {fileID: 5921401427834939274}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Output
+      _node: {fileID: 5549100808343436263}
+      _typeQualifiedName: TVB.Game.Graph.BaseInteractiveNode, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: Input
+        node: {fileID: 2536969877716603477}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  Input: {fileID: 0}
+  Output: {fileID: 0}
+  Direction: 3
 --- !u!114 &5817153872669983366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -541,7 +589,7 @@ MonoBehaviour:
   m_Name: Go To
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -456, y: -136}
+  position: {x: -728, y: -72}
   ports:
     keys:
     - Input
@@ -562,7 +610,7 @@ MonoBehaviour:
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: Input
-        node: {fileID: 2536969877716603477}
+        node: {fileID: 5549100808343436263}
         reroutePoints: []
       _direction: 1
       _connectionType: 0
@@ -570,7 +618,7 @@ MonoBehaviour:
       _dynamic: 0
   Input: {fileID: 0}
   Output: {fileID: 0}
-  Destination: {x: 1.48, y: -0.54}
+  Destination: {x: 1.88, y: 6.27}
 --- !u!114 &8127341724241543181
 MonoBehaviour:
   m_ObjectHideFlags: 0

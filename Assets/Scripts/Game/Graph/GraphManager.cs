@@ -163,6 +163,9 @@
 				case ChangeSceneNode changeSceneNode:
 					AdventureGame.Instance.LoadSceneAsync(changeSceneNode.SceneName);
 					yield break;
+				case SetDirectionNode setDirectionNode:
+					AdventureGame.Instance.Player.SetDirection(setDirectionNode.Direction);
+					break;
 				case DecisionNode decisionNode:
 					m_SelectedDecision = -1;
 

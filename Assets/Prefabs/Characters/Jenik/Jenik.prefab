@@ -98,6 +98,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MovementSpeed: 5
   m_StoppingDistance: 0.1
+  m_Direction: 0
+  m_Transform: {fileID: 195011594902564322}
+  m_Animator: {fileID: 750541644347536977}
+  m_SpriteRenderer: {fileID: 195011594902564323}
 --- !u!95 &750541644347536977
 Animator:
   serializedVersion: 3

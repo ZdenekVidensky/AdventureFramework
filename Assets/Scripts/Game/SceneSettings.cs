@@ -29,8 +29,6 @@ namespace TVB.Game
     {
         public string SceneName;
         public Vector2 Position;
-        // TODO: Direction
+        public EDirection Direction;
     }
-
-    // TODO: Music, Ambient
 }
