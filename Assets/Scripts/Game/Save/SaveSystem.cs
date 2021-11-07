@@ -7,13 +7,13 @@ namespace TVB.Game.Save
 {
     public static class SaveSystem
     {
-        public static void SaveGame(Vector3 position, List<InventoryItem> items, Dictionary<string, bool> conditions, string sceneName, string saveName)
+        public static void SaveGame(Vector3 position, EDirection direction, List<InventoryItem> items, Dictionary<string, bool> conditions, string sceneName, string saveName)
         {
             BinaryFormatter formatter = new BinaryFormatter();
             string path = Application.persistentDataPath + "/" + saveName + ".sav";
             FileStream stream = new FileStream(path, FileMode.Create);
 
-            SaveData saveData = new SaveData(position, items, conditions, sceneName);
+            SaveData saveData = new SaveData(position, direction, items, conditions, sceneName);
 
             formatter.Serialize(stream, saveData);
             stream.Close();

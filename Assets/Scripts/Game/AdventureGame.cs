@@ -200,6 +200,7 @@
             if (m_PendingSaveData != null)
             {
                 Player.transform.position = new Vector3(m_PendingSaveData.PositionX, m_PendingSaveData.PositionY, Player.Position.z);
+                Player.SetDirection((EDirection)m_PendingSaveData.Direction);
                 m_PendingSaveData = null;
             }
         }
@@ -346,14 +347,19 @@
 
             if (Input.GetButtonDown("QuickSave") == true)
             {
-                Conditions.Add("test", false);
-                SaveSystem.SaveGame(Player.Position, Inventory.Items, Conditions, Scene.SceneName, "quicksave");
+                SaveSystem.SaveGame(Player.Position, Player.Direction, Inventory.Items, Conditions, Scene.SceneName, "quicksave");
                 Debug.LogError("Saved!");
             }
 
             if (Input.GetButtonDown("QuickLoad") == true)
             {
                 SaveData saveData = SaveSystem.LoadGame("quicksave");
+
+                if (saveData == null)
+                {
+                    Debug.LogError("There is no quick save file");
+                    return;
+                }
 
                 StartCoroutine(LoadSceneAsync_Coroutine(saveData.SceneName, saveData));
 

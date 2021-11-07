@@ -5,6 +5,8 @@ namespace TVB.Game
     [CreateAssetMenu(menuName = "Data/SceneSettings")]
     public class SceneSettings : ScriptableObject
     {
+        public string SceneName;
+
         [Header("Scales")]
         public ScaleLevel TopScale;
         public ScaleLevel BottomScale;

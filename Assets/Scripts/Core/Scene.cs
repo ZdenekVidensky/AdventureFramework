@@ -13,13 +13,18 @@
 
     public class Scene : MonoBehaviour
     {
+        // CONFIGURATION
+
+        [SerializeField]
+        protected SceneSettings           m_SceneSettings;
+
         public Frontend Frontend { get => m_Frontend; }
 
-        protected bool        m_Initialized;
-        private Frontend      m_Frontend;
-        private SceneObject[] m_SceneObjects = new SceneObject[0];
+        protected bool                    m_Initialized;
+        private Frontend                  m_Frontend;
+        private SceneObject[]             m_SceneObjects = new SceneObject[0];
 
-        public string SceneName;
+        public string SceneName => m_SceneSettings.SceneName ?? "";
 
         // PROTECTED MEMBERS
 

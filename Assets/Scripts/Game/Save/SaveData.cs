@@ -12,14 +12,15 @@ namespace TVB.Game.Save
         public float PositionY;
         public string[] InventoryItems;
         public string SceneName;
+        public int Direction;
         public ConditionSaveData[] Conditions;
 
-        // TODO: Direction
 
-        public SaveData(Vector3 position, List<InventoryItem> items, Dictionary<string, bool> conditions, string sceneName)
+        public SaveData(Vector3 position, EDirection direction, List<InventoryItem> items, Dictionary<string, bool> conditions, string sceneName)
         {
             PositionX = position.x;
             PositionY = position.y;
+            Direction = (int)direction;
             SceneName = sceneName;
 
             int itemsCount = items.Count;

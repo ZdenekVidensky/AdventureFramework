@@ -5,7 +5,6 @@ namespace TVB.Game
 
     using TVB.Game.Interactable;
     using TVB.Core.Attributes;
-    using Sirenix.OdinInspector;
 
     public class Player : MonoBehaviour, ITalkable
     {
@@ -18,8 +17,9 @@ namespace TVB.Game
 
         // PUBLIC MEMBERS
 
-        public Vector3 Position => m_Transform.position;
-        public bool IsGoing     => m_CurrentPath != null;
+        public Vector3 Position     => m_Transform.position;
+        public bool IsGoing         => m_CurrentPath != null;
+        public EDirection Direction => m_Direction;
 
         // ANIMATOR PARAMETERS
 

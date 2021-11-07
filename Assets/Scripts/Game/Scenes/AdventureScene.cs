@@ -9,12 +9,6 @@
 
     public class AdventureScene : Scene
     {
-        // CONFIGURATION
-
-        [SerializeField]
-        private SceneSettings m_SceneSettings;
-
-
         // SCENE INTERFACE
 
         public override void OnInitialized()
