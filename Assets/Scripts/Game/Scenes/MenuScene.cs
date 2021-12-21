@@ -1,6 +1,5 @@
 ﻿namespace TVB.Game.Scenes
 {
-
     using UnityEngine;
 
     using TVB.Core;
