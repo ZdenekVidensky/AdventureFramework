@@ -20,7 +20,7 @@ MonoBehaviour:
       Text: "Nov\xE1 hra"
       VoiceoverAudioClip: {fileID: 0}
     - Language: 1
-      Text: 
+      Text: New Game
       VoiceoverAudioClip: {fileID: 0}
   - TextID: 200002
     Translates:
@@ -28,7 +28,7 @@ MonoBehaviour:
       Text: "Pokra\u010Dovat"
       VoiceoverAudioClip: {fileID: 0}
     - Language: 1
-      Text: 
+      Text: Continue
       VoiceoverAudioClip: {fileID: 0}
   - TextID: 200003
     Translates:
@@ -36,5 +36,13 @@ MonoBehaviour:
       Text: Konec
       VoiceoverAudioClip: {fileID: 0}
     - Language: 1
-      Text: 
+      Text: End
+      VoiceoverAudioClip: {fileID: 0}
+  - TextID: 200004
+    Translates:
+    - Language: 0
+      Text: "Nastaven\xED"
+      VoiceoverAudioClip: {fileID: 0}
+    - Language: 1
+      Text: Options
       VoiceoverAudioClip: {fileID: 0}

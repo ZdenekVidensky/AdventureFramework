@@ -99,7 +99,7 @@
 
         protected virtual void Close()
         {
-            Frontend.CloseScreen(this.GetType());
+            Frontend.CloseView(this.GetType());
         }
     }
 }

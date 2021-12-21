@@ -17,13 +17,13 @@
         // PRIVATE MEMBERS
         
         private GUIView[]     m_AvailableViews = new GUIView[0];
-        private List<GUIView> m_ScreensStack   = new List<GUIView>(10);
+        private List<GUIView> m_ViewsStack   = new List<GUIView>(10);
 
         // PUBLIC METHODS
 
         public void Initialize()
         {
-            m_ScreensStack.Clear();
+            m_ViewsStack.Clear();
             m_AvailableViews = GetComponentsInChildren<GUIView>(true);
 
             for (int idx = 0, count = m_AvailableViews.Length; idx < count; idx++)
@@ -60,42 +60,42 @@
             OnDeinitialized();
         }
 
-        public T OpenScreen<T>() where T : GUIView
+        public T OpenView<T>() where T : GUIView
         {
-            return OpenScreen(typeof(T)) as T;
+            return OpenView(typeof(T)) as T;
         }
 
-        public GUIView OpenScreen(System.Type screenType)
+        public GUIView OpenView(System.Type viewType)
         {
-            var screenToOpen = m_AvailableViews.FirstOrDefault(m => m.GetType() == screenType);
+            GUIView viewToOpen = m_AvailableViews.FirstOrDefault(m => m.GetType() == viewType);
 
-            if (screenToOpen == null)
+            if (viewToOpen == null)
             {
                 return null;
             }
 
-            m_ScreensStack.Insert(0, screenToOpen);
-            screenToOpen.Interactable = true;
-            screenToOpen.Canvas.enabled = true;
-            screenToOpen.SetActive(true);
-            screenToOpen.OnOpen();
+            m_ViewsStack.Insert(0, viewToOpen);
+            viewToOpen.Interactable = true;
+            viewToOpen.Canvas.enabled = true;
+            viewToOpen.SetActive(true);
+            viewToOpen.OnOpen();
 
-            return screenToOpen;
+            return viewToOpen;
         }
 
         public bool IsViewOpen<T>() where T: GUIView
         {
-            return m_ScreensStack.FirstOrDefault(m => m.GetType() == typeof(T)) != null;
+            return m_ViewsStack.FirstOrDefault(m => m.GetType() == typeof(T)) != null;
         }
 
-        public void CloseScreen<T>() where T : GUIView
+        public void CloseView<T>() where T : GUIView
         {
-            CloseScreen(typeof(T));
+            CloseView(typeof(T));
         }
 
-        public void CloseScreen(System.Type screenType)
+        public void CloseView(System.Type viewType)
         {
-            var viewToClose = m_ScreensStack.FirstOrDefault(m => m.GetType() == screenType);
+            GUIView viewToClose = m_ViewsStack.FirstOrDefault(m => m.GetType() == viewType);
 
             if (viewToClose == null)
                 return;
@@ -103,7 +103,7 @@
             viewToClose.Interactable   = false;
             viewToClose.Canvas.enabled = false;
             viewToClose.OnClosed();
-            m_ScreensStack.Remove(viewToClose);
+            m_ViewsStack.Remove(viewToClose);
         }
 
         public virtual void OnInitialized() { }

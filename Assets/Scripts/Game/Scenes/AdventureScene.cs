@@ -19,7 +19,7 @@
 
             InitializePlayer();
 
-            Frontend.OpenScreen<GUIIngameView>();
+            Frontend.OpenView<GUIIngameView>();
 
             StartCoroutine(m_Fader.FadeIn(0.3f, OnFadeInCompleted));
 
@@ -71,7 +71,7 @@
 
         private void OnAchievementUnlocked(Achievement achievement)
         {
-            GUIAchievementUnlockedView achievementView = Frontend.OpenScreen<GUIAchievementUnlockedView>();
+            GUIAchievementUnlockedView achievementView = Frontend.OpenView<GUIAchievementUnlockedView>();
             achievementView.SetData(achievement);
         }
     }

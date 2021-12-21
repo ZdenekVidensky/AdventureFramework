@@ -52,7 +52,7 @@
 
             if (m_CheatManager.DisplayDevelopmentView == true)
             {
-                GUIDevelopmentView devView = Frontend.OpenScreen<GUIDevelopmentView>();
+                GUIDevelopmentView devView = Frontend.OpenView<GUIDevelopmentView>();
                 devView.DisplayFPS(m_CheatManager.DisplayFPS);
             }
 

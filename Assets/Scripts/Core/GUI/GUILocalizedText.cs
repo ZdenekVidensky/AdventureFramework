@@ -6,6 +6,7 @@
     using TVB.Core.Localization;
 
     using GUIText = TMPro.TextMeshProUGUI;
+    using Sirenix.OdinInspector;
 
     public class GUILocalizedText : MonoBehaviour
     {
@@ -13,6 +14,9 @@
 
         [GetComponent, SerializeField, HideInInspector]
         private GUIText m_Text;
+
+        [MultiLineProperty(5), DisableInEditorMode, DisableInPlayMode, ShowInInspector]
+        public string Text => TextDatabase.Localize[TextID];
 
         public string Translation
         {

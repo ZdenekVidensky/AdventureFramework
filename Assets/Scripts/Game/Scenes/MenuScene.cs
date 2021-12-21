@@ -14,7 +14,7 @@
         {
             base.OnInitialized();
 
-            Frontend.OpenScreen<GUIMainMenuView>();
+            Frontend.OpenView<GUIMainMenuView>();
 
             StartCoroutine(m_Fader.FadeIn(0.3f, OnFadeInCompleted));
 

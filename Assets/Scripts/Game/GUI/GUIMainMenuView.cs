@@ -7,6 +7,7 @@
     using TVB.Core.Attributes;
     using TVB.Core.GUI;
     using TVB.Game.GameSignals;
+    using System;
 
     public class GUIMainMenuView : GUIView
     {
@@ -23,6 +24,8 @@
         private Button  m_NewGameButton;
         [GetComponentInChildren("EndGameButton", true), SerializeField, HideInInspector]
         private Button  m_EndGameButton;
+        [GetComponentInChildren("OptionsButton", true), SerializeField, HideInInspector]
+        private Button  m_OptionsButton;
 
         public override void OnInitialized()
         {
@@ -30,12 +33,19 @@
 
             m_NewGameButton.onClick.AddListener(OnNewGameButtonClicked);
             m_EndGameButton.onClick.AddListener(OnEndGameButtonClicked);
+            m_OptionsButton.onClick.AddListener(OnOptionsButtonClicked);
+        }
+
+        private void OnOptionsButtonClicked()
+        {
+            
         }
 
         public override void OnDeinitialized()
         {
             m_NewGameButton.onClick.RemoveListener(OnNewGameButtonClicked);
             m_EndGameButton.onClick.RemoveListener(OnEndGameButtonClicked);
+            m_OptionsButton.onClick.RemoveListener(OnOptionsButtonClicked);
 
             base.OnDeinitialized();
         }
