@@ -30,7 +30,7 @@
 
         // PUBLIC METHODS
 
-        public void PlayMusic(AudioClip clip)
+        public void PlayMusic(AudioClip clip, bool fade = true)
         {
             if (m_Disabled == true)
                 return;
@@ -44,11 +44,27 @@
             if (m_MusicAudioSourceA.isPlaying == false)
             {
                 m_MusicAudioSourceA.clip = clip;
-                StartCoroutine(FadeAudio(m_MusicAudioSourceA, true));
+
+                if (fade == true)
+                {
+                    StartCoroutine(FadeAudio(m_MusicAudioSourceA, true));
+                }
+                else
+                {
+                    m_MusicAudioSourceA.volume = MAX_MUSIC_VOLUME;
+                    m_MusicAudioSourceA.Play();
+                }
 
                 if (m_MusicAudioSourceB.isPlaying == true)
                 {
-                    StartCoroutine(FadeAudio(m_MusicAudioSourceB, false));
+                    if (fade == true)
+                    {
+                        StartCoroutine(FadeAudio(m_MusicAudioSourceB, false));
+                    }
+                    else
+                    {
+                        m_MusicAudioSourceB.Stop();
+                    }
                 }
                 return;
             }
@@ -56,11 +72,27 @@
             if (m_MusicAudioSourceB.isPlaying == false)
             {
                 m_MusicAudioSourceB.clip = clip;
-                StartCoroutine(FadeAudio(m_MusicAudioSourceB, true));
+
+                if (fade == true)
+                {
+                    StartCoroutine(FadeAudio(m_MusicAudioSourceB, true));
+                }
+                else
+                {
+                    m_MusicAudioSourceB.volume = MAX_MUSIC_VOLUME;
+                    m_MusicAudioSourceB.Play();
+                }
 
                 if (m_MusicAudioSourceA.isPlaying == true)
                 {
-                    StartCoroutine(FadeAudio(m_MusicAudioSourceA, false));
+                    if (fade == true)
+                    {
+                        StartCoroutine(FadeAudio(m_MusicAudioSourceA, false));
+                    }
+                    else
+                    {
+                        m_MusicAudioSourceA.Stop();
+                    }
                 }
                 return;
             }

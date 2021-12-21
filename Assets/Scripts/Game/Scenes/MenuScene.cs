@@ -8,12 +8,6 @@
 
     public class MenuScene : Scene
     {
-        // CONFIGURATION
-
-        [SerializeField]
-        private AudioClip m_BackgroundMusic;
-
-
         // SCENE INTERFACE
 
         public override void OnInitialized()
@@ -27,7 +21,7 @@
             Signals.GameplaySignals.NewGame.Connect(OnNewGame);
             Signals.GameplaySignals.EndGame.Connect(OnEndGame);
 
-            m_AudioManager.PlayMusic(m_BackgroundMusic);
+            m_AudioManager.PlayMusic(m_SceneSettings.BackgroundMusic, false);
         }
 
         public override void OnUpdate()

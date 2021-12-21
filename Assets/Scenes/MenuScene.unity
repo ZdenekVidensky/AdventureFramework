@@ -669,7 +669,6 @@ MonoBehaviour:
   m_SceneSettings: {fileID: 11400000, guid: 2f0f744955bf3414bb9bf57cdcac1a78, type: 2}
   m_CheatManager: {fileID: 0}
   m_AudioManager: {fileID: 0}
-  m_BackgroundMusic: {fileID: 8300000, guid: efc1cf94fc816db4ca77b1ca668f91a2, type: 3}
 --- !u!4 &1746700160
 Transform:
   m_ObjectHideFlags: 0

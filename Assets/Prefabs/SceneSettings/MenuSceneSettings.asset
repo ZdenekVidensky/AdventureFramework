@@ -20,5 +20,5 @@ MonoBehaviour:
     YPosition: 0
     Scale: 0
   PreviousSceneLocations: []
-  BackgroundMusic: {fileID: 0}
+  BackgroundMusic: {fileID: 8300000, guid: efc1cf94fc816db4ca77b1ca668f91a2, type: 3}
   AmbientMusic: {fileID: 0}
