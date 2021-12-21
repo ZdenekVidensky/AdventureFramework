@@ -30,8 +30,6 @@
 
         [GetComponent(true), SerializeField, HideInInspector]
         protected SceneCheatManager m_CheatManager;
-        [GetComponent(true), SerializeField, HideInInspector]
-        protected AudioManager m_AudioManager;
         protected GUIFader m_Fader;
 
         // PUBLIC METHODS

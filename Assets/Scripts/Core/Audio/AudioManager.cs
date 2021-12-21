@@ -11,6 +11,7 @@
         // CONSTANTS
 
         private const float MAX_MUSIC_VOLUME = 1f; // TODO: Remove
+        private const float MIN_MUSIC_VOLUME = 0.0005f;
 
         // CONFIGURATION
 
@@ -128,6 +129,8 @@
 
         private IEnumerator FadeAudio(AudioSource audioSource, bool fadeIn)
         {
+            yield return null;
+
             float diff = Time.unscaledDeltaTime / m_CrossDuration;
 
             if (fadeIn == true)
@@ -143,7 +146,7 @@
             }
             else
             {
-                while (audioSource.volume > 0f)
+                while (audioSource.volume > MIN_MUSIC_VOLUME)
                 {
                     audioSource.volume -= diff;
                     yield return null;

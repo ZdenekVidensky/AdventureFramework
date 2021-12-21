@@ -44,6 +44,9 @@
 
         public void PlaySound(AudioClip clip)
         {
+            if (clip == null)
+                return;
+
             m_AudioSource.PlayOneShot(clip);
         }
 
