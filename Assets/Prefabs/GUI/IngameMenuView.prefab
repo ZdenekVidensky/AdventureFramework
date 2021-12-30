@@ -333,7 +333,7 @@ GameObject:
   - component: {fileID: 3232604372020072514}
   - component: {fileID: 3232604372020072512}
   m_Layer: 5
-  m_Name: NewGameText
+  m_Name: SaveGameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -386,7 +386,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Game
+  m_text: Save Game
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -467,7 +467,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75d40f5c285be0649be9e8165fd336ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TextID: 200001
+  TextID: 200014
   m_Text: {fileID: 0}
 --- !u!1 &3232604372668507478
 GameObject:
@@ -749,10 +749,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3232604372862714150}
   - component: {fileID: 3232604372862714149}
-  - component: {fileID: 3232604372862714148}
+  - component: {fileID: 5822931723647088400}
   - component: {fileID: 3232604372862714151}
   m_Layer: 5
-  m_Name: MainMenuView
+  m_Name: IngameMenuView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -799,7 +799,7 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!114 &3232604372862714148
+--- !u!114 &5822931723647088400
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -808,13 +808,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 3232604372862714153}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c6ecc4def1def742b4dc150fb4a3083, type: 3}
+  m_Script: {fileID: 11500000, guid: 644eb3e32b81f7f4dbd53dc0c6c9becb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_BackButton: {fileID: 0}
   m_Frame: {fileID: 0}
   m_Canvas: {fileID: 0}
-  m_ButtonSound: {fileID: 8300000, guid: 813215594814da94a95585f8abe6b454, type: 3}
+  m_ButtonSound: {fileID: 0}
   m_ContinueButton: {fileID: 0}
   m_NewGameButton: {fileID: 0}
   m_EndGameButton: {fileID: 0}
@@ -916,7 +916,7 @@ GameObject:
   - component: {fileID: 3232604373062758744}
   - component: {fileID: 3232604373062758747}
   m_Layer: 5
-  m_Name: NewGameButton
+  m_Name: SaveGameButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

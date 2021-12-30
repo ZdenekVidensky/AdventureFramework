@@ -8,6 +8,7 @@
     using UnityEngine.Audio;
     using TVB.Game.Options;
     using TVB.Game.GameSignals;
+    using TVB.Game.Utilities;
 
     public class GUIOptionsView : GUIView
     {

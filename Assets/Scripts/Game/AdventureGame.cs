@@ -18,6 +18,8 @@
     using TVB.Game.Save;
     
     using Scene = Core.Scene;
+    using TVB.Game.Utilities;
+    using TVB.Game.GUI;
 
     public class AdventureGame : Game
     {
@@ -347,13 +349,13 @@
                 m_GraphManager.OnSkipPerformed();
             }
 
-            if (Input.GetButtonDown("QuickSave") == true)
+            if (Input.GetButtonDown(InputNamesUtility.QUICK_SAVE) == true)
             {
                 SaveSystem.SaveGame(Player.Position, Player.Direction, Inventory.Items, Conditions, Scene.SceneName, "quicksave");
                 Debug.LogError("Saved!");
             }
 
-            if (Input.GetButtonDown("QuickLoad") == true)
+            if (Input.GetButtonDown(InputNamesUtility.QUICK_LOAD) == true)
             {
                 SaveData saveData = SaveSystem.LoadGame("quicksave");
 
@@ -366,6 +368,23 @@
                 StartCoroutine(LoadSceneAsync_Coroutine(saveData.SceneName, saveData));
 
                 Debug.LogError("Loaded!");
+            }
+
+            if (IsBusy == false && Player != null)
+            {
+                if (Input.GetButtonDown(InputNamesUtility.MENU) == true)
+                {
+                    if (GamePaused == true)
+                    {
+                        Scene.Frontend.CloseView<GUIIngameMenuView>();
+                        GamePaused = false; 
+                    }
+                    else
+                    {
+                        Scene.Frontend.OpenView<GUIIngameMenuView>();
+                        GamePaused = true; 
+                    }
+                }
             }
         }
 

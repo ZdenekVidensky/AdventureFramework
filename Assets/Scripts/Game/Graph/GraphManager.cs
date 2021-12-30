@@ -13,6 +13,7 @@
 	using TVB.Game.GameSignals;
 	using TVB.Game.Navigation;
     using TVB.Game.Options;
+    using TVB.Game.Utilities;
 
     public class GraphManager : MonoBehaviour
 	{

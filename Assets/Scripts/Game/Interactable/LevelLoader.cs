@@ -19,6 +19,9 @@ public class LevelLoader : MonoBehaviour, IInteractable
         if (AdventureGame.Instance.IsBusy == true)
             return;
 
+        if (AdventureGame.Instance.GamePaused == true)
+            return;
+
         (this as IInteractable).OnInteract();
     }
 

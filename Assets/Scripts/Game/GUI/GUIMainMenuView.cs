@@ -53,8 +53,8 @@
             base.OnOpen();
 
             m_ContinueButton.interactable = true;
-            m_NewGameButton.interactable = true;
-            m_EndGameButton.interactable = true;
+            m_NewGameButton.interactable  = true;
+            m_EndGameButton.interactable  = true;
         }
 
         // HANDLERS

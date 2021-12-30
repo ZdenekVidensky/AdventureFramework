@@ -110,3 +110,19 @@ MonoBehaviour:
     - Language: 1
       Text: Voices
       VoiceoverAudioClip: {fileID: 0}
+  - TextID: 200013
+    Translates:
+    - Language: 0
+      Text: "Nahr\xE1t hru"
+      VoiceoverAudioClip: {fileID: 0}
+    - Language: 1
+      Text: Load Game
+      VoiceoverAudioClip: {fileID: 0}
+  - TextID: 200014
+    Translates:
+    - Language: 0
+      Text: "Ulo\u017Eit hru"
+      VoiceoverAudioClip: {fileID: 0}
+    - Language: 1
+      Text: Save Game
+      VoiceoverAudioClip: {fileID: 0}
