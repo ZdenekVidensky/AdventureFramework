@@ -12,8 +12,9 @@
 	using TVB.Game.Interactable;
 	using TVB.Game.GameSignals;
 	using TVB.Game.Navigation;
+    using TVB.Game.Options;
 
-	public class GraphManager : MonoBehaviour
+    public class GraphManager : MonoBehaviour
 	{
 		// PRIVATE MEMBERS
 
@@ -26,6 +27,7 @@
 		private bool                                      m_Talking;
 		private IEnumerator                               m_MainCoroutine;
 		private bool                                      m_SkipProcessingPerformed;
+		private bool                                      m_DisplaySubtitles = true;
 
 		private Dictionary<ETalkableCharacter, ITalkable> m_TalkableCharacters = new Dictionary<ETalkableCharacter, ITalkable>(8);
 
@@ -33,7 +35,7 @@
 
 		private void Awake()
 		{
-			Initialize();
+			InitializeOnSceneLoaded();
 		}
 
 		private void OnDestroy()
@@ -50,8 +52,18 @@
 		// PUBLIC METHODS
 
 		public void Initialize()
+        {
+			InitializeOnSceneLoaded();
+
+			PlayerOptions options = PlayerOptionsUtility.GetPlayerOptions();
+			m_DisplaySubtitles = options.SubtitlesOn;
+
+			Signals.GameplaySignals.OptionsChanged.Connect(OnOptionsChanged);
+		}
+
+		public void InitializeOnSceneLoaded()
 		{
-			m_IngameView = FindObjectOfType<GUIIngameView>();
+			m_IngameView        = FindObjectOfType<GUIIngameView>();
 			m_NavigationManager = FindObjectOfType<NavigationManager>();
 
 			if (m_IngameView != null)
@@ -114,6 +126,11 @@
 		}
 
 		// PRIVATE METHODS
+
+		private void OnOptionsChanged(PlayerOptions options)
+        {
+			m_DisplaySubtitles = options.SubtitlesOn;
+        }
 
 		private IEnumerator ProcessNode(BaseInteractiveNode node)
 		{
@@ -343,8 +360,11 @@
 				yield break;
 			}
 
-			m_IngameView.SetSubtitlesText(text);
-			m_IngameView.SetSubtitlesVisibility(true);
+			if (m_DisplaySubtitles == true)
+            {
+				m_IngameView.SetSubtitlesText(text);
+				m_IngameView.SetSubtitlesVisibility(true);
+            }
 
 			if (playTalkAnimation == true)
 			{
@@ -369,7 +389,11 @@
 				}
 			}
 
-			m_IngameView.SetSubtitlesVisibility(false);
+			if (m_DisplaySubtitles == true)
+            {
+				m_IngameView.SetSubtitlesVisibility(false);
+            }
+
 			m_Talking = false;
 		}
 

@@ -3,6 +3,7 @@
     using UnityEngine;
 
     using TVB.Core.Attributes;
+    using UnityEngine.UI;
 
     [RequireComponent(typeof(Canvas))]
     public class GUIView : MonoBehaviour
@@ -39,6 +40,9 @@
         private bool            m_Initialized;
         private bool            m_Interactable;
 
+        [GetComponentInChildren("BackButton"), SerializeField, HideInInspector]
+        private Button          m_BackButton;
+
         [GetComponentInChildren("Frame", true), SerializeField, HideInInspector]
         private CanvasGroup     m_Frame;
         [GetComponent(true), SerializeField, HideInInspector]
@@ -74,9 +78,20 @@
         public virtual void OnInitialized()
         {
             m_Initialized = true;
+
+            if (m_BackButton != null)
+            {
+                m_BackButton.onClick.AddListener(OnBackButtonClicked);
+            }
         }
 
-        public virtual void OnDeinitialized() { }
+        public virtual void OnDeinitialized()
+        {
+            if (m_BackButton != null)
+            {
+                m_BackButton.onClick.RemoveListener(OnBackButtonClicked);
+            }
+        }
 
         public virtual void OnUpdate()
         {
@@ -100,6 +115,11 @@
         protected virtual void Close()
         {
             Frontend.CloseView(this.GetType());
+        }
+
+        protected virtual void OnBackButtonClicked()
+        {
+            Close();
         }
     }
 }

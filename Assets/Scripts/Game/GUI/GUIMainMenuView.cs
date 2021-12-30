@@ -2,12 +2,10 @@
 {
     using UnityEngine;
     using UnityEngine.UI;
-    using UnityEngine.EventSystems;
 
     using TVB.Core.Attributes;
     using TVB.Core.GUI;
     using TVB.Game.GameSignals;
-    using System;
 
     public class GUIMainMenuView : GUIView
     {
@@ -38,7 +36,7 @@
 
         private void OnOptionsButtonClicked()
         {
-            
+            Frontend.OpenView<GUIOptionsView>();
         }
 
         public override void OnDeinitialized()

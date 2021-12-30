@@ -1,17 +1,15 @@
 ﻿namespace TVB.Core.Audio
 {
     using System.Collections;
-
+    using TVB.Game.Options;
     using UnityEngine;
-    
-    // TODO: Max volume from options
+    using UnityEngine.Audio;
 
     public class AudioManager : MonoBehaviour
     {
         // CONSTANTS
 
-        private const float MAX_MUSIC_VOLUME = 1f; // TODO: Remove
-        private const float MIN_MUSIC_VOLUME = 0.0005f;
+        private const float MIN_MUSIC_VOLUME = 0.0001f;
 
         // CONFIGURATION
 
@@ -20,6 +18,8 @@
         private float       m_CrossDuration = 2f;
         [SerializeField]
         private bool        m_Disabled = false;
+        [SerializeField]
+        private AudioMixer  m_AudioMixer;
 
         [Header("Audio Sources")]
         [SerializeField]
@@ -30,6 +30,15 @@
         private AudioSource m_AmbientAudioSource;
 
         // PUBLIC METHODS
+
+        public void Initialize()
+        {
+            PlayerOptions options = PlayerOptionsUtility.GetPlayerOptions();
+
+            m_AudioMixer.SetFloat(PlayerOptionsUtility.SOUNDS_VOLUME_PARAMETER, Mathf.Log10(options.SoundsVolume) * PlayerOptionsUtility.VOLUME_MULTIPLIER);
+            m_AudioMixer.SetFloat(PlayerOptionsUtility.MUSIC_VOLUME_PARAMETER, Mathf.Log10(options.MusicVolume) * PlayerOptionsUtility.VOLUME_MULTIPLIER);
+            m_AudioMixer.SetFloat(PlayerOptionsUtility.VOICES_VOLUME_PARAMETER, Mathf.Log10(options.VoicesVolume) * PlayerOptionsUtility.VOLUME_MULTIPLIER);
+        }
 
         public void PlayMusic(AudioClip clip, bool fade = true)
         {
@@ -42,6 +51,8 @@
             if (m_MusicAudioSourceB.isPlaying == true && m_MusicAudioSourceB.clip == clip)
                 return;
 
+            float maxMusicVolume = PlayerOptionsUtility.GetPlayerOptions().MusicVolume;
+
             if (m_MusicAudioSourceA.isPlaying == false)
             {
                 m_MusicAudioSourceA.clip = clip;
@@ -52,7 +63,7 @@
                 }
                 else
                 {
-                    m_MusicAudioSourceA.volume = MAX_MUSIC_VOLUME;
+                    m_MusicAudioSourceA.volume = maxMusicVolume;
                     m_MusicAudioSourceA.Play();
                 }
 
@@ -80,7 +91,7 @@
                 }
                 else
                 {
-                    m_MusicAudioSourceB.volume = MAX_MUSIC_VOLUME;
+                    m_MusicAudioSourceB.volume = maxMusicVolume;
                     m_MusicAudioSourceB.Play();
                 }
 
@@ -129,6 +140,8 @@
 
         private IEnumerator FadeAudio(AudioSource audioSource, bool fadeIn)
         {
+            float maxMusicVolume = PlayerOptionsUtility.GetPlayerOptions().MusicVolume;
+
             yield return null;
 
             float diff = Time.unscaledDeltaTime / m_CrossDuration;
@@ -138,7 +151,7 @@
                 audioSource.Play();
                 audioSource.volume = 0f;
 
-                while (audioSource.volume < MAX_MUSIC_VOLUME)
+                while (audioSource.volume < maxMusicVolume)
                 {
                     audioSource.volume += diff;
                     yield return null;

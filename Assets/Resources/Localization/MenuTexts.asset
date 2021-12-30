@@ -46,3 +46,67 @@ MonoBehaviour:
     - Language: 1
       Text: Options
       VoiceoverAudioClip: {fileID: 0}
+  - TextID: 200005
+    Translates:
+    - Language: 0
+      Text: "Pou\u017E\xEDt"
+      VoiceoverAudioClip: {fileID: 0}
+    - Language: 1
+      Text: Apply
+      VoiceoverAudioClip: {fileID: 0}
+  - TextID: 200006
+    Translates:
+    - Language: 0
+      Text: "Zp\u011Bt"
+      VoiceoverAudioClip: {fileID: 0}
+    - Language: 1
+      Text: Back
+      VoiceoverAudioClip: {fileID: 0}
+  - TextID: 200007
+    Translates:
+    - Language: 0
+      Text: 
+      VoiceoverAudioClip: {fileID: 0}
+    - Language: 1
+      Text: 
+      VoiceoverAudioClip: {fileID: 0}
+  - TextID: 200008
+    Translates:
+    - Language: 0
+      Text: Titulky
+      VoiceoverAudioClip: {fileID: 0}
+    - Language: 1
+      Text: Subtitles
+      VoiceoverAudioClip: {fileID: 0}
+  - TextID: 200009
+    Translates:
+    - Language: 0
+      Text: Jazyk
+      VoiceoverAudioClip: {fileID: 0}
+    - Language: 1
+      Text: Language
+      VoiceoverAudioClip: {fileID: 0}
+  - TextID: 200010
+    Translates:
+    - Language: 0
+      Text: Zvuky
+      VoiceoverAudioClip: {fileID: 0}
+    - Language: 1
+      Text: Sounds
+      VoiceoverAudioClip: {fileID: 0}
+  - TextID: 200011
+    Translates:
+    - Language: 0
+      Text: Hudba
+      VoiceoverAudioClip: {fileID: 0}
+    - Language: 1
+      Text: Music
+      VoiceoverAudioClip: {fileID: 0}
+  - TextID: 200012
+    Translates:
+    - Language: 0
+      Text: Dialogy
+      VoiceoverAudioClip: {fileID: 0}
+    - Language: 1
+      Text: Voices
+      VoiceoverAudioClip: {fileID: 0}

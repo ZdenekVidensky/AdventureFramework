@@ -11,10 +11,10 @@
     using TVB.Core;
     using TVB.Core.Localization;
     using TVB.Core.Audio;
+    using TVB.Core.Attributes;
     using TVB.Game.GameSignals;
     using TVB.Game.Graph;
     using TVB.Game.Interactable;
-    using TVB.Core.Attributes;
     using TVB.Game.Save;
     
     using Scene = Core.Scene;
@@ -24,12 +24,12 @@
         // CONFIGURATION
 
         [SerializeField]
-        private ELanguage m_Language = ELanguage.Czech;
+        private ELanguage           m_Language = ELanguage.Czech;
         [SerializeField]
         private AudioManager        m_AudioManager;
 
         [SerializeField]
-        private List<Achievement> m_AchievementsDatabase = new List<Achievement>(32);
+        private List<Achievement>   m_AchievementsDatabase = new List<Achievement>(32);
         [SerializeField]
         private List<InventoryItem> m_InventoryItemsDatabase;
 
@@ -39,14 +39,13 @@
         [GetComponent(), SerializeField, HideInInspector]
         private List<InventoryItem> m_StartingItems;
 
-
-
         // PUBLIC MEMBERS
 
-        public Inventory Inventory => m_Inventory;
+        public Inventory Inventory                 => m_Inventory;
         public Dictionary<string, bool> Conditions => m_Conditions;
-        public List<string> UnlockedAchievements => m_UnlockedAchievements;
-        public GraphManager GraphManager => m_GraphManager;
+        public List<string> UnlockedAchievements   => m_UnlockedAchievements;
+        public GraphManager GraphManager           => m_GraphManager;
+        public AudioManager AudioManager           => m_AudioManager;
         public Player Player
         {
             get
@@ -59,8 +58,6 @@
                 return m_Player;
             }
         }
-        public AudioManager AudioManager => m_AudioManager;
-
 
         public bool IsBusy
         {
@@ -179,6 +176,11 @@
                 Inventory.AddItems(m_StartingItems);
             }
 
+            if (m_AudioManager != null)
+            {
+                m_AudioManager.Initialize();
+            }
+
             // TODO:
             //Cursor.SetCursor(m_GUISettings.CursorIcon, Vector2.zero, CursorMode.ForceSoftware);
         }
@@ -194,7 +196,7 @@
         {
             base.OnSceneLoaded();
 
-            m_GraphManager.Initialize();
+            m_GraphManager.InitializeOnSceneLoaded();
             m_Player = FindObjectOfType<Player>();
 
             if (m_PendingSaveData != null)
