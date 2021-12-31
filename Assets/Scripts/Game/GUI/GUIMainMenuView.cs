@@ -20,6 +20,8 @@
         private Button m_ContinueButton;
         [GetComponentInChildren("NewGameButton", true), SerializeField, HideInInspector]
         private Button  m_NewGameButton;
+        [GetComponentInChildren("LoadGameButton", true), SerializeField, HideInInspector]
+        private Button  m_LoadGameButton;
         [GetComponentInChildren("EndGameButton", true), SerializeField, HideInInspector]
         private Button  m_EndGameButton;
         [GetComponentInChildren("OptionsButton", true), SerializeField, HideInInspector]
@@ -32,6 +34,7 @@
             m_NewGameButton.onClick.AddListener(OnNewGameButtonClicked);
             m_EndGameButton.onClick.AddListener(OnEndGameButtonClicked);
             m_OptionsButton.onClick.AddListener(OnOptionsButtonClicked);
+            m_LoadGameButton.onClick.AddListener(OnLoadGameButtonClicked);
         }
 
         private void OnOptionsButtonClicked()
@@ -44,6 +47,7 @@
             m_NewGameButton.onClick.RemoveListener(OnNewGameButtonClicked);
             m_EndGameButton.onClick.RemoveListener(OnEndGameButtonClicked);
             m_OptionsButton.onClick.RemoveListener(OnOptionsButtonClicked);
+            m_LoadGameButton.onClick.RemoveListener(OnLoadGameButtonClicked);
 
             base.OnDeinitialized();
         }
@@ -58,6 +62,12 @@
         }
 
         // HANDLERS
+
+        private void OnLoadGameButtonClicked()
+        {
+            Frontend.PlaySound(m_ButtonSound);
+            Frontend.OpenView<GUILoadGameView>();
+        }
 
         private void OnNewGameButtonClicked()
         {

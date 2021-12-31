@@ -281,6 +281,11 @@
             StartCoroutine(LoadSceneAsync_Coroutine(sceneName));
         }
 
+        public void LoadSavedGame(SaveData saveData)
+        {
+            StartCoroutine(LoadSceneAsync_Coroutine(saveData.SceneName, saveData));
+        }
+
         private IEnumerator LoadSceneAsync_Coroutine(string sceneName, SaveData saveData = null)
         {
             IsBusy = true;
@@ -351,13 +356,13 @@
 
             if (Input.GetButtonDown(InputNamesUtility.QUICK_SAVE) == true)
             {
-                SaveSystem.SaveGame(Player.Position, Player.Direction, Inventory.Items, Conditions, Scene.SceneName, "quicksave");
+                SaveSystem.SaveGame(Player.Position, Player.Direction, Inventory.Items, Conditions, Scene.SceneName, "quicksave", Scene.SceneNameID);
                 Debug.LogError("Saved!");
             }
 
             if (Input.GetButtonDown(InputNamesUtility.QUICK_LOAD) == true)
             {
-                SaveData saveData = SaveSystem.LoadGame("quicksave");
+                SaveData saveData = SaveSystem.LoadGame("quicksave.sav");
 
                 if (saveData == null)
                 {

@@ -1,11 +1,18 @@
 namespace TVB.Game
 {
     using UnityEngine;
+    using Sirenix.OdinInspector;
+
+    using TVB.Core.Localization;
 
     [CreateAssetMenu(menuName = "Data/SceneSettings")]
     public class SceneSettings : ScriptableObject
     {
         public string SceneName;
+        public int SceneNameID;
+
+        [MultiLineProperty(5), DisableInEditorMode, DisableInPlayMode, ShowInInspector]
+        public string DisplayName => TextDatabase.Localize[SceneNameID];
 
         [Header("Scales")]
         public ScaleLevel TopScale;

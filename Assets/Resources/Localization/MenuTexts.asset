@@ -126,3 +126,19 @@ MonoBehaviour:
     - Language: 1
       Text: Save Game
       VoiceoverAudioClip: {fileID: 0}
+  - TextID: 200015
+    Translates:
+    - Language: 0
+      Text: "Rychl\xE9 ulo\u017Een\xED"
+      VoiceoverAudioClip: {fileID: 0}
+    - Language: 1
+      Text: Quicksave
+      VoiceoverAudioClip: {fileID: 0}
+  - TextID: 200016
+    Translates:
+    - Language: 0
+      Text: "-- Pr\xE1zdn\xE1 pozice --"
+      VoiceoverAudioClip: {fileID: 0}
+    - Language: 1
+      Text: -- Empty slot --
+      VoiceoverAudioClip: {fileID: 0}

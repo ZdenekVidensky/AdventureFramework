@@ -25,6 +25,7 @@
         private SceneObject[]             m_SceneObjects = new SceneObject[0];
 
         public string SceneName => m_SceneSettings.SceneName ?? "";
+        public int SceneNameID => m_SceneSettings.SceneNameID;
 
         // PROTECTED MEMBERS
 

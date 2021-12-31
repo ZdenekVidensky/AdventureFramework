@@ -8,20 +8,28 @@ namespace TVB.Game.Save
     [System.Serializable]
     public class SaveData
     {
+        public System.DateTime Date;
         public float PositionX;
         public float PositionY;
         public string[] InventoryItems;
         public string SceneName;
         public int Direction;
+        public int SceneNameID;
         public ConditionSaveData[] Conditions;
 
-
-        public SaveData(Vector3 position, EDirection direction, List<InventoryItem> items, Dictionary<string, bool> conditions, string sceneName)
+        public SaveData(Vector3 position,
+            EDirection direction, List<InventoryItem> items,
+            Dictionary<string, bool> conditions,
+            string sceneName,
+            int sceneNameID,
+            System.DateTime date)
         {
-            PositionX = position.x;
-            PositionY = position.y;
-            Direction = (int)direction;
-            SceneName = sceneName;
+            PositionX   = position.x;
+            PositionY   = position.y;
+            Direction   = (int)direction;
+            SceneName   = sceneName;
+            SceneNameID = sceneNameID;
+            Date        = date;
 
             int itemsCount = items.Count;
             InventoryItems = new string[itemsCount];

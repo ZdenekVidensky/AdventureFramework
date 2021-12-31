@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: SampleSceneSettings
   m_EditorClassIdentifier: 
   SceneName: SampleScene
+  SceneNameID: 300001
   TopScale:
     YPosition: 7.7493
     Scale: 2.6
