@@ -20,6 +20,8 @@
         private Button m_ContinueButton;
         [GetComponentInChildren("SaveGameButton", true), SerializeField, HideInInspector]
         private Button m_SaveGameButton;
+        [GetComponentInChildren("LoadGameButton", true), SerializeField, HideInInspector]
+        private Button m_LoadGameButton;
         [GetComponentInChildren("EndGameButton", true), SerializeField, HideInInspector]
         private Button m_EndGameButton;
         [GetComponentInChildren("OptionsButton", true), SerializeField, HideInInspector]
@@ -31,6 +33,7 @@
 
             m_ContinueButton.onClick.AddListener(OnContinueButtonClicked);
             m_SaveGameButton.onClick.AddListener(OnSaveGameButtonClicked);
+            m_LoadGameButton.onClick.AddListener(OnLoadGameButtonClicked);
             m_EndGameButton.onClick.AddListener(OnEndGameButtonClicked);
             m_OptionsButton.onClick.AddListener(OnOptionsButtonClicked);
         }
@@ -44,6 +47,7 @@
         {
             m_ContinueButton.onClick.RemoveListener(OnContinueButtonClicked);
             m_SaveGameButton.onClick.RemoveListener(OnSaveGameButtonClicked);
+            m_LoadGameButton.onClick.RemoveListener(OnLoadGameButtonClicked);
             m_EndGameButton.onClick.RemoveListener(OnEndGameButtonClicked);
             m_OptionsButton.onClick.RemoveListener(OnOptionsButtonClicked);
 
@@ -63,7 +67,7 @@
 
         private void OnContinueButtonClicked()
         {
-            AdventureGame.Instance.GamePaused = false;
+            AdventureGame.Instance.IsGamePaused = false;
             Frontend.PlaySound(m_ButtonSound);
 
             Close();
@@ -71,8 +75,12 @@
 
         private void OnSaveGameButtonClicked()
         {
-            //Signals.GameplaySignals.NewGame.Emit();
-            //Frontend.PlaySound(m_ButtonSound);
+            Frontend.OpenView<GUISaveGameView>();
+        }
+
+        private void OnLoadGameButtonClicked()
+        {
+            Frontend.OpenView<GUILoadGameView>();
         }
 
         private void OnEndGameButtonClicked()

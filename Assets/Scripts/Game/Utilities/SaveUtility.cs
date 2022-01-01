@@ -1,16 +1,24 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
-using UnityEngine;
-
-namespace TVB.Game.Save
+﻿namespace TVB.Game.Utilities
 {
-    public static class SaveSystem
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Runtime.Serialization.Formatters.Binary;
+
+    using UnityEngine;
+
+    using TVB.Game.Save;
+
+    public static class SaveUtility
     {
+        public const string SAVE_SUFFIX    = ".sav";
+        public const string AUTOSAVE_NAME  = "0autosave.sav";
+        public const string QUICKSAVE_NAME = "1quicksave.sav";
+        public const string DEFAULT_NAME   = "savegame.sav";
+
         public static void SaveGame(Vector3 position, EDirection direction, List<InventoryItem> items, Dictionary<string, bool> conditions, string sceneName, string saveName, int sceneNameID)
         {
             BinaryFormatter formatter = new BinaryFormatter();
-            string path = Application.persistentDataPath + "/" + saveName + ".sav";
+            string path = Application.persistentDataPath + "/" + saveName;
             FileStream stream = new FileStream(path, FileMode.Create);
 
             SaveData saveData = new SaveData(position, direction, items, conditions, sceneName, sceneNameID, System.DateTime.Now);
@@ -38,11 +46,12 @@ namespace TVB.Game.Save
         public static List<GUISaveData> GetSaveData(bool includeQuicksave)
         {
             List<GUISaveData> result = new List<GUISaveData> (8);
-            string[] saveFilePaths = System.IO.Directory.GetFiles(Application.persistentDataPath);
+            string[] saveFilePaths = Directory.GetFiles(Application.persistentDataPath);
+            System.Array.Sort(saveFilePaths);
 
-            foreach(string saveFilePath in saveFilePaths)
+            foreach (string saveFilePath in saveFilePaths)
             {
-                if (saveFilePath.EndsWith(".sav") == true)
+                if (saveFilePath.EndsWith(SaveUtility.SAVE_SUFFIX) == true)
                 {
                     GUISaveData newData = new GUISaveData();
 
@@ -54,14 +63,16 @@ namespace TVB.Game.Save
 
                     string fileName = Path.GetFileName(saveFilePath);
 
-                    bool isQuicksave = fileName.Contains("quicksave");
+                    bool isQuicksave = fileName == QUICKSAVE_NAME;
+                    bool isAutoSave = fileName  == AUTOSAVE_NAME;
 
-                    if (includeQuicksave == false && isQuicksave == true)
+                    if (includeQuicksave == false && (isQuicksave == true || isAutoSave == true))
                         continue;
 
                     newData.Date         = saveData.Date;
                     newData.SceneNameID  = saveData.SceneNameID;
                     newData.IsQuicksave  = isQuicksave;
+                    newData.IsAutosave   = isAutoSave;
                     newData.SaveFileName = fileName;
 
                     result.Add(newData);

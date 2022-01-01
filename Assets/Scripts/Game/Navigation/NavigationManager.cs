@@ -35,7 +35,7 @@ namespace TVB.Game.Navigation
             if (AdventureGame.Instance.IsInventoryOpen == true)
                 return;
 
-            if (AdventureGame.Instance.GamePaused == true)
+            if (AdventureGame.Instance.IsGamePaused == true)
                 return;
 
             AdventureGame.Instance.GraphManager.ForceStopProcessing();

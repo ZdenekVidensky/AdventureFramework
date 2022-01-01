@@ -115,12 +115,12 @@
             }
         }
 
-        public bool GamePaused
+        public bool IsGamePaused
         {
-            get => m_GamePaused;
+            get => m_IsGamePaused;
             set
             {
-                m_GamePaused = value;
+                m_IsGamePaused = value;
                 OnGamePauseChanged();
             }
         }
@@ -154,7 +154,7 @@
         private Dictionary<string, bool>      m_Conditions           = new Dictionary<string, bool>(64);
         private List<string>                  m_UnlockedAchievements = new List<string>(16);
         private bool                          m_GameEnded            = false;
-        private bool                          m_GamePaused           = false;
+        private bool                          m_IsGamePaused         = false;
         private GraphManager                  m_GraphManager         = null;
         private Player                        m_Player               = null;
         private bool                          m_IsBusy               = false;
@@ -286,6 +286,11 @@
             StartCoroutine(LoadSceneAsync_Coroutine(saveData.SceneName, saveData));
         }
 
+        public void SaveGame(string saveFileName)
+        {
+            SaveUtility.SaveGame(Player.Position, Player.Direction, Inventory.Items, Conditions, Scene.SceneName, saveFileName, Scene.SceneNameID);
+        }
+
         private IEnumerator LoadSceneAsync_Coroutine(string sceneName, SaveData saveData = null)
         {
             IsBusy = true;
@@ -314,6 +319,8 @@
 
                 yield return null;
             }
+
+            IsGamePaused = false;
         }
 
         // PRIVATE METHODS
@@ -356,13 +363,12 @@
 
             if (Input.GetButtonDown(InputNamesUtility.QUICK_SAVE) == true)
             {
-                SaveSystem.SaveGame(Player.Position, Player.Direction, Inventory.Items, Conditions, Scene.SceneName, "quicksave", Scene.SceneNameID);
-                Debug.LogError("Saved!");
+                SaveGame(SaveUtility.QUICKSAVE_NAME);
             }
 
             if (Input.GetButtonDown(InputNamesUtility.QUICK_LOAD) == true)
             {
-                SaveData saveData = SaveSystem.LoadGame("quicksave.sav");
+                SaveData saveData = SaveUtility.LoadGame(SaveUtility.QUICKSAVE_NAME);
 
                 if (saveData == null)
                 {
@@ -379,15 +385,15 @@
             {
                 if (Input.GetButtonDown(InputNamesUtility.MENU) == true)
                 {
-                    if (GamePaused == true)
+                    if (IsGamePaused == true)
                     {
                         Scene.Frontend.CloseView<GUIIngameMenuView>();
-                        GamePaused = false; 
+                        IsGamePaused = false; 
                     }
                     else
                     {
                         Scene.Frontend.OpenView<GUIIngameMenuView>();
-                        GamePaused = true; 
+                        IsGamePaused = true; 
                     }
                 }
             }
@@ -395,7 +401,7 @@
 
         private void OnGamePauseChanged()
         {
-            if (m_GamePaused == false)
+            if (m_IsGamePaused == false)
             {
                 Time.timeScale = 1f;
             }

@@ -5,12 +5,11 @@
 
     using TVB.Core.GUI;
     using TVB.Game.Save;
+    using TVB.Game.Utilities;
 
     public class GUISaveSlotsList : GUIComponent
     {
-        [SerializeField]
-        private bool m_IsLoadMenu = true;
-
+        private bool m_IsLoadMenu;
         private GUISaveSlot[] SaveSlots;
 
         public override void OnInitialized()
@@ -20,9 +19,10 @@
             SaveSlots = GetComponentsInChildren<GUISaveSlot>();
         }
 
-        public void InitializeSaveSlots()
+        public void InitializeSaveSlots(bool isLoadMenu)
         {
-            List<GUISaveData> saveDataList = SaveSystem.GetSaveData(true);
+            m_IsLoadMenu = isLoadMenu;
+            List<GUISaveData> saveDataList = SaveUtility.GetSaveData(true);
             int dataCount = saveDataList.Count;
 
             for (int idx = 0; idx < SaveSlots.Length; idx++)
@@ -38,11 +38,7 @@
                 if (idx >= dataCount)
                 {
                     slot.SetIsEmpty();
-
-                    if (m_IsLoadMenu == true)
-                    {
-                        slot.SetIsEnabled(false);
-                    }
+                    slot.SetIsEnabled(m_IsLoadMenu == false);
 
                     continue;
                 }
@@ -56,15 +52,21 @@
             }
         }
 
-        private void OnSaveSlotClick(string saveFileName)
+        private void OnSaveSlotClick(string saveFileName, GUISaveSlot clickedSlot)
         {
+            // Load game
+
             if (m_IsLoadMenu == true)
             {
-                SaveData saveData = SaveSystem.LoadGame(saveFileName);
+                SaveData saveData = SaveUtility.LoadGame(saveFileName);
                 AdventureGame.Instance.LoadSavedGame(saveData);
 
                 return;
             }
+
+            string finalFileName = $"{System.Array.IndexOf(SaveSlots, clickedSlot)}{SaveUtility.DEFAULT_NAME}";
+            AdventureGame.Instance.SaveGame(finalFileName);
+            InitializeSaveSlots(m_IsLoadMenu);
         }
     }
 }

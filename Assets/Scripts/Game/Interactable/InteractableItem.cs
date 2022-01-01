@@ -115,7 +115,7 @@
             if (AdventureGame.Instance.IsBusy == true)
                 return;
 
-            if (AdventureGame.Instance.GamePaused == true)
+            if (AdventureGame.Instance.IsGamePaused == true)
                 return;
 
             (this as IInteractable).OnInteract();

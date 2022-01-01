@@ -5,7 +5,7 @@
     using TVB.Core.Attributes;
     using TVB.Core.GUI;
 
-    public class GUILoadGameView : GUIView
+    public class GUISaveGameView : GUIView
     {
         // CONFIGURATION
 
@@ -33,7 +33,7 @@
         {
             base.OnOpen();
 
-            m_SlotsList.InitializeSaveSlots(true);
+            m_SlotsList.InitializeSaveSlots(false);
         }
     }
 }

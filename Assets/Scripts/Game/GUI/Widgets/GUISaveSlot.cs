@@ -19,11 +19,7 @@
 
         private const int QUICKSAVE_TEXTID = 200015;
         private const int EMPTY_TEXTID     = 200016;
-
-        // CONFIGURATION
-
-        [SerializeField]
-        private bool    m_IsLoadSlot = true;
+        private const int AUTOSAVE_TEXTID  = 200017;
 
         // PRIVATE MEMBERS
 
@@ -34,7 +30,7 @@
         private string  m_SaveFileName;
 
         [System.Serializable]
-        public class GUISaveSlotClickEvent : UnityEvent<string> { }
+        public class GUISaveSlotClickEvent : UnityEvent<string, GUISaveSlot> { }
 
         // PUBLIC MEMBERS
 
@@ -52,6 +48,10 @@
             if (data.IsQuicksave == true)
             {
                 sb.AppendFormat(" ({0})", TextDatabase.Localize[QUICKSAVE_TEXTID]);
+            }
+            else if (data.IsAutosave == true)
+            {
+                sb.AppendFormat(" ({0})", TextDatabase.Localize[AUTOSAVE_TEXTID]);
             }
 
             m_Text.text = sb.ToString();
@@ -89,7 +89,7 @@
 
         private void OnButtonClick()
         {
-            OnClick.Invoke(m_SaveFileName);
+            OnClick.Invoke(m_SaveFileName, this);
         }
     }
 }

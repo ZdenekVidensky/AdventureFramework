@@ -142,3 +142,11 @@ MonoBehaviour:
     - Language: 1
       Text: -- Empty slot --
       VoiceoverAudioClip: {fileID: 0}
+  - TextID: 200017
+    Translates:
+    - Language: 0
+      Text: "Automatick\xE9 ulo\u017Een\xED"
+      VoiceoverAudioClip: {fileID: 0}
+    - Language: 1
+      Text: Autosave
+      VoiceoverAudioClip: {fileID: 0}
