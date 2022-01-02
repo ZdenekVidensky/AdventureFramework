@@ -6,6 +6,7 @@
     using TVB.Core.GUI;
     using TVB.Game.Save;
     using TVB.Game.Utilities;
+    using System.Linq;
 
     public class GUISaveSlotsList : GUIComponent
     {
@@ -22,33 +23,54 @@
         public void InitializeSaveSlots(bool isLoadMenu)
         {
             m_IsLoadMenu = isLoadMenu;
-            List<GUISaveData> saveDataList = SaveUtility.GetSaveData(true);
+            List<GUISaveData> saveDataList = SaveUtility.GetSaveData(isLoadMenu == true);
             int dataCount = saveDataList.Count;
 
             for (int idx = 0; idx < SaveSlots.Length; idx++)
             {
                 GUISaveSlot slot = SaveSlots[idx];
                 slot.OnClick.RemoveAllListeners();
+
+                slot.SetIsEmpty();
+                slot.SetIsEnabled(m_IsLoadMenu == false);
+
+                slot.OnClick.AddListener(OnSaveSlotClick);
             }
 
-            for (int idx = 0; idx < SaveSlots.Length; idx++)
+            bool containsAutosave = false;
+            bool containsQuicksave = false;
+
+            for(int idx = 0, count = saveDataList.Count; idx < count; idx++)
             {
-                GUISaveSlot slot = SaveSlots[idx];
+                GUISaveData data = saveDataList[idx];
+                int index = data.Index;
 
-                if (idx >= dataCount)
+                if (isLoadMenu == false)
                 {
-                    slot.SetIsEmpty();
-                    slot.SetIsEnabled(m_IsLoadMenu == false);
-
-                    continue;
+                    index -= 2;
                 }
 
-                GUISaveData data = saveDataList[idx];
+                if (index >= SaveSlots.Length)
+                    break;
 
+                GUISaveSlot slot = SaveSlots[index];
                 slot.Initialize(data);
                 slot.SetIsEnabled(true);
 
-                slot.OnClick.AddListener(OnSaveSlotClick);
+                containsAutosave  |= data.IsAutosave;
+                containsQuicksave |= data.IsQuicksave;
+            }
+
+            // Hide autosave and quicksave slots if there is no any
+
+            if (isLoadMenu == true && containsAutosave == false)
+            {
+                SaveSlots[0].SetActive(false);
+            }
+
+            if (isLoadMenu == true && containsQuicksave == false)
+            {
+                SaveSlots[1].SetActive(false);
             }
         }
 
@@ -64,7 +86,7 @@
                 return;
             }
 
-            string finalFileName = $"{System.Array.IndexOf(SaveSlots, clickedSlot)}{SaveUtility.DEFAULT_NAME}";
+            string finalFileName = $"{System.Array.IndexOf(SaveSlots, clickedSlot) + 2}{SaveUtility.DEFAULT_NAME}";
             AdventureGame.Instance.SaveGame(finalFileName);
             InitializeSaveSlots(m_IsLoadMenu);
         }

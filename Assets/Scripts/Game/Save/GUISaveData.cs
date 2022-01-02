@@ -4,6 +4,7 @@
    {
         public System.DateTime Date;
         public int             SceneNameID;
+        public int             Index;
         public string          SaveFileName;
         public bool            IsQuicksave;
         public bool            IsAutosave;

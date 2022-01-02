@@ -43,11 +43,10 @@
             return result;
         }
 
-        public static List<GUISaveData> GetSaveData(bool includeQuicksave)
+        public static List<GUISaveData> GetSaveData(bool includeQuickAndAutosave)
         {
             List<GUISaveData> result = new List<GUISaveData> (8);
             string[] saveFilePaths = Directory.GetFiles(Application.persistentDataPath);
-            System.Array.Sort(saveFilePaths);
 
             foreach (string saveFilePath in saveFilePaths)
             {
@@ -56,7 +55,7 @@
                     GUISaveData newData = new GUISaveData();
 
                     BinaryFormatter formatter = new BinaryFormatter();
-                    FileStream stream = new FileStream(saveFilePath, FileMode.Open);
+                    FileStream stream         = new FileStream(saveFilePath, FileMode.Open);
 
                     SaveData saveData = formatter.Deserialize(stream) as SaveData;
                     stream.Close();
@@ -64,9 +63,9 @@
                     string fileName = Path.GetFileName(saveFilePath);
 
                     bool isQuicksave = fileName == QUICKSAVE_NAME;
-                    bool isAutoSave = fileName  == AUTOSAVE_NAME;
+                    bool isAutoSave  = fileName == AUTOSAVE_NAME;
 
-                    if (includeQuicksave == false && (isQuicksave == true || isAutoSave == true))
+                    if (includeQuickAndAutosave == false && (isQuicksave == true || isAutoSave == true))
                         continue;
 
                     newData.Date         = saveData.Date;
@@ -74,10 +73,13 @@
                     newData.IsQuicksave  = isQuicksave;
                     newData.IsAutosave   = isAutoSave;
                     newData.SaveFileName = fileName;
+                    newData.Index        = int.Parse(fileName.Substring(0, 1));
 
                     result.Add(newData);
                 }
             }
+
+            result.Sort((a, b) => a.Index.CompareTo(b.Index));
 
             return result;
         }
