@@ -106,6 +106,19 @@
             m_ViewsStack.Remove(viewToClose);
         }
 
+        public System.Type CloseTopView(System.Type untilViewType)
+        {
+            GUIView viewToClose = m_ViewsStack.First();
+            System.Type viewType = viewToClose.GetType();
+
+            if (viewType == untilViewType)
+                return null;
+
+            CloseView(viewType);
+
+            return viewType;
+        }
+
         public virtual void OnInitialized() { }
         public virtual void OnDeinitialized() { }
         public virtual void OnUpdate()

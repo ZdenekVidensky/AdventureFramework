@@ -377,17 +377,25 @@
                 }
 
                 StartCoroutine(LoadSceneAsync_Coroutine(saveData.SceneName, saveData));
-
-                Debug.LogError("Loaded!");
             }
 
             if (IsBusy == false && Player != null)
             {
                 if (Input.GetButtonDown(InputNamesUtility.MENU) == true)
                 {
+                    if (IsInventoryOpen == true)
+                    {
+                        IsInventoryOpen = false;
+                        return;
+                    }
+
+                    System.Type closedViewType = Scene.Frontend.CloseTopView(typeof(GUIIngameView));
+
+                    if (closedViewType != null && closedViewType != typeof(GUIIngameMenuView))
+                        return;
+
                     if (IsGamePaused == true)
                     {
-                        Scene.Frontend.CloseView<GUIIngameMenuView>();
                         IsGamePaused = false; 
                     }
                     else
