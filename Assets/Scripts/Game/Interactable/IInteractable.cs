@@ -12,6 +12,7 @@
 		EInteractableAction      ActionType       { get; }
 		InteractiveGraph         InteractiveGraph { get; }
 		int                      CustomTextID     { get; }
+		Vector3                  Position         { get; }
 		void OnInteract();
 		void OnUseItem(string itemID);
 		void Destroy();
@@ -24,6 +25,7 @@
 		Use,
 		Examine,
 		Take,
+		Walk,
 		Custom
 	}
 

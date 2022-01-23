@@ -8,10 +8,10 @@ public class LevelLoader : MonoBehaviour, IInteractable
 {
     [SerializeField]
     private string m_SceneName;
-    EInteractableAction IInteractable.ActionType => EInteractableAction.None;
-
-    string IInteractable.Name => gameObject.name;
-
+    
+    EInteractableAction IInteractable.ActionType    => EInteractableAction.None;
+    Vector3 IInteractable.Position                  => transform.position;
+    string IInteractable.Name                       => gameObject.name;
     InteractiveGraph IInteractable.InteractiveGraph => null;
 
     private void OnMouseDown()

@@ -51,6 +51,9 @@
         [GetComponentInChildren("Decision4Text", true), SerializeField, HideInInspector]
         private GUIText       m_Decision4Text;
 
+        [GetComponentInChildren("ActivePlaces", true), SerializeField, HideInInspector]
+        private GUIActivePlaces m_ActivePlaces;
+
         // PUBLIC MEMBERS
 
         [HideInInspector]
@@ -77,6 +80,8 @@
             m_ItemDescriptionRectTransform = m_ItemDescription.rectTransform;
          
             SetInventoryData(AdventureGame.Instance.Inventory.Items);
+
+            m_ActivePlaces.Initialize(AdventureGame.Instance.CurrentScene.InteractableItems);
         }
 
         public override void OnDeinitialized()

@@ -26,6 +26,7 @@
         int IInteractable.CustomTextID                       => m_CustomTextID;
         InteractiveGraph IInteractable.InteractiveGraph      => m_InteractiveGraph;
         string IInteractable.Name                            => gameObject.name;
+        Vector3 IInteractable.Position                       => transform.position;
 
 
         [SerializeField, TableList]

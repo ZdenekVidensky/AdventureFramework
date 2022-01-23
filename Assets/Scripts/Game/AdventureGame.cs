@@ -20,6 +20,7 @@
     using TVB.Game.Utilities;
     
     using Scene = Core.Scene;
+    using TVB.Game.Scenes;
 
     public class AdventureGame : Game
     {
@@ -138,6 +139,11 @@
         public string PreviousScene
         {
             get => m_PreviousScene;
+        }
+
+        public AdventureScene CurrentScene
+        {
+            get => Scene as AdventureScene;
         }
 
         public static new AdventureGame Instance

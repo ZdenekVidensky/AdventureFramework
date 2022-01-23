@@ -44,4 +44,12 @@ public static class GUIExtensions
 
         @this.gameObject.SetActive(state);
     }
+
+    public static void SetActive(this Image @this, bool state)
+    {
+        if (@this.gameObject.activeSelf == state)
+            return;
+
+        @this.gameObject.SetActive(state);
+    }
 }
