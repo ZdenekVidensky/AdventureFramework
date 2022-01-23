@@ -16,10 +16,10 @@
     using TVB.Game.Graph;
     using TVB.Game.Interactable;
     using TVB.Game.Save;
+    using TVB.Game.GUI;
+    using TVB.Game.Utilities;
     
     using Scene = Core.Scene;
-    using TVB.Game.Utilities;
-    using TVB.Game.GUI;
 
     public class AdventureGame : Game
     {
