@@ -179,7 +179,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -310,7 +310,7 @@ RectTransform:
   - {fileID: 1252224382886778295}
   - {fileID: 3005246231492197974}
   m_Father: {fileID: 5842480762933790005}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -373,7 +373,7 @@ RectTransform:
   m_Children:
   - {fileID: 5778745651931793712}
   m_Father: {fileID: 5842480762933790005}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -670,9 +670,9 @@ RectTransform:
   - {fileID: 5842480764420721127}
   - {fileID: 5842480763908767797}
   - {fileID: 5842480763921501355}
+  - {fileID: 5480554463368836908}
   - {fileID: 4559855931593398514}
   - {fileID: 804677701011664606}
-  - {fileID: 5480554463368836908}
   m_Father: {fileID: 5842480764073660421}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1184,6 +1184,7 @@ MonoBehaviour:
   m_Decision3Text: {fileID: 0}
   m_Decision4Text: {fileID: 0}
   m_ActivePlaces: {fileID: 0}
+  m_ActivePlacesButton: {fileID: 0}
   SelectDecisionEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -2214,7 +2215,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5842480762933790005}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}

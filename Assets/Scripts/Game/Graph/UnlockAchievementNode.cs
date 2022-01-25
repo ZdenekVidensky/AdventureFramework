@@ -1,4 +1,4 @@
-﻿namespace TVB.Game.Graph
+﻿namespace TVB.Core.Graph
 {
     using UnityEngine;
 

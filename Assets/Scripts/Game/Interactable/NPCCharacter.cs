@@ -1,11 +1,12 @@
-﻿namespace TVB.Game.Interactable
+﻿namespace TVB.Core.Interactable
 {
     using UnityEngine;
 
-    using TVB.Game.Graph;
+    using TVB.Core.Graph;
     using TVB.Core.Localization;
     using Sirenix.OdinInspector;
     using TVB.Game.GameSignals;
+    using TVB.Game;
 
     public class NPCCharacter : MonoBehaviour, IInteractable, ITalkable
     {
@@ -103,6 +104,9 @@
             if (AdventureGame.Instance.IsGamePaused == true)
                 return;
 
+            if (AdventureGame.Instance.AreActivePlacesVisible == true)
+                return;
+
             (this as IInteractable).OnInteract();
         }
 
@@ -113,6 +117,9 @@
                 return;
 
             if (AdventureGame.Instance.IsInventoryOpen == true)
+                return;
+
+            if (AdventureGame.Instance.AreActivePlacesVisible == true)
                 return;
 
             string selectedItem = AdventureGame.Instance.SelectedItemID;
@@ -150,6 +157,9 @@
                 return;
 
             if (AdventureGame.Instance.IsInventoryOpen == true)
+                return;
+
+            if (AdventureGame.Instance.AreActivePlacesVisible == true)
                 return;
 
             Signals.GUISignals.ShowItemDescription.Emit(false);

@@ -35,6 +35,9 @@ namespace TVB.Game.Navigation
             if (AdventureGame.Instance.IsInventoryOpen == true)
                 return;
 
+            if (AdventureGame.Instance.AreActivePlacesVisible == true)
+                return;
+
             if (AdventureGame.Instance.IsGamePaused == true)
                 return;
 

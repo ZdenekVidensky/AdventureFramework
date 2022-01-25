@@ -2367,7 +2367,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff545570004b575498f69dec2886c863, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_InteractableAction: 2
+  m_InteractableAction: 5
   m_CustomTextID: 100006
   m_InteractiveGraph: {fileID: 11400000, guid: 577673a16486e084d820a52fbd957077, type: 2}
   m_ItemNameID: 100007
@@ -2641,6 +2641,22 @@ PrefabInstance:
     - target: {fileID: 804677701011664606, guid: deab62797e0dd1f45948813e3b1c894b, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 770.40137
+      objectReference: {fileID: 0}
+    - target: {fileID: 1252224382886778295, guid: deab62797e0dd1f45948813e3b1c894b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1252224382886778295, guid: deab62797e0dd1f45948813e3b1c894b, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1252224382886778295, guid: deab62797e0dd1f45948813e3b1c894b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1252224382886778295, guid: deab62797e0dd1f45948813e3b1c894b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1397874183507770830, guid: deab62797e0dd1f45948813e3b1c894b, type: 3}
       propertyPath: m_AnchorMax.y

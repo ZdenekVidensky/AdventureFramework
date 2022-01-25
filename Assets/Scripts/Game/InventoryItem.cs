@@ -6,7 +6,7 @@
     using Sirenix.OdinInspector;
 
     using TVB.Core.Localization;
-    using TVB.Game.Graph;
+    using TVB.Core.Graph;
 
     [CreateAssetMenu(fileName = "InventoryItem", menuName = "Items/InventoryItem")]
     [System.Serializable]

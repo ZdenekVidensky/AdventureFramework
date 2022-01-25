@@ -1,15 +1,16 @@
 ﻿namespace TVB.Core
 {
     using System.Collections;
+    using System.Collections.Generic;
 
     using UnityEngine;
 
     using TVB.Core.GUI;
     using TVB.Core.Attributes;
-    using TVB.Core.Audio;
     using TVB.Game;
     using TVB.Game.GUI;
     using TVB.Game.DebugTools;
+    using TVB.Core.Interactable;
 
     public class Scene : MonoBehaviour
     {
@@ -26,6 +27,24 @@
 
         public string SceneName => m_SceneSettings.SceneName ?? "";
         public int SceneNameID => m_SceneSettings.SceneNameID;
+
+        // PUBLIC MEMBERS
+
+        public List<IInteractable> InteractableItems
+        {
+            get
+            {
+                m_InteractableItems.Clear();
+
+                GetComponentsInChildren(true, m_InteractableItems); // Must be before frontend initialization
+
+                return m_InteractableItems;
+            }
+        }
+
+        // PRIVATE MEMBERS
+
+        private List<IInteractable> m_InteractableItems = new List<IInteractable>(16);
 
         // PROTECTED MEMBERS
 

@@ -13,8 +13,8 @@
     using TVB.Core.Audio;
     using TVB.Core.Attributes;
     using TVB.Game.GameSignals;
-    using TVB.Game.Graph;
-    using TVB.Game.Interactable;
+    using TVB.Core.Graph;
+    using TVB.Core.Interactable;
     using TVB.Game.Save;
     using TVB.Game.GUI;
     using TVB.Game.Utilities;
@@ -86,7 +86,24 @@
             set
             {
                 m_IsInventoryOpen = value;
+                Signals.GUISignals.SetActivePlacesVisible.Emit(false);
                 Signals.GUISignals.SetInventoryOpen.Emit(value);
+            }
+        }
+
+        public bool AreActivePlacesVisible
+        {
+            get
+            {
+                return m_AreActivePlacesVisible;
+            }
+
+            set
+            {
+                m_AreActivePlacesVisible = value;
+                Signals.GUISignals.SetActivePlacesVisible.Emit(value);
+                Signals.GUISignals.SetInventoryOpen.Emit(false);
+                //IsGamePaused = value;
             }
         }
 
@@ -156,19 +173,20 @@
 
         // PRIVATE MEMBERS
 
-        private Inventory                     m_Inventory            = new Inventory();
-        private Dictionary<string, bool>      m_Conditions           = new Dictionary<string, bool>(64);
-        private List<string>                  m_UnlockedAchievements = new List<string>(16);
-        private bool                          m_GameEnded            = false;
-        private bool                          m_IsGamePaused         = false;
-        private GraphManager                  m_GraphManager         = null;
-        private Player                        m_Player               = null;
-        private bool                          m_IsBusy               = false;
-        private bool                          m_IsInventoryOpen      = false;
-        private string                        m_SelectedItem         = null;
-        private string                        m_HoveredItem          = null;
-        private string                        m_PreviousScene        = null;
-        private SaveData                      m_PendingSaveData      = null;
+        private Inventory                     m_Inventory              = new Inventory();
+        private Dictionary<string, bool>      m_Conditions             = new Dictionary<string, bool>(64);
+        private List<string>                  m_UnlockedAchievements   = new List<string>(16);
+        private bool                          m_GameEnded              = false;
+        private bool                          m_IsGamePaused           = false;
+        private GraphManager                  m_GraphManager           = null;
+        private Player                        m_Player                 = null;
+        private bool                          m_IsBusy                 = false;
+        private bool                          m_IsInventoryOpen        = false;
+        private bool                          m_AreActivePlacesVisible = false;
+        private string                        m_SelectedItem           = null;
+        private string                        m_HoveredItem            = null;
+        private string                        m_PreviousScene          = null;
+        private SaveData                      m_PendingSaveData        = null;
 
         // GAME INTERFACE
 

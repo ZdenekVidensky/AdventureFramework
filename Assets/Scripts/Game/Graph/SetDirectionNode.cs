@@ -1,6 +1,7 @@
-﻿namespace TVB.Game.Graph
+﻿namespace TVB.Core.Graph
 {
     using UnityEngine;
+    using TVB.Game;
 
     [CreateNodeMenu("SetDirectionNode"), NodeTint("#2e7928")]
     [NodeWidth(250)]

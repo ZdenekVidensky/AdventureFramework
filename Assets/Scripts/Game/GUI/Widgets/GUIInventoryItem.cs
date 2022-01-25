@@ -10,7 +10,7 @@
     using TVB.Core.Attributes;
     using TVB.Game.GameSignals;
     using TVB.Core.Localization;
-    using TVB.Game.Graph;
+    using TVB.Core.Graph;
 
     public class GUIInventoryItem : GUIComponent, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler
     {

@@ -4,7 +4,7 @@
     using UnityEditor.Build;
     using UnityEditor.Build.Reporting;
 
-    using TVB.Game.Graph;
+    using TVB.Core.Graph;
 
     class GamePostprocessor : IProcessSceneWithReport
     {

@@ -1,10 +1,10 @@
-﻿namespace TVB.Game.Interactable
+﻿namespace TVB.Core.Interactable
 {
     using UnityEngine;
     using Sirenix.OdinInspector;
 
     using TVB.Core.Localization;
-    using TVB.Game.Graph;
+    using TVB.Core.Graph;
 
     public interface IInteractable
 	{

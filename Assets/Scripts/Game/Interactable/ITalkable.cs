@@ -1,4 +1,4 @@
-﻿namespace TVB.Game.Interactable
+﻿namespace TVB.Core.Interactable
 {   
     public interface ITalkable
     {

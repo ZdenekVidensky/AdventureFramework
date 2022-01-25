@@ -49,10 +49,13 @@
         [GetComponentInChildren("Decision3Text", true), SerializeField, HideInInspector]
         private GUIText       m_Decision3Text;
         [GetComponentInChildren("Decision4Text", true), SerializeField, HideInInspector]
-        private GUIText       m_Decision4Text;
+        private GUIText         m_Decision4Text;
 
         [GetComponentInChildren("ActivePlaces", true), SerializeField, HideInInspector]
         private GUIActivePlaces m_ActivePlaces;
+
+        [GetComponentInChildren("ActivePlacesButton", true), SerializeField, HideInInspector]
+        private Button          m_ActivePlacesButton;
 
         // PUBLIC MEMBERS
 
@@ -76,27 +79,29 @@
             Signals.GUISignals.ShowItemDescription.Connect(ShowItemDescription);
             Signals.GUISignals.GameBusyChanged.Connect(OnGameIsBusyChanged);
             Signals.GUISignals.SetInventoryOpen.Connect(OnSetInventoryOpen);
+            Signals.GUISignals.SetActivePlacesVisible.Connect(SetActivePlacesVisible);
+
+            m_ActivePlacesButton.onClick.AddListener(OnActivePlacesButtonClick);
 
             m_ItemDescriptionRectTransform = m_ItemDescription.rectTransform;
          
             SetInventoryData(AdventureGame.Instance.Inventory.Items);
-
-            m_ActivePlaces.Initialize(AdventureGame.Instance.CurrentScene.InteractableItems);
         }
 
         public override void OnDeinitialized()
         {
-
             m_Decision1Button.onClick.RemoveListener(OnDecision1ButtonClick);
             m_Decision2Button.onClick.RemoveListener(OnDecision2ButtonClick);
             m_Decision3Button.onClick.RemoveListener(OnDecision3ButtonClick);
             m_Decision4Button.onClick.RemoveListener(OnDecision4ButtonClick);
 
+            m_ActivePlacesButton.onClick.RemoveListener(OnActivePlacesButtonClick);
+
             Signals.GUISignals.GameBusyChanged.Disconnect(OnGameIsBusyChanged);
             Signals.GUISignals.SetInventoryOpen.Disconnect(OnSetInventoryOpen);
-
-            Signals.GUISignals.SetItemDescription.DisconnectAll();
-            Signals.GUISignals.ShowItemDescription.DisconnectAll();
+            Signals.GUISignals.SetActivePlacesVisible.Disconnect(SetActivePlacesVisible);
+            Signals.GUISignals.SetItemDescription.Disconnect(SetItemDescription);
+            Signals.GUISignals.ShowItemDescription.Disconnect(ShowItemDescription);
 
             base.OnDeinitialized();
         }
@@ -208,7 +213,23 @@
             SelectDecisionEvent.Invoke(3);
         }
 
+        private void OnActivePlacesButtonClick()
+        {
+            if (AdventureGame.Instance.IsBusy == true)
+                return;
+
+            m_ActivePlaces.InitializeItems(AdventureGame.Instance.CurrentScene.InteractableItems);
+
+            bool activePlacesVisible                      = !m_ActivePlaces.gameObject.activeSelf;
+            AdventureGame.Instance.AreActivePlacesVisible = activePlacesVisible;
+        }
+
         // GUI SIGNALS
+
+        private void SetActivePlacesVisible(bool visible)
+        {
+            m_ActivePlaces.SetActive(visible);
+        }
 
         private void SetItemDescription(string description)
         {

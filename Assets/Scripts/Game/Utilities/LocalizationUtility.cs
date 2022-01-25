@@ -1,4 +1,4 @@
-﻿using TVB.Game.Interactable;
+﻿using TVB.Core.Interactable;
 
 namespace TVB.Game.Utilities
 {

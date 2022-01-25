@@ -3,7 +3,7 @@ namespace TVB.Game
     using System.Collections.Generic;
     using UnityEngine;
 
-    using TVB.Game.Interactable;
+    using TVB.Core.Interactable;
     using TVB.Core.Attributes;
 
     public class Player : MonoBehaviour, ITalkable
@@ -49,6 +49,9 @@ namespace TVB.Game
         void Update()
         {
             if (AdventureGame.Instance.IsInventoryOpen == true)
+                return;
+
+            if (AdventureGame.Instance.AreActivePlacesVisible == true)
                 return;
 
             UpdateMovement();

@@ -6,7 +6,7 @@
     using UnityEngine.UI;
 
     using TVB.Core.GUI;
-    using TVB.Game.Interactable;
+    using TVB.Core.Interactable;
 
     public class GUIActivePlaces : GUIComponent
     {
@@ -29,18 +29,35 @@
         // PRIVATE MEMBERS
 
         private List<GUIIcon> m_Icons = new List<GUIIcon>(ICONS_NUMBER);
+        private Camera        m_MainCamera;
+
+        public override void OnInitialized()
+        {
+            base.OnInitialized();
+
+            m_MainCamera = Camera.main;
+        }
 
         // PUBLIC METHODS
 
-        public void Initialize(List<IInteractable> interactableItems)
+        public void InitializeItems(List<IInteractable> interactableItems)
         {
+            for (int idx = 0, count = m_Icons.Count; idx < count; idx++)
+            {
+                Destroy(m_Icons[idx].Icon.gameObject);
+            }
+
+            m_Icons.Clear();
+
             for (int idx = 0, count = interactableItems.Count; idx < count; idx++)
             {
                 IInteractable item = interactableItems[idx];
-                Image iconPrefab = GetIconByActionType(item.ActionType);
-                Image icon = Instantiate<Image>(iconPrefab, RectTransform);
+                Image iconPrefab   = GetIconByActionType(item.ActionType);
+                Image icon         = Instantiate<Image>(iconPrefab, RectTransform);
+                icon.raycastTarget = false;
 
-                // TODO: set position
+                Vector3 screenPosition = m_MainCamera.WorldToScreenPoint(item.Position);
+                icon.rectTransform.position = screenPosition;
 
                 GUIIcon iconItem = new GUIIcon
                 {
@@ -53,13 +70,6 @@
         }
 
         // UTILITIES
-
-        private void AddIconToList(Image iconPrefab, ref List<Image> iconList)
-        {
-            Image icon = Instantiate<Image>(iconPrefab, RectTransform);
-            iconList.Add(icon);
-            icon.SetActive(false);
-        }
 
         private struct GUIIcon
         {

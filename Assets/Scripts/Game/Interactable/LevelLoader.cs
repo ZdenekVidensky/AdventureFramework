@@ -1,7 +1,7 @@
 using UnityEngine;
 
-using TVB.Game.Graph;
-using TVB.Game.Interactable;
+using TVB.Core.Graph;
+using TVB.Core.Interactable;
 using TVB.Game;
 
 public class LevelLoader : MonoBehaviour, IInteractable

@@ -1,7 +1,8 @@
-﻿namespace TVB.Game.Graph
+﻿namespace TVB.Core.Graph
 {
     using UnityEngine;
     using Sirenix.OdinInspector;
+    using TVB.Game;
 
     [CreateNodeMenu("Take Item Node"), NodeTint("#2e7928")]
     [NodeWidth(250)]

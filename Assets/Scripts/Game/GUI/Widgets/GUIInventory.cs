@@ -93,7 +93,7 @@
             if (AdventureGame.Instance.IsBusy == true)
                 return;
 
-            bool inventoryActive = !m_MainFrame.gameObject.activeSelf;
+            bool inventoryActive                   = !m_MainFrame.gameObject.activeSelf;
             AdventureGame.Instance.IsInventoryOpen = inventoryActive;
         }
 

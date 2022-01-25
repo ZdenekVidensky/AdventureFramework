@@ -1,11 +1,12 @@
-﻿namespace TVB.Game.Interactable
+﻿namespace TVB.Core.Interactable
 {
     using UnityEngine;
     using Sirenix.OdinInspector;
 
-    using TVB.Game.Graph;
+    using TVB.Core.Graph;
     using TVB.Game.GameSignals;
     using TVB.Core.Localization;
+    using TVB.Game;
 
     public class InteractableItem : MonoBehaviour, IInteractable
     {
@@ -71,6 +72,9 @@
             if (AdventureGame.Instance.IsInventoryOpen == true)
                 return;
 
+            if (AdventureGame.Instance.AreActivePlacesVisible == true)
+                return;
+
             string selectedItem = AdventureGame.Instance.SelectedItemID;
             string actionText;
 
@@ -108,12 +112,21 @@
             if (AdventureGame.Instance.IsInventoryOpen == true)
                 return;
 
+            if (AdventureGame.Instance.AreActivePlacesVisible == true)
+                return;
+
             Signals.GUISignals.ShowItemDescription.Emit(false);
         }
 
         private void OnMouseDown()
         {
             if (AdventureGame.Instance.IsBusy == true)
+                return;
+
+            if (AdventureGame.Instance.IsInventoryOpen == true)
+                return;
+
+            if (AdventureGame.Instance.AreActivePlacesVisible == true)
                 return;
 
             if (AdventureGame.Instance.IsGamePaused == true)

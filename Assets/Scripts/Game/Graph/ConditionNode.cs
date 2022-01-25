@@ -1,7 +1,8 @@
-﻿namespace TVB.Game.Graph
+﻿namespace TVB.Core.Graph
 {
     using UnityEngine;
     using Sirenix.OdinInspector;
+    using TVB.Game;
 
     [CreateNodeMenu("Condition Node"), NodeTint("#e2e04d")]
     [NodeWidth(250)]

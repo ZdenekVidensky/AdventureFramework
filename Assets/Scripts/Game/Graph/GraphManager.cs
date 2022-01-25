@@ -1,4 +1,4 @@
-﻿namespace TVB.Game.Graph
+﻿namespace TVB.Core.Graph
 {
 	using System.Collections;
 	using System.Collections.Generic;
@@ -8,8 +8,9 @@
 	using XNode;
 
 	using TVB.Core.Coroutines;
+	using TVB.Core.Interactable;
+    using TVB.Game;
 	using TVB.Game.GUI;
-	using TVB.Game.Interactable;
 	using TVB.Game.GameSignals;
 	using TVB.Game.Navigation;
     using TVB.Game.Options;

@@ -7,18 +7,9 @@
     using TVB.Core;
     using TVB.Game.GUI;
     using TVB.Game.GameSignals;
-    using TVB.Game.Interactable;
 
     public class AdventureScene : Scene
     {
-        // PUBLIC MEMBERS
-
-        public List<IInteractable> InteractableItems { get => m_InteractableItems; }
-
-        // PRIVATE MEMBERS
-
-        public List<IInteractable> m_InteractableItems;
-
         // SCENE INTERFACE
 
         public override void OnInitialized()
@@ -50,8 +41,6 @@
             {
                 AdventureGame.Instance.AudioManager.StopAmbient();
             }
-
-            GetComponentsInChildren<IInteractable>(true, m_InteractableItems);
         }
 
         public override void OnUpdate()
