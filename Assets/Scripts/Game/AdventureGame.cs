@@ -388,6 +388,8 @@
             if (Input.GetButtonDown(InputNamesUtility.QUICK_SAVE) == true)
             {
                 SaveGame(SaveUtility.QUICKSAVE_NAME);
+
+                Debug.LogError("Quicksaved");
             }
 
             if (Input.GetButtonDown(InputNamesUtility.QUICK_LOAD) == true)
