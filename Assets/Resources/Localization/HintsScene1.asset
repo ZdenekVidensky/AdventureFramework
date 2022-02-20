@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1f4495938ece56489ef14db33131328, type: 3}
+  m_Name: HintsScene1
+  m_EditorClassIdentifier: 
+  Name: HintsScene1
+  Items:
+  - TextID: 400001
+    Translates:
+    - Language: 0
+      Text: Duch
+      VoiceoverAudioClip: {fileID: 0}
+    - Language: 1
+      Text: Ghost
+      VoiceoverAudioClip: {fileID: 0}
+  - TextID: 400002
+    Translates:
+    - Language: 0
+      Text: "Dve\u0159e"
+      VoiceoverAudioClip: {fileID: 0}
+    - Language: 1
+      Text: Door
+      VoiceoverAudioClip: {fileID: 0}
+  - TextID: 400003
+    Translates:
+    - Language: 0
+      Text: "Zapalova\u010D"
+      VoiceoverAudioClip: {fileID: 0}
+    - Language: 1
+      Text: 
+      VoiceoverAudioClip: {fileID: 0}

@@ -397,6 +397,7 @@ MonoBehaviour:
   m_TalkIcon: {fileID: 4398187410815653895, guid: 6fef4fc5913722f408caeafddd2176e2, type: 3}
   m_LookIcon: {fileID: 9098240387596802812, guid: 912173292f3ca9b4ea7ab96da3196abe, type: 3}
   m_TakeIcon: {fileID: 2195182798495409541, guid: 7d4b2449477ff9a4e9df6ad30fd8e6c1, type: 3}
+  m_ActivePlacePrefab: {fileID: 8693579948281107240, guid: 78db91914e0d15845a4481e46e700a00, type: 3}
 --- !u!1 &5842480762741280635
 GameObject:
   m_ObjectHideFlags: 0

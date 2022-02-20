@@ -2024,6 +2024,7 @@ MonoBehaviour:
   m_TalkableCharacter: 1
   m_InteractableAction: 1
   m_CustomTextID: 100005
+  m_ActivePlaceTextID: 400001
   m_InteractiveGraph: {fileID: 11400000, guid: 86203b66034483d4c8f439dabb0dd496, type: 2}
   m_Animator: {fileID: 0}
   m_InteractableWithItems:
@@ -2369,6 +2370,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_InteractableAction: 5
   m_CustomTextID: 100006
+  m_ActivePlaceTextID: 400002
   m_InteractiveGraph: {fileID: 11400000, guid: 577673a16486e084d820a52fbd957077, type: 2}
   m_ItemNameID: 100007
   m_InteractableWithItems: []

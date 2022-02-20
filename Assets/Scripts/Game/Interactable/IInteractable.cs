@@ -8,11 +8,12 @@
 
     public interface IInteractable
 	{
-		string                   Name             { get; }
-		EInteractableAction      ActionType       { get; }
-		InteractiveGraph         InteractiveGraph { get; }
-		int                      CustomTextID     { get; }
-		Vector3                  Position         { get; }
+		string                   Name              { get; }
+		EInteractableAction      ActionType        { get; }
+		InteractiveGraph         InteractiveGraph  { get; }
+		int                      CustomTextID      { get; }
+		Vector3                  Position          { get; }
+		int                      ActivePlaceTextID { get; }
 		void OnInteract();
 		void OnUseItem(string itemID);
 		void Destroy();

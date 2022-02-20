@@ -14,6 +14,8 @@
         private EInteractableAction      m_InteractableAction;
         [SerializeField]
         private int                      m_CustomTextID;
+        [SerializeField]
+        private int                      m_ActivePlaceTextID;
         [DisableInEditorMode, DisableInPlayMode, ShowInInspector]
         public string CustomTextID => TextDatabase.Localize[m_CustomTextID];
         [SerializeField]
@@ -22,9 +24,12 @@
         private int                      m_ItemNameID;
         [DisableInEditorMode, DisableInPlayMode, ShowInInspector]
         public string ItemName => TextDatabase.Localize[m_ItemNameID];
+        [DisableInEditorMode, DisableInPlayMode, ShowInInspector]
+        public string ActivePlaceText => TextDatabase.Localize[m_ActivePlaceTextID];
 
         EInteractableAction IInteractable.ActionType         => m_InteractableAction;
         int IInteractable.CustomTextID                       => m_CustomTextID;
+        int IInteractable.ActivePlaceTextID                  => m_ActivePlaceTextID;
         InteractiveGraph IInteractable.InteractiveGraph      => m_InteractiveGraph;
         string IInteractable.Name                            => gameObject.name;
         Vector3 IInteractable.Position                       => transform.position;

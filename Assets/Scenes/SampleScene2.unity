@@ -299,6 +299,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_InteractableAction: 2
   m_CustomTextID: 100022
+  m_ActivePlaceTextID: 400002
   m_InteractiveGraph: {fileID: 11400000, guid: 1922fe9276ccddf45a9bd59966f5cdd0, type: 2}
   m_ItemNameID: 100007
   m_InteractableWithItems: []
@@ -1718,6 +1719,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_InteractableAction: 4
   m_CustomTextID: 100008
+  m_ActivePlaceTextID: 400003
   m_InteractiveGraph: {fileID: 11400000, guid: baee73cf591cb7c4696ee7485e52a6b1, type: 2}
   m_ItemNameID: 100002
   m_InteractableWithItems: []

@@ -18,17 +18,22 @@
 
         [Header("Icons")]
         [SerializeField]
-        private Image         m_WalkIcon;
+        private Image          m_WalkIcon;
         [SerializeField]
-        private Image         m_TalkIcon;
+        private Image          m_TalkIcon;
         [SerializeField]
-        private Image         m_LookIcon;
+        private Image          m_LookIcon;
         [SerializeField]
-        private Image         m_TakeIcon;
+        private Image          m_TakeIcon;
+
+        [Header("Prefab")]
+        [SerializeField]
+        private GUIActivePlace m_ActivePlacePrefab;
 
         // PRIVATE MEMBERS
 
-        private List<GUIIcon> m_Icons = new List<GUIIcon>(ICONS_NUMBER);
+        private List<GUIActivePlace> m_ActivePlaces = new List<GUIActivePlace>(ICONS_NUMBER);
+
         private Camera        m_MainCamera;
 
         public override void OnInitialized()
@@ -42,40 +47,27 @@
 
         public void InitializeItems(List<IInteractable> interactableItems)
         {
-            for (int idx = 0, count = m_Icons.Count; idx < count; idx++)
+            for (int idx = 0, count = m_ActivePlaces.Count; idx < count; idx++)
             {
-                Destroy(m_Icons[idx].Icon.gameObject);
+                Destroy(m_ActivePlaces[idx].gameObject);
             }
 
-            m_Icons.Clear();
+            m_ActivePlaces.Clear();
 
             for (int idx = 0, count = interactableItems.Count; idx < count; idx++)
             {
                 IInteractable item = interactableItems[idx];
-                Image iconPrefab   = GetIconByActionType(item.ActionType);
-                Image icon         = Instantiate<Image>(iconPrefab, RectTransform);
-                icon.raycastTarget = false;
-
+                Image iconPrefab = GetIconByActionType(item.ActionType);
+                GUIActivePlace activePlace = Instantiate<GUIActivePlace>(m_ActivePlacePrefab, RectTransform);
                 Vector3 screenPosition = m_MainCamera.WorldToScreenPoint(item.Position);
-                icon.rectTransform.position = screenPosition;
 
-                GUIIcon iconItem = new GUIIcon
-                {
-                    Name = item.Name,
-                    Icon = icon,
-                };
+                activePlace.SetData(item.ActivePlaceTextID, iconPrefab.sprite, screenPosition);
 
-                m_Icons.Add(iconItem);
+                m_ActivePlaces.Add(activePlace);
             }
         }
 
         // UTILITIES
-
-        private struct GUIIcon
-        {
-            public string Name;
-            public Image  Icon;
-        }
 
         private Image GetIconByActionType(EInteractableAction action)
         {

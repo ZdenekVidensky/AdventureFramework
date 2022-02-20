@@ -5,8 +5,9 @@
     using TVB.Core.Attributes;
     using TVB.Core.Localization;
 
-    using GUIText = TMPro.TextMeshProUGUI;
     using Sirenix.OdinInspector;
+
+    using GUIText = TMPro.TextMeshProUGUI;
 
     public class GUILocalizedText : MonoBehaviour
     {
@@ -26,9 +27,14 @@
             }
         }
 
+        public void SetTextElement(GUIText textElement)
+        {
+            m_Text = textElement;
+        }
+
         public void Localize()
         {
-            string translatedText = TextDatabase.Localize[TextID];
+            string translatedText = Translation;
 
             if (m_Text != null)
             {
