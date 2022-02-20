@@ -45,6 +45,9 @@ public class LocalizationEditorWindow : OdinMenuEditorWindow
     {
         base.OnBeginDrawEditors();
 
+        if (this == null || this.MenuTree == null || this.MenuTree.Selection == null)
+            return;
+
         OdinMenuTreeSelection selected = this.MenuTree.Selection;
 
         SirenixEditorGUI.BeginHorizontalToolbar();
