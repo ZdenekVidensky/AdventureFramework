@@ -6,6 +6,8 @@
     using TVB.Core.Attributes;
     using TVB.Core.GUI;
     using TVB.Game.GameSignals;
+    using System;
+    using TVB.Game.Utilities;
 
     public class GUIMainMenuView : GUIView
     {
@@ -31,6 +33,7 @@
         {
             base.OnInitialized();
 
+            m_ContinueButton.onClick.AddListener(OnContinueButtonClicked);
             m_NewGameButton.onClick.AddListener(OnNewGameButtonClicked);
             m_EndGameButton.onClick.AddListener(OnEndGameButtonClicked);
             m_OptionsButton.onClick.AddListener(OnOptionsButtonClicked);
@@ -44,6 +47,7 @@
 
         public override void OnDeinitialized()
         {
+            m_ContinueButton.onClick.RemoveListener(OnContinueButtonClicked);
             m_NewGameButton.onClick.RemoveListener(OnNewGameButtonClicked);
             m_EndGameButton.onClick.RemoveListener(OnEndGameButtonClicked);
             m_OptionsButton.onClick.RemoveListener(OnOptionsButtonClicked);
@@ -52,9 +56,18 @@
             base.OnDeinitialized();
         }
 
+        private void OnContinueButtonClicked()
+        {
+            Signals.GameplaySignals.ContinueGame.Emit();
+            Frontend.PlaySound(m_ButtonSound);
+        }
+
         public override void OnOpen()
         {
             base.OnOpen();
+
+            bool saveFilesExists = SaveUtility.SaveFilesExists();
+            m_ContinueButton.SetActive(saveFilesExists);
 
             m_ContinueButton.interactable = true;
             m_NewGameButton.interactable  = true;

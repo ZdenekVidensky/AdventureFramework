@@ -5,6 +5,8 @@
     using TVB.Core;
     using TVB.Game.GUI;
     using TVB.Game.GameSignals;
+    using TVB.Game.Utilities;
+    using TVB.Game.Save;
 
     public class MenuScene : Scene
     {
@@ -18,6 +20,7 @@
 
             StartCoroutine(m_Fader.FadeIn(0.3f, OnFadeInCompleted));
 
+            Signals.GameplaySignals.ContinueGame.Connect(OnContinueGame);
             Signals.GameplaySignals.NewGame.Connect(OnNewGame);
             Signals.GameplaySignals.EndGame.Connect(OnEndGame);
 
@@ -31,6 +34,7 @@
 
         public override void OnDeinitialized()
         {
+            Signals.GameplaySignals.NewGame.Disconnect(OnContinueGame);
             Signals.GameplaySignals.NewGame.Disconnect(OnNewGame);
             Signals.GameplaySignals.EndGame.Disconnect(OnEndGame);
 
@@ -38,6 +42,16 @@
         }
 
         // HANDLERS
+
+        private void OnContinueGame()
+        {
+            AdventureGame.Instance.IsBusy = true;
+
+            AdventureGame.Instance.AudioManager.StopMusic();
+
+            SaveData saveData = SaveUtility.GetLatestSaveData();
+            AdventureGame.Instance.LoadSavedGame(saveData);
+        }
 
         private void OnNewGame()
         {

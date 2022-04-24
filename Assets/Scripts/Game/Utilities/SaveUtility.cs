@@ -27,6 +27,19 @@
             stream.Close();
         }
 
+        public static bool SaveFilesExists()
+        {
+            string[] saveFilePaths = Directory.GetFiles(Application.persistentDataPath);
+
+            foreach (string saveFilePath in saveFilePaths)
+            {
+                if (saveFilePath.EndsWith(SaveUtility.SAVE_SUFFIX) == true)
+                    return true;
+            }
+
+            return false;
+        }
+
         public static SaveData LoadGame(string saveName)
         {
             string path = Application.persistentDataPath + "/" + saveName;
@@ -41,6 +54,18 @@
             stream.Close();
 
             return result;
+        }
+
+        public static SaveData GetLatestSaveData(bool includeQuickAndAutosave = true)
+        {
+            List<GUISaveData> saveData = GetSaveData(includeQuickAndAutosave);
+
+            if (saveData.Count == 0)
+                return null;
+
+            saveData.Sort((a, b) => b.Date.CompareTo(a.Date));
+
+            return LoadGame(saveData[0].SaveFileName);
         }
 
         public static List<GUISaveData> GetSaveData(bool includeQuickAndAutosave)
