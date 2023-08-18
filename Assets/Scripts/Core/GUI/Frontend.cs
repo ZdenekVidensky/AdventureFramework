@@ -1,11 +1,9 @@
 ﻿namespace TVB.Core.GUI
 {
-    using System.Linq;
     using System.Collections.Generic;
-    
-    using UnityEngine;
-
+    using System.Linq;
     using TVB.Core.Localization;
+    using UnityEngine;
 
     public class Frontend : MonoBehaviour
     {
@@ -15,9 +13,9 @@
         private AudioSource m_AudioSource;
 
         // PRIVATE MEMBERS
-        
-        private GUIView[]     m_AvailableViews = new GUIView[0];
-        private List<GUIView> m_ViewsStack   = new List<GUIView>(10);
+
+        private GUIView[] m_AvailableViews = new GUIView[0];
+        private List<GUIView> m_ViewsStack = new List<GUIView>(10);
 
         // PUBLIC METHODS
 
@@ -36,7 +34,7 @@
             }
 
             TextDatabase.OnLanguageChanged += RefreshTranslations;
-            
+
             RefreshTranslations();
 
             OnInitialized();
@@ -83,7 +81,7 @@
             return viewToOpen;
         }
 
-        public bool IsViewOpen<T>() where T: GUIView
+        public bool IsViewOpen<T>() where T : GUIView
         {
             return m_ViewsStack.FirstOrDefault(m => m.GetType() == typeof(T)) != null;
         }
@@ -100,7 +98,7 @@
             if (viewToClose == null)
                 return;
 
-            viewToClose.Interactable   = false;
+            viewToClose.Interactable = false;
             viewToClose.Canvas.enabled = false;
             viewToClose.OnClosed();
             m_ViewsStack.Remove(viewToClose);

@@ -1,5 +1,5 @@
 ﻿namespace TVB.Core.Interactable
-{   
+{
     public interface ITalkable
     {
         void SetIsTalking(bool state);

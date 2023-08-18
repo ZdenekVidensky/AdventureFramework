@@ -16,11 +16,11 @@
 
         [Header("Configuration")]
         [SerializeField]
-        private float       m_CrossDuration = 2f;
+        private float m_CrossDuration = 2f;
         [SerializeField]
-        private bool        m_Disabled = false;
+        private bool m_Disabled = false;
         [SerializeField]
-        private AudioMixer  m_AudioMixer;
+        private AudioMixer m_AudioMixer;
 
         [Header("Audio Sources")]
         [SerializeField]

@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace TVB.Game.Options
+﻿namespace TVB.Game.Options
 {
     public struct PlayerOptions
     {

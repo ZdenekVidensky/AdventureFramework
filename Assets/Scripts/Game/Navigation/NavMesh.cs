@@ -32,7 +32,7 @@ namespace TVB.Game.Navigation
         {
             Gizmos.DrawIcon(transform.position, "path", true);
 
-            foreach(NavMesh item in Neighbours)
+            foreach (NavMesh item in Neighbours)
             {
                 if (item == null)
                     continue;

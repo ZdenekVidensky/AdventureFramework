@@ -8,7 +8,7 @@
     {
         public static void Save(object data, string relativePath)
         {
-            string json    = JsonUtility.ToJson(data, false);
+            string json = JsonUtility.ToJson(data, false);
             string path = GetPath(relativePath);
 
             File.WriteAllText(path, json);

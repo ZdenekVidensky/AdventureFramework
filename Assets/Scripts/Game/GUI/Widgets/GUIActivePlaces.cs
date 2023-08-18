@@ -1,12 +1,10 @@
 ﻿namespace TVB.Game.GUI
 {
     using System.Collections.Generic;
-
-    using UnityEngine;
-    using UnityEngine.UI;
-
     using TVB.Core.GUI;
     using TVB.Core.Interactable;
+    using UnityEngine;
+    using UnityEngine.UI;
 
     public class GUIActivePlaces : GUIComponent
     {
@@ -18,13 +16,13 @@
 
         [Header("Icons")]
         [SerializeField]
-        private Image          m_WalkIcon;
+        private Image m_WalkIcon;
         [SerializeField]
-        private Image          m_TalkIcon;
+        private Image m_TalkIcon;
         [SerializeField]
-        private Image          m_LookIcon;
+        private Image m_LookIcon;
         [SerializeField]
-        private Image          m_TakeIcon;
+        private Image m_TakeIcon;
 
         [Header("Prefab")]
         [SerializeField]
@@ -34,7 +32,7 @@
 
         private List<GUIActivePlace> m_ActivePlaces = new List<GUIActivePlace>(ICONS_NUMBER);
 
-        private Camera        m_MainCamera;
+        private Camera m_MainCamera;
 
         public override void OnInitialized()
         {

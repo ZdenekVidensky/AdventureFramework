@@ -1,33 +1,29 @@
 ﻿namespace TVB.Game.GUI
 {
     using System.Collections.Generic;
-
-    using UnityEngine;
-    using UnityEngine.UI;
-    using UnityEngine.Events;
-    using UnityEngine.EventSystems;
-
-    using TVB.Core.GUI;
     using TVB.Core.Attributes;
+    using TVB.Core.GUI;
     using TVB.Core.Localization;
     using TVB.Game.GameSignals;
-    
+    using UnityEngine;
+    using UnityEngine.Events;
+    using UnityEngine.EventSystems;
+    using UnityEngine.UI;
     using GUIText = TMPro.TextMeshProUGUI;
-    using System;
 
     public class GUIIngameView : GUIView
     {
         [System.Serializable]
-        public class SelectDecision : UnityEvent<int> {}
+        public class SelectDecision : UnityEvent<int> { }
 
         //PRIVATE MEMBERS
 
         [GetComponentInChildren("Subtitles", true), SerializeField, HideInInspector]
-        private GUIText       m_Subtitles;
+        private GUIText m_Subtitles;
         [GetComponentInChildren("Inventory", true), SerializeField, HideInInspector]
-        private GUIInventory  m_Inventory;
+        private GUIInventory m_Inventory;
         [GetComponentInChildren("ItemDescription", true), SerializeField, HideInInspector]
-        private GUIText       m_ItemDescription;
+        private GUIText m_ItemDescription;
 
         private RectTransform m_ItemDescriptionRectTransform;
 
@@ -35,27 +31,27 @@
         [GetComponentInChildren("Decisions", true), SerializeField, HideInInspector]
         private RectTransform m_Decisions;
         [GetComponentInChildren("Decision1", true), SerializeField, HideInInspector]
-        private Button        m_Decision1Button;
+        private Button m_Decision1Button;
         [GetComponentInChildren("Decision2", true), SerializeField, HideInInspector]
-        private Button        m_Decision2Button;
+        private Button m_Decision2Button;
         [GetComponentInChildren("Decision3", true), SerializeField, HideInInspector]
-        private Button        m_Decision3Button;
+        private Button m_Decision3Button;
         [GetComponentInChildren("Decision4", true), SerializeField, HideInInspector]
-        private Button        m_Decision4Button;
+        private Button m_Decision4Button;
         [GetComponentInChildren("Decision1Text", true), SerializeField, HideInInspector]
-        private GUIText       m_Decision1Text;
+        private GUIText m_Decision1Text;
         [GetComponentInChildren("Decision2Text", true), SerializeField, HideInInspector]
-        private GUIText       m_Decision2Text;
+        private GUIText m_Decision2Text;
         [GetComponentInChildren("Decision3Text", true), SerializeField, HideInInspector]
-        private GUIText       m_Decision3Text;
+        private GUIText m_Decision3Text;
         [GetComponentInChildren("Decision4Text", true), SerializeField, HideInInspector]
-        private GUIText         m_Decision4Text;
+        private GUIText m_Decision4Text;
 
         [GetComponentInChildren("ActivePlaces", true), SerializeField, HideInInspector]
         private GUIActivePlaces m_ActivePlaces;
 
         [GetComponentInChildren("ActivePlacesButton", true), SerializeField, HideInInspector]
-        private Button          m_ActivePlacesButton;
+        private Button m_ActivePlacesButton;
 
         // PUBLIC MEMBERS
 
@@ -84,7 +80,7 @@
             m_ActivePlacesButton.onClick.AddListener(OnActivePlacesButtonClick);
 
             m_ItemDescriptionRectTransform = m_ItemDescription.rectTransform;
-         
+
             SetInventoryData(AdventureGame.Instance.Inventory.Items);
         }
 
@@ -220,7 +216,7 @@
 
             m_ActivePlaces.InitializeItems(AdventureGame.Instance.CurrentScene.InteractableItems);
 
-            bool activePlacesVisible                      = !m_ActivePlaces.gameObject.activeSelf;
+            bool activePlacesVisible = !m_ActivePlaces.gameObject.activeSelf;
             AdventureGame.Instance.AreActivePlacesVisible = activePlacesVisible;
         }
 

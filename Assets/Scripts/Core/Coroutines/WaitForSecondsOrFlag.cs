@@ -7,7 +7,7 @@
         // PRIVATE MEMBERS
 
         private System.Func<bool> m_Predicate;
-        private float             m_EndTime;
+        private float m_EndTime;
 
         // YIELD INSTRUCTION INTERFACE
 
@@ -22,7 +22,7 @@
         public WaitForSecondsAndPredicate(float seconds, System.Func<bool> prediate)
         {
             m_Predicate = prediate;
-            m_EndTime   = Time.realtimeSinceStartup + seconds;
+            m_EndTime = Time.realtimeSinceStartup + seconds;
         }
     }
 }

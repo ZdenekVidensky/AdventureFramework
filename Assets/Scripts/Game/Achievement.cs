@@ -11,7 +11,7 @@
         public const string SWORD_ACHIEVEMENT = "sword_achievement";
 
         public string ID;
-        public int    TextID;
+        public int TextID;
         public Sprite Sprite;
     }
 }

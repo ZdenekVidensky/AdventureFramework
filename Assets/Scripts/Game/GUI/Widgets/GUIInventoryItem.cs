@@ -1,29 +1,27 @@
 ﻿namespace TVB.Game.GUI
 {
     using System.Collections.Generic;
-
-    using UnityEngine;
-    using UnityEngine.UI;
-    using UnityEngine.EventSystems;
-
-    using TVB.Core.GUI;
     using TVB.Core.Attributes;
-    using TVB.Game.GameSignals;
-    using TVB.Core.Localization;
     using TVB.Core.Graph;
+    using TVB.Core.GUI;
+    using TVB.Core.Localization;
+    using TVB.Game.GameSignals;
+    using UnityEngine;
+    using UnityEngine.EventSystems;
+    using UnityEngine.UI;
 
     public class GUIInventoryItem : GUIComponent, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler
     {
         [GetComponent(true), SerializeField, HideInInspector]
-        private Image                  m_Image;
+        private Image m_Image;
 
         [SerializeField]
-        private Transform              m_View;
+        private Transform m_View;
 
-        private Vector3                m_Position;
-        private string                 m_ItemID;
-        private int                    m_ItemNameID;
-        private Transform              m_OriginalParent;
+        private Vector3 m_Position;
+        private string m_ItemID;
+        private int m_ItemNameID;
+        private Transform m_OriginalParent;
         private List<InteractableWith> m_InteractableWithItems;
 
         public override void OnInitialized()
@@ -64,10 +62,10 @@
 
         public void SetData(InventoryItem item)
         {
-            m_Image.sprite          = item.Sprite;
-            m_Position              = RectTransform.position;
-            m_ItemID                = item.ID;
-            m_ItemNameID            = item.NameID;
+            m_Image.sprite = item.Sprite;
+            m_Position = RectTransform.position;
+            m_ItemID = item.ID;
+            m_ItemNameID = item.NameID;
             m_InteractableWithItems = item.InteractableWithItems;
         }
 

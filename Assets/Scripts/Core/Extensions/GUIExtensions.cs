@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
+﻿using TMPro;
 using TVB.Core.GUI;
+using UnityEngine;
+using UnityEngine.UI;
 
 public static class GUIExtensions
 {

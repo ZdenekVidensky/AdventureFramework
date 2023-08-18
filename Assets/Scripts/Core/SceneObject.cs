@@ -1,7 +1,7 @@
 ﻿namespace TVB.Core
 {
     using UnityEngine;
-    
+
     public class SceneObject : MonoBehaviour
     {
         private bool m_Initialized;

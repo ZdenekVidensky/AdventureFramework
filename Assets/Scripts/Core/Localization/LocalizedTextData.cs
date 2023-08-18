@@ -2,9 +2,9 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace TVB.Core.Localization
-{ 
+{
     [System.Serializable]
-    public class LocalizedTextData 
+    public class LocalizedTextData
     {
         public LocalizedTextData()
         {
@@ -47,6 +47,6 @@ namespace TVB.Core.Localization
     {
         public ELanguage Language;
         public string Text;
-        public AudioClip VoiceoverAudioClip; 
+        public AudioClip VoiceoverAudioClip;
     }
 }

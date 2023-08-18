@@ -1,10 +1,8 @@
 ﻿namespace TVB.Game.GUI
 {
-    using UnityEngine;
-    
     using TVB.Core.Attributes;
     using TVB.Core.GUI;
-
+    using UnityEngine;
     using GUIText = TMPro.TextMeshProUGUI;
 
     public class GUIDevelopmentView : GUIView
@@ -12,7 +10,7 @@
         // CONSTANTS
 
         private const string COPYRIGHT_FORMAT = "Copyright {0} TVB Software";
-        private const string FPS_FORMAT       = "FPS {0}";
+        private const string FPS_FORMAT = "FPS {0}";
 
         // PRIVATE MEMBERS
 

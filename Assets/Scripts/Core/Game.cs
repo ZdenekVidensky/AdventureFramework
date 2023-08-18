@@ -26,7 +26,7 @@
         // PRIVATE MEMBERS
 
         private List<GameService> m_GameServices = new List<GameService>(10);
-        private Scene             m_Scene;
+        private Scene m_Scene;
 
         // MONOBEHAVIOUR INTERFACE
 

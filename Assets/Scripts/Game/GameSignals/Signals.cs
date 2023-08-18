@@ -19,12 +19,12 @@
             }
         }
 
-        public static GUISignals      GUISignals      => Instance.m_GUISignals;
+        public static GUISignals GUISignals => Instance.m_GUISignals;
         public static GameplaySignals GameplaySignals => Instance.m_GameplaySignals;
 
         // PRIVATE MEMBERS
 
-        private GUISignals      m_GUISignals      = new GUISignals();
+        private GUISignals m_GUISignals = new GUISignals();
         private GameplaySignals m_GameplaySignals = new GameplaySignals();
     }
 }

@@ -10,6 +10,6 @@
         [Output] public BaseInteractiveNode Output;
 
         public string MethodName;
-        public float  Delay = 0f;
+        public float Delay = 0f;
     }
 }

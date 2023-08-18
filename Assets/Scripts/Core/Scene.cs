@@ -2,28 +2,26 @@
 {
     using System.Collections;
     using System.Collections.Generic;
-
-    using UnityEngine;
-
-    using TVB.Core.GUI;
     using TVB.Core.Attributes;
-    using TVB.Game;
-    using TVB.Game.GUI;
-    using TVB.Game.DebugTools;
+    using TVB.Core.GUI;
     using TVB.Core.Interactable;
+    using TVB.Game;
+    using TVB.Game.DebugTools;
+    using TVB.Game.GUI;
+    using UnityEngine;
 
     public class Scene : MonoBehaviour
     {
         // CONFIGURATION
 
         [SerializeField]
-        protected SceneSettings           m_SceneSettings;
+        protected SceneSettings m_SceneSettings;
 
         public Frontend Frontend { get => m_Frontend; }
 
-        protected bool                    m_Initialized;
-        private Frontend                  m_Frontend;
-        private SceneObject[]             m_SceneObjects = new SceneObject[0];
+        protected bool m_Initialized;
+        private Frontend m_Frontend;
+        private SceneObject[] m_SceneObjects = new SceneObject[0];
 
         public string SceneName => m_SceneSettings.SceneName ?? "";
         public int SceneNameID => m_SceneSettings.SceneNameID;
@@ -101,7 +99,7 @@
 
         public virtual void OnInitialized()
         {
-            m_Initialized = true;     
+            m_Initialized = true;
         }
 
         public virtual void OnUpdate()

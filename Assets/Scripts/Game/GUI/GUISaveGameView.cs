@@ -1,9 +1,8 @@
 ﻿namespace TVB.Game.GUI
 {
-    using UnityEngine;
-
     using TVB.Core.Attributes;
     using TVB.Core.GUI;
+    using UnityEngine;
 
     public class GUISaveGameView : GUIView
     {

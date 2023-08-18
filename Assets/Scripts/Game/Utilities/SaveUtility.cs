@@ -3,17 +3,15 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Runtime.Serialization.Formatters.Binary;
-
-    using UnityEngine;
-
     using TVB.Game.Save;
+    using UnityEngine;
 
     public static class SaveUtility
     {
-        public const string SAVE_SUFFIX    = ".sav";
-        public const string AUTOSAVE_NAME  = "0autosave.sav";
+        public const string SAVE_SUFFIX = ".sav";
+        public const string AUTOSAVE_NAME = "0autosave.sav";
         public const string QUICKSAVE_NAME = "1quicksave.sav";
-        public const string DEFAULT_NAME   = "savegame.sav";
+        public const string DEFAULT_NAME = "savegame.sav";
 
         public static void SaveGame(Vector3 position, EDirection direction, List<InventoryItem> items, Dictionary<string, bool> conditions, string sceneName, string saveName, int sceneNameID)
         {
@@ -70,7 +68,7 @@
 
         public static List<GUISaveData> GetSaveData(bool includeQuickAndAutosave)
         {
-            List<GUISaveData> result = new List<GUISaveData> (8);
+            List<GUISaveData> result = new List<GUISaveData>(8);
             string[] saveFilePaths = Directory.GetFiles(Application.persistentDataPath);
 
             foreach (string saveFilePath in saveFilePaths)
@@ -80,7 +78,7 @@
                     GUISaveData newData = new GUISaveData();
 
                     BinaryFormatter formatter = new BinaryFormatter();
-                    FileStream stream         = new FileStream(saveFilePath, FileMode.Open);
+                    FileStream stream = new FileStream(saveFilePath, FileMode.Open);
 
                     SaveData saveData = formatter.Deserialize(stream) as SaveData;
                     stream.Close();
@@ -88,17 +86,17 @@
                     string fileName = Path.GetFileName(saveFilePath);
 
                     bool isQuicksave = fileName == QUICKSAVE_NAME;
-                    bool isAutoSave  = fileName == AUTOSAVE_NAME;
+                    bool isAutoSave = fileName == AUTOSAVE_NAME;
 
                     if (includeQuickAndAutosave == false && (isQuicksave == true || isAutoSave == true))
                         continue;
 
-                    newData.Date         = saveData.Date;
-                    newData.SceneNameID  = saveData.SceneNameID;
-                    newData.IsQuicksave  = isQuicksave;
-                    newData.IsAutosave   = isAutoSave;
+                    newData.Date = saveData.Date;
+                    newData.SceneNameID = saveData.SceneNameID;
+                    newData.IsQuicksave = isQuicksave;
+                    newData.IsAutosave = isAutoSave;
                     newData.SaveFileName = fileName;
-                    newData.Index        = int.Parse(fileName.Substring(0, 1));
+                    newData.Index = int.Parse(fileName.Substring(0, 1));
 
                     result.Add(newData);
                 }

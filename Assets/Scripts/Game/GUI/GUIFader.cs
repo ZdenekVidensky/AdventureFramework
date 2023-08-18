@@ -1,11 +1,9 @@
 ﻿namespace TVB.Game.GUI
 {
     using System.Collections;
-
-    using UnityEngine;
-
     using TVB.Core.Attributes;
     using TVB.Core.GUI;
+    using UnityEngine;
 
     // TODO: Refactor on Update
     public class GUIFader : GUIComponent

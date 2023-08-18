@@ -3,7 +3,7 @@
 namespace TVB.Game.Utilities
 {
     public static class LocalizationUtility
-     {
+    {
         public static int GetActionTypeTextID(EInteractableAction actionType, int customTextID)
         {
             switch (actionType)
@@ -22,5 +22,5 @@ namespace TVB.Game.Utilities
                     return 0;
             }
         }
-     }
+    }
 }

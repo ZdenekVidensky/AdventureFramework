@@ -2,7 +2,7 @@
 namespace TVB.Core.Attributes
 {
     using System;
-    
+
     [AttributeUsage(AttributeTargets.Field)]
     public class GetComponentInChildrenAttribute : Attribute
     {

@@ -6,7 +6,7 @@ namespace TVB.Game.Navigation
 
     public static class AStar
     {
-        public static List<Vector2>Search(NavMesh startMesh, NavMesh destinationMesh)
+        public static List<Vector2> Search(NavMesh startMesh, NavMesh destinationMesh)
         {
             List<Vector2> result = new List<Vector2>(16);
 
@@ -18,10 +18,10 @@ namespace TVB.Game.Navigation
 
             Dictionary<NavMesh, NavMesh> cameFrom = new Dictionary<NavMesh, NavMesh>();
 
-            while(openSet.Any() == true)
+            while (openSet.Any() == true)
             {
                 NavMesh current = openSet.Where(m => Function(m, startMesh, destinationMesh) == openSet.Min(n => Function(n, startMesh, destinationMesh))).FirstOrDefault();
-                
+
                 if (current == destinationMesh)
                 {
                     return ReconstructPath(cameFrom, destinationMesh);

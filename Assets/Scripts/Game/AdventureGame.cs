@@ -1,54 +1,51 @@
 ﻿namespace TVB.Game
 {
+    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Collections;
-
-    using UnityEngine;
-    using UnityEditor;
-    using UnityEngine.SceneManagement;
-
     using TVB.Core;
-    using TVB.Core.Localization;
-    using TVB.Core.Audio;
     using TVB.Core.Attributes;
-    using TVB.Game.GameSignals;
+    using TVB.Core.Audio;
     using TVB.Core.Graph;
     using TVB.Core.Interactable;
-    using TVB.Game.Save;
+    using TVB.Core.Localization;
+    using TVB.Game.GameSignals;
     using TVB.Game.GUI;
-    using TVB.Game.Utilities;
-    
-    using Scene = Core.Scene;
+    using TVB.Game.Save;
     using TVB.Game.Scenes;
+    using TVB.Game.Utilities;
+    using UnityEditor;
+    using UnityEngine;
+    using UnityEngine.SceneManagement;
+    using Scene = Core.Scene;
 
     public class AdventureGame : Game
     {
         // CONFIGURATION
 
         [SerializeField]
-        private ELanguage           m_Language = ELanguage.Czech;
+        private ELanguage m_Language = ELanguage.Czech;
         [SerializeField]
-        private AudioManager        m_AudioManager;
+        private AudioManager m_AudioManager;
 
         [SerializeField]
-        private List<Achievement>   m_AchievementsDatabase = new List<Achievement>(32);
+        private List<Achievement> m_AchievementsDatabase = new List<Achievement>(32);
         [SerializeField]
         private List<InventoryItem> m_InventoryItemsDatabase;
 
         [Header("Cheats")]
         [SerializeField]
-        private bool                m_EnableCheats = true;
+        private bool m_EnableCheats = true;
         [GetComponent(), SerializeField, HideInInspector]
         private List<InventoryItem> m_StartingItems;
 
         // PUBLIC MEMBERS
 
-        public Inventory Inventory                 => m_Inventory;
+        public Inventory Inventory => m_Inventory;
         public Dictionary<string, bool> Conditions => m_Conditions;
-        public List<string> UnlockedAchievements   => m_UnlockedAchievements;
-        public GraphManager GraphManager           => m_GraphManager;
-        public AudioManager AudioManager           => m_AudioManager;
+        public List<string> UnlockedAchievements => m_UnlockedAchievements;
+        public GraphManager GraphManager => m_GraphManager;
+        public AudioManager AudioManager => m_AudioManager;
         public Player Player
         {
             get
@@ -173,20 +170,20 @@
 
         // PRIVATE MEMBERS
 
-        private Inventory                     m_Inventory              = new Inventory();
-        private Dictionary<string, bool>      m_Conditions             = new Dictionary<string, bool>(64);
-        private List<string>                  m_UnlockedAchievements   = new List<string>(16);
-        private bool                          m_GameEnded              = false;
-        private bool                          m_IsGamePaused           = false;
-        private GraphManager                  m_GraphManager           = null;
-        private Player                        m_Player                 = null;
-        private bool                          m_IsBusy                 = false;
-        private bool                          m_IsInventoryOpen        = false;
-        private bool                          m_AreActivePlacesVisible = false;
-        private string                        m_SelectedItem           = null;
-        private string                        m_HoveredItem            = null;
-        private string                        m_PreviousScene          = null;
-        private SaveData                      m_PendingSaveData        = null;
+        private Inventory m_Inventory = new Inventory();
+        private Dictionary<string, bool> m_Conditions = new Dictionary<string, bool>(64);
+        private List<string> m_UnlockedAchievements = new List<string>(16);
+        private bool m_GameEnded = false;
+        private bool m_IsGamePaused = false;
+        private GraphManager m_GraphManager = null;
+        private Player m_Player = null;
+        private bool m_IsBusy = false;
+        private bool m_IsInventoryOpen = false;
+        private bool m_AreActivePlacesVisible = false;
+        private string m_SelectedItem = null;
+        private string m_HoveredItem = null;
+        private string m_PreviousScene = null;
+        private SaveData m_PendingSaveData = null;
 
         // GAME INTERFACE
 
@@ -237,7 +234,7 @@
 
         public void ProcessInteractiveGraph(InteractiveGraph graph, IInteractable interactableObject = null)
         {
-           StartCoroutine(m_GraphManager.ProcessInteractiveGraph(graph, interactableObject));
+            StartCoroutine(m_GraphManager.ProcessInteractiveGraph(graph, interactableObject));
         }
 
         public void InitializeGraphManager()
@@ -422,12 +419,12 @@
 
                     if (IsGamePaused == true)
                     {
-                        IsGamePaused = false; 
+                        IsGamePaused = false;
                     }
                     else
                     {
                         Scene.Frontend.OpenView<GUIIngameMenuView>();
-                        IsGamePaused = true; 
+                        IsGamePaused = true;
                     }
                 }
             }

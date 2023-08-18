@@ -1,13 +1,11 @@
 ﻿namespace TVB.Game.GUI
 {
-    using UnityEngine;
-    using UnityEngine.UI;
-
     using TVB.Core.Attributes;
     using TVB.Core.GUI;
     using TVB.Game.GameSignals;
-    using System;
     using TVB.Game.Utilities;
+    using UnityEngine;
+    using UnityEngine.UI;
 
     public class GUIMainMenuView : GUIView
     {
@@ -21,13 +19,13 @@
         [GetComponentInChildren("ContinueGameButton", true), SerializeField, HideInInspector]
         private Button m_ContinueButton;
         [GetComponentInChildren("NewGameButton", true), SerializeField, HideInInspector]
-        private Button  m_NewGameButton;
+        private Button m_NewGameButton;
         [GetComponentInChildren("LoadGameButton", true), SerializeField, HideInInspector]
-        private Button  m_LoadGameButton;
+        private Button m_LoadGameButton;
         [GetComponentInChildren("EndGameButton", true), SerializeField, HideInInspector]
-        private Button  m_EndGameButton;
+        private Button m_EndGameButton;
         [GetComponentInChildren("OptionsButton", true), SerializeField, HideInInspector]
-        private Button  m_OptionsButton;
+        private Button m_OptionsButton;
 
         public override void OnInitialized()
         {
@@ -70,8 +68,8 @@
             m_ContinueButton.SetActive(saveFilesExists);
 
             m_ContinueButton.interactable = true;
-            m_NewGameButton.interactable  = true;
-            m_EndGameButton.interactable  = true;
+            m_NewGameButton.interactable = true;
+            m_EndGameButton.interactable = true;
         }
 
         // HANDLERS

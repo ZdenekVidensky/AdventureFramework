@@ -1,9 +1,8 @@
 namespace TVB.Game
 {
-    using UnityEngine;
     using Sirenix.OdinInspector;
-
     using TVB.Core.Localization;
+    using UnityEngine;
 
     [CreateAssetMenu(menuName = "Data/SceneSettings")]
     public class SceneSettings : ScriptableObject

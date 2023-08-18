@@ -1,27 +1,27 @@
 namespace TVB.Game.Navigation
 {
+    using Sirenix.OdinInspector;
     using System.Collections.Generic;
     using UnityEngine;
-    using Sirenix.OdinInspector;
 
     [RequireComponent(typeof(PolygonCollider2D))]
     public class NavigationManager : MonoBehaviour
     {
 
         private const string BLOCK_LAYER_NAME = "Block";
-        private const float  DOUBLECLICK_DELAY = 0.3f;
+        private const float DOUBLECLICK_DELAY = 0.3f;
 
         // PRIVATE MEMBERS
 
-        private NavMesh[]         m_NavMeshes = new NavMesh[0];
-        private Camera            m_MainCamera;
-        private float             m_LastClickTime;
+        private NavMesh[] m_NavMeshes = new NavMesh[0];
+        private Camera m_MainCamera;
+        private float m_LastClickTime;
 
         // MONOBEHAVIOUR INTERFACE
 
         private void Awake()
         {
-            m_MainCamera   = Camera.main;
+            m_MainCamera = Camera.main;
 
             FillNavMeshes();
         }
@@ -122,11 +122,11 @@ namespace TVB.Game.Navigation
         {
             m_NavMeshes = GetComponentsInChildren<NavMesh>(true);
 
-            foreach(var item in m_NavMeshes)
+            foreach (var item in m_NavMeshes)
             {
                 item.Neighbours.Clear();
 
-                foreach(var subItem in m_NavMeshes)
+                foreach (var subItem in m_NavMeshes)
                 {
                     if (subItem == item)
                         continue;

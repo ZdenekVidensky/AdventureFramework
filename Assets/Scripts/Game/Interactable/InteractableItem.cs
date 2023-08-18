@@ -1,38 +1,37 @@
 ﻿namespace TVB.Core.Interactable
 {
-    using UnityEngine;
     using Sirenix.OdinInspector;
-
     using TVB.Core.Graph;
-    using TVB.Game.GameSignals;
     using TVB.Core.Localization;
     using TVB.Game;
+    using TVB.Game.GameSignals;
+    using UnityEngine;
 
     public class InteractableItem : MonoBehaviour, IInteractable
     {
         [SerializeField]
-        private EInteractableAction      m_InteractableAction;
+        private EInteractableAction m_InteractableAction;
         [SerializeField]
-        private int                      m_CustomTextID;
+        private int m_CustomTextID;
         [SerializeField]
-        private int                      m_ActivePlaceTextID;
+        private int m_ActivePlaceTextID;
         [DisableInEditorMode, DisableInPlayMode, ShowInInspector]
         public string CustomTextID => TextDatabase.Localize[m_CustomTextID];
         [SerializeField]
-        private InteractiveGraph         m_InteractiveGraph;
+        private InteractiveGraph m_InteractiveGraph;
         [SerializeField]
-        private int                      m_ItemNameID;
+        private int m_ItemNameID;
         [DisableInEditorMode, DisableInPlayMode, ShowInInspector]
         public string ItemName => TextDatabase.Localize[m_ItemNameID];
         [DisableInEditorMode, DisableInPlayMode, ShowInInspector]
         public string ActivePlaceText => TextDatabase.Localize[m_ActivePlaceTextID];
 
-        EInteractableAction IInteractable.ActionType         => m_InteractableAction;
-        int IInteractable.CustomTextID                       => m_CustomTextID;
-        int IInteractable.ActivePlaceTextID                  => m_ActivePlaceTextID;
-        InteractiveGraph IInteractable.InteractiveGraph      => m_InteractiveGraph;
-        string IInteractable.Name                            => gameObject.name;
-        Vector3 IInteractable.Position                       => transform.position;
+        EInteractableAction IInteractable.ActionType => m_InteractableAction;
+        int IInteractable.CustomTextID => m_CustomTextID;
+        int IInteractable.ActivePlaceTextID => m_ActivePlaceTextID;
+        InteractiveGraph IInteractable.InteractiveGraph => m_InteractiveGraph;
+        string IInteractable.Name => gameObject.name;
+        Vector3 IInteractable.Position => transform.position;
 
 
         [SerializeField, TableList]

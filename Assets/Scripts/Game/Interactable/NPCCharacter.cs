@@ -1,57 +1,56 @@
 ﻿namespace TVB.Core.Interactable
 {
-    using UnityEngine;
-
+    using Sirenix.OdinInspector;
     using TVB.Core.Graph;
     using TVB.Core.Localization;
-    using Sirenix.OdinInspector;
-    using TVB.Game.GameSignals;
     using TVB.Game;
+    using TVB.Game.GameSignals;
+    using UnityEngine;
 
     public class NPCCharacter : MonoBehaviour, IInteractable, ITalkable
     {
         // CONFIGURATION
 
         [SerializeField]
-        private int                                         m_NameTextID;
+        private int m_NameTextID;
 
         [SerializeField]
-        private ETalkableCharacter                          m_TalkableCharacter;
+        private ETalkableCharacter m_TalkableCharacter;
 
         [DisableInEditorMode, DisableInPlayMode, ShowInInspector]
-        public string NameText => TextDatabase.Localize[    m_NameTextID];
+        public string NameText => TextDatabase.Localize[m_NameTextID];
         [SerializeField]
-        private EInteractableAction                         m_InteractableAction;
+        private EInteractableAction m_InteractableAction;
         [SerializeField]
-        private int                                         m_CustomTextID;
+        private int m_CustomTextID;
         [SerializeField]
-        private int                                         m_ActivePlaceTextID;
+        private int m_ActivePlaceTextID;
         [DisableInEditorMode, DisableInPlayMode, ShowInInspector]
         public string CustomTextID => TextDatabase.Localize[m_CustomTextID];
         [SerializeField]
-        private InteractiveGraph                            m_InteractiveGraph;
+        private InteractiveGraph m_InteractiveGraph;
         [SerializeField]
-        private Animator                                    m_Animator;
+        private Animator m_Animator;
         [SerializeField]
-        private InteractableWithItem[]                      m_InteractableWithItems;
+        private InteractableWithItem[] m_InteractableWithItems;
         [DisableInEditorMode, DisableInPlayMode, ShowInInspector]
         public string ActivePlaceText => TextDatabase.Localize[m_ActivePlaceTextID];
 
         // STATIC MEMBERS
 
-        private static int TALKING_PARAMETER      = Animator.StringToHash("Talking");
+        private static int TALKING_PARAMETER = Animator.StringToHash("Talking");
         private static readonly int TALK_VARIANT_PARAMETER = Animator.StringToHash("TalkVariant");
-        private static int INTERACT_PARAMETER     = Animator.StringToHash("Interact");
-        private static int LEAVE_PARAMETER        = Animator.StringToHash("Leave");
+        private static int INTERACT_PARAMETER = Animator.StringToHash("Interact");
+        private static int LEAVE_PARAMETER = Animator.StringToHash("Leave");
 
         // IINTERACTABLE INTERFACE
 
-        EInteractableAction IInteractable.ActionType         => m_InteractableAction;
-        int IInteractable.CustomTextID                       => m_CustomTextID;
-        int IInteractable.ActivePlaceTextID                  => m_ActivePlaceTextID;
-        InteractiveGraph IInteractable.InteractiveGraph      => m_InteractiveGraph;
-        string IInteractable.Name                            => gameObject.name;
-        Vector3 IInteractable.Position                       => transform.position;
+        EInteractableAction IInteractable.ActionType => m_InteractableAction;
+        int IInteractable.CustomTextID => m_CustomTextID;
+        int IInteractable.ActivePlaceTextID => m_ActivePlaceTextID;
+        InteractiveGraph IInteractable.InteractiveGraph => m_InteractiveGraph;
+        string IInteractable.Name => gameObject.name;
+        Vector3 IInteractable.Position => transform.position;
 
         void IInteractable.OnInteract()
         {
@@ -66,7 +65,7 @@
             }
         }
 
-        void IInteractable.Destroy() {}
+        void IInteractable.Destroy() { }
 
         ETalkableCharacter ITalkable.Character { get => m_TalkableCharacter; }
 
@@ -129,7 +128,7 @@
 
             string selectedItem = AdventureGame.Instance.SelectedItemID;
             string actionText;
-            
+
             if (selectedItem != null)
             {
                 InteractableWithItem interactableWith = GetInteractableWithItem(selectedItem);

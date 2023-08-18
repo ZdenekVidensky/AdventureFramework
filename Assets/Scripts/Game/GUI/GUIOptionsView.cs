@@ -1,14 +1,13 @@
 ﻿namespace TVB.Game.GUI
 {
-    using UnityEngine;
-    using UnityEngine.UI;
-
     using TVB.Core.Attributes;
     using TVB.Core.GUI;
-    using UnityEngine.Audio;
-    using TVB.Game.Options;
     using TVB.Game.GameSignals;
+    using TVB.Game.Options;
     using TVB.Game.Utilities;
+    using UnityEngine;
+    using UnityEngine.Audio;
+    using UnityEngine.UI;
 
     public class GUIOptionsView : GUIView
     {
@@ -37,7 +36,7 @@
 
         // Options
 
-        private bool  m_SubtitlesOn;
+        private bool m_SubtitlesOn;
         private float m_SoundsVolume;
         private float m_MusicVolume;
         private float m_VoicesVolume;
@@ -80,9 +79,9 @@
             m_VoicesVolume = options.VoicesVolume;
 
             m_SubtitlesToggle.isOn = m_SubtitlesOn;
-            m_SoundsSlider.value   = m_SoundsVolume;
-            m_MusicSlider.value    = m_MusicVolume;
-            m_VoicesSlider.value   = m_VoicesVolume;
+            m_SoundsSlider.value = m_SoundsVolume;
+            m_MusicSlider.value = m_MusicVolume;
+            m_VoicesSlider.value = m_VoicesVolume;
         }
 
         protected override void OnBackButtonClicked()

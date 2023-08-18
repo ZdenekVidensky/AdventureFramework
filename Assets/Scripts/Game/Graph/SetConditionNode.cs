@@ -1,7 +1,7 @@
 ﻿namespace TVB.Core.Graph
 {
-    using UnityEngine;
     using Sirenix.OdinInspector;
+    using UnityEngine;
 
 
     [CreateNodeMenu("Set Condition Node"), NodeTint("#24f2c9")]

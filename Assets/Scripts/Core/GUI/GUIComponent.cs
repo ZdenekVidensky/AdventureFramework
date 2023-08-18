@@ -2,7 +2,7 @@
 {
     using TVB.Core.Attributes;
     using UnityEngine;
-    
+
     public class GUIComponent : MonoBehaviour
     {
         // PUBLIC MEMBERS
@@ -34,7 +34,7 @@
 
         public virtual void OnDeinitialized()
         {
-            Frontend      = null;
+            Frontend = null;
             m_Initialized = false;
         }
 

@@ -1,12 +1,10 @@
 ﻿namespace TVB.Game.GUI
 {
     using System.Collections.Generic;
-    using UnityEngine;
 
     using TVB.Core.GUI;
     using TVB.Game.Save;
     using TVB.Game.Utilities;
-    using System.Linq;
 
     public class GUISaveSlotsList : GUIComponent
     {
@@ -40,7 +38,7 @@
             bool containsAutosave = false;
             bool containsQuicksave = false;
 
-            for(int idx = 0, count = saveDataList.Count; idx < count; idx++)
+            for (int idx = 0, count = saveDataList.Count; idx < count; idx++)
             {
                 GUISaveData data = saveDataList[idx];
                 int index = data.Index;
@@ -57,7 +55,7 @@
                 slot.Initialize(data);
                 slot.SetIsEnabled(true);
 
-                containsAutosave  |= data.IsAutosave;
+                containsAutosave |= data.IsAutosave;
                 containsQuicksave |= data.IsQuicksave;
             }
 

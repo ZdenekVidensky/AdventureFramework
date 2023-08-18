@@ -1,16 +1,13 @@
 ﻿namespace TVB.Game.GUI
 {
     using System.Text;
-
-    using UnityEngine;
-    using UnityEngine.UI;
-    using UnityEngine.Events;
-
-    using TVB.Core.GUI;
     using TVB.Core.Attributes;
+    using TVB.Core.GUI;
     using TVB.Core.Localization;
     using TVB.Game.Save;
-
+    using UnityEngine;
+    using UnityEngine.Events;
+    using UnityEngine.UI;
     using GUIText = TMPro.TextMeshProUGUI;
 
     public class GUISaveSlot : GUIComponent
@@ -18,16 +15,16 @@
         // CONSTANTS
 
         private const int QUICKSAVE_TEXTID = 200015;
-        private const int EMPTY_TEXTID     = 200016;
-        private const int AUTOSAVE_TEXTID  = 200017;
+        private const int EMPTY_TEXTID = 200016;
+        private const int AUTOSAVE_TEXTID = 200017;
 
         // PRIVATE MEMBERS
 
         [SerializeField, HideInInspector, GetComponentInChildren("Text", true)]
         private GUIText m_Text;
         [SerializeField, HideInInspector, GetComponent(true)]
-        private Button  m_Button;
-        private string  m_SaveFileName;
+        private Button m_Button;
+        private string m_SaveFileName;
 
         [System.Serializable]
         public class GUISaveSlotClickEvent : UnityEvent<string, GUISaveSlot> { }

@@ -1,8 +1,6 @@
 ﻿namespace TVB.Core.Localization
 {
     using System.Collections.Generic;
-    using System.IO;
-    using UnityEditor;
     using UnityEngine;
 
     public class TextDatabase
@@ -46,9 +44,9 @@
 
         // PRIVATE MEMBERS
 
-        private Dictionary<int, string>    m_Translations = new Dictionary<int, string>(255);
+        private Dictionary<int, string> m_Translations = new Dictionary<int, string>(255);
         private Dictionary<int, AudioClip> m_TranslatedAudioClips = new Dictionary<int, AudioClip>(255);
-        private ELanguage                  m_CurrentLanguage;
+        private ELanguage m_CurrentLanguage;
 
         // PUBLIC METHODS
 
@@ -77,7 +75,7 @@
                     LocalizedTextDataItem localizedDataItem = localizedData.GetTranslatedData(language);
 
                     m_Translations.Add(localizedData.TextID, localizedDataItem.Text);
-                    
+
                     if (localizedDataItem.VoiceoverAudioClip != null)
                     {
                         m_TranslatedAudioClips.Add(localizedData.TextID, localizedDataItem.VoiceoverAudioClip);

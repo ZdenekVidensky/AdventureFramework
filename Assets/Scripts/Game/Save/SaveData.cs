@@ -24,12 +24,12 @@ namespace TVB.Game.Save
             int sceneNameID,
             System.DateTime date)
         {
-            PositionX   = position.x;
-            PositionY   = position.y;
-            Direction   = (int)direction;
-            SceneName   = sceneName;
+            PositionX = position.x;
+            PositionY = position.y;
+            Direction = (int)direction;
+            SceneName = sceneName;
             SceneNameID = sceneNameID;
-            Date        = date;
+            Date = date;
 
             int itemsCount = items.Count;
             InventoryItems = new string[itemsCount];
@@ -43,7 +43,7 @@ namespace TVB.Game.Save
             Conditions = new ConditionSaveData[conditionsCount];
 
             int counter = 0;
-            foreach(KeyValuePair<string, bool> condition in conditions)
+            foreach (KeyValuePair<string, bool> condition in conditions)
             {
                 Conditions[counter] = new ConditionSaveData() { Name = condition.Key, Value = condition.Value };
                 counter++;

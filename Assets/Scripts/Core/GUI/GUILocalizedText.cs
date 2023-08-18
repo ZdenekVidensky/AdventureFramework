@@ -1,12 +1,9 @@
 ﻿namespace TVB.Core.GUI
 {
-    using UnityEngine;
-
+    using Sirenix.OdinInspector;
     using TVB.Core.Attributes;
     using TVB.Core.Localization;
-
-    using Sirenix.OdinInspector;
-
+    using UnityEngine;
     using GUIText = TMPro.TextMeshProUGUI;
 
     public class GUILocalizedText : MonoBehaviour

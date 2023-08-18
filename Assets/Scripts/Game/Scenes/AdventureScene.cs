@@ -1,12 +1,10 @@
 ﻿namespace TVB.Game.Scenes
 {
-    using System.Collections.Generic;
-
-    using UnityEngine;
 
     using TVB.Core;
-    using TVB.Game.GUI;
     using TVB.Game.GameSignals;
+    using TVB.Game.GUI;
+    using UnityEngine;
 
     public class AdventureScene : Scene
     {

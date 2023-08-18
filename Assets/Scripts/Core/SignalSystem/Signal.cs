@@ -1,7 +1,7 @@
 ﻿namespace TVB.Core.SignalSystem
 {
     using System;
-    
+
     public class Signal
     {
         private event Action<int> m_EventHandler;

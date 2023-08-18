@@ -1,12 +1,11 @@
 ﻿namespace TVB.Game.Scenes
 {
-    using UnityEngine;
 
     using TVB.Core;
-    using TVB.Game.GUI;
     using TVB.Game.GameSignals;
-    using TVB.Game.Utilities;
+    using TVB.Game.GUI;
     using TVB.Game.Save;
+    using TVB.Game.Utilities;
 
     public class MenuScene : Scene
     {

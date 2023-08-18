@@ -1,24 +1,23 @@
 namespace TVB.Game
 {
     using System.Collections.Generic;
-    using UnityEngine;
-
-    using TVB.Core.Interactable;
     using TVB.Core.Attributes;
+    using TVB.Core.Interactable;
+    using UnityEngine;
 
     public class Player : MonoBehaviour, ITalkable
     {
         // CONFIGURATION
 
         [SerializeField]
-        private float          m_MovementSpeed = 5f;
+        private float m_MovementSpeed = 5f;
         [SerializeField]
-        private float          m_StoppingDistance = 0.01f;
+        private float m_StoppingDistance = 0.01f;
 
         // PUBLIC MEMBERS
 
-        public Vector3 Position     => m_Transform.position;
-        public bool IsGoing         => m_CurrentPath != null;
+        public Vector3 Position => m_Transform.position;
+        public bool IsGoing => m_CurrentPath != null;
         public EDirection Direction => m_Direction;
 
         // ANIMATOR PARAMETERS
@@ -30,19 +29,19 @@ namespace TVB.Game
         // PRIVATE MEMBERS
 
 
-        private float          m_ScaleLevelsDistance;
-        private SceneSettings  m_SceneSettings;
+        private float m_ScaleLevelsDistance;
+        private SceneSettings m_SceneSettings;
 
-        private List<Vector2>  m_CurrentPath = null;
-        private int            m_CurrentPathIndex;
-        private Vector3        m_CurrentDestinationPoint;
-        private Vector3        m_CurrentDirection;
+        private List<Vector2> m_CurrentPath = null;
+        private int m_CurrentPathIndex;
+        private Vector3 m_CurrentDestinationPoint;
+        private Vector3 m_CurrentDirection;
 
-        private EDirection     m_Direction;
+        private EDirection m_Direction;
         [GetComponent(true), SerializeField, HideInInspector]
-        private Transform      m_Transform;
+        private Transform m_Transform;
         [GetComponent(true), SerializeField, HideInInspector]
-        private Animator       m_Animator;
+        private Animator m_Animator;
         [GetComponent(true), SerializeField, HideInInspector]
         private SpriteRenderer m_SpriteRenderer;
 
@@ -62,7 +61,7 @@ namespace TVB.Game
 
         public void SetSceneSettings(SceneSettings sceneSettings)
         {
-            m_SceneSettings       = sceneSettings;
+            m_SceneSettings = sceneSettings;
             m_ScaleLevelsDistance = Mathf.Abs(m_SceneSettings.BottomScale.YPosition - m_SceneSettings.TopScale.YPosition);
 
             // Set position based on previous scene
@@ -81,10 +80,10 @@ namespace TVB.Game
 
         public void GoTo(Vector2 destinationPoint)
         {
-            List<Vector2> path        = new List<Vector2>(1) { destinationPoint };
-            m_CurrentPathIndex        = 0;
+            List<Vector2> path = new List<Vector2>(1) { destinationPoint };
+            m_CurrentPathIndex = 0;
             m_CurrentDestinationPoint = path[m_CurrentPathIndex];
-            m_CurrentDirection        = (m_CurrentDestinationPoint - m_Transform.position);
+            m_CurrentDirection = (m_CurrentDestinationPoint - m_Transform.position);
 
             SetDirection(CalculateNewDirection(m_CurrentDirection));
 
@@ -93,22 +92,22 @@ namespace TVB.Game
 
         public void GoTo(List<Vector2> path)
         {
-            m_CurrentPathIndex        = 0;
+            m_CurrentPathIndex = 0;
             m_CurrentDestinationPoint = path[m_CurrentPathIndex];
-            m_CurrentDirection        = (m_CurrentDestinationPoint - m_Transform.position);
+            m_CurrentDirection = (m_CurrentDestinationPoint - m_Transform.position);
 
             SetDirection(CalculateNewDirection(m_CurrentDirection));
-            m_CurrentPath             = path;
+            m_CurrentPath = path;
         }
 
         public void SkipTo(Vector3 destinationPoint)
         {
-            m_Transform.position      = destinationPoint;
-            m_CurrentDirection        = (destinationPoint - m_Transform.position);
+            m_Transform.position = destinationPoint;
+            m_CurrentDirection = (destinationPoint - m_Transform.position);
 
             SetDirection(CalculateNewDirection(m_CurrentDirection));
 
-            m_CurrentPath             = null;
+            m_CurrentPath = null;
             m_CurrentDestinationPoint = Vector3.zero;
             m_CurrentDestinationPoint = Vector3.zero;
         }
@@ -139,9 +138,9 @@ namespace TVB.Game
                 }
                 else
                 {
-                    m_CurrentPathIndex       += 1;
+                    m_CurrentPathIndex += 1;
                     m_CurrentDestinationPoint = m_CurrentPath[m_CurrentPathIndex];
-                    m_CurrentDirection        = (m_CurrentDestinationPoint - m_Transform.position);
+                    m_CurrentDirection = (m_CurrentDestinationPoint - m_Transform.position);
                     SetDirection(CalculateNewDirection(m_CurrentDirection));
                 }
             }

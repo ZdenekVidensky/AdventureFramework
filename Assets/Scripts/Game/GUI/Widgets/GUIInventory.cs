@@ -1,30 +1,28 @@
 ﻿namespace TVB.Game.GUI
 {
     using System.Collections.Generic;
-
+    using TVB.Core.Attributes;
+    using TVB.Core.GUI;
+    using TVB.Game.GameSignals;
     using UnityEngine;
     using UnityEngine.UI;
-
-    using TVB.Core.GUI;
-    using TVB.Core.Attributes;
-    using TVB.Game.GameSignals;
 
     public class GUIInventory : GUIComponent
     {
         private List<GUIInventoryItem> m_Items = new List<GUIInventoryItem>(20);
 
         [GetComponentInChildren("Item", true), SerializeField, HideInInspector]
-        private GUIInventoryItem       m_Item;
+        private GUIInventoryItem m_Item;
 
         [GetComponentInChildren("MainFrame", true), SerializeField, HideInInspector]
-        private RectTransform          m_MainFrame;
+        private RectTransform m_MainFrame;
         [GetComponentInChildren("Content", true), SerializeField, HideInInspector]
-        private Transform              m_ContentTransform;
+        private Transform m_ContentTransform;
         [GetComponentInChildren("Content", true), SerializeField, HideInInspector]
-        private GUIGridLayout          m_GridLayout;
+        private GUIGridLayout m_GridLayout;
 
         [SerializeField]
-        private Button                 m_InventoryToggleButton;
+        private Button m_InventoryToggleButton;
 
         public override void OnInitialized()
         {
@@ -93,7 +91,7 @@
             if (AdventureGame.Instance.IsBusy == true)
                 return;
 
-            bool inventoryActive                   = !m_MainFrame.gameObject.activeSelf;
+            bool inventoryActive = !m_MainFrame.gameObject.activeSelf;
             AdventureGame.Instance.IsInventoryOpen = inventoryActive;
         }
 

@@ -1,11 +1,10 @@
 ﻿namespace TVB.Game.GUI
 {
-    using UnityEngine;
-    using UnityEngine.UI;
-
     using TVB.Core.Attributes;
     using TVB.Core.GUI;
     using TVB.Game.GameSignals;
+    using UnityEngine;
+    using UnityEngine.UI;
 
     public class GUIIngameMenuView : GUIView
     {

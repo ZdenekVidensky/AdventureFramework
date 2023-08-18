@@ -1,12 +1,10 @@
 ﻿namespace TVB.Game
 {
-    using System.Collections.Generic;
-
-    using UnityEngine;
     using Sirenix.OdinInspector;
-
-    using TVB.Core.Localization;
+    using System.Collections.Generic;
     using TVB.Core.Graph;
+    using TVB.Core.Localization;
+    using UnityEngine;
 
     [CreateAssetMenu(fileName = "InventoryItem", menuName = "Items/InventoryItem")]
     [System.Serializable]

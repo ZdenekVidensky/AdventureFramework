@@ -1,8 +1,7 @@
 ﻿namespace TVB.Core.GUI
 {
-    using UnityEngine;
-
     using TVB.Core.Attributes;
+    using UnityEngine;
     using UnityEngine.UI;
 
     [RequireComponent(typeof(Canvas))]
@@ -32,25 +31,25 @@
 
         // PROTECTED MEMBERS
 
-        protected Frontend     Frontend;
+        protected Frontend Frontend;
 
         // PRIVATE MEMBERS
 
-        private GUIComponent[]  m_Components;
-        private bool            m_Initialized;
-        private bool            m_Interactable;
+        private GUIComponent[] m_Components;
+        private bool m_Initialized;
+        private bool m_Interactable;
 
         [GetComponentInChildren("BackButton"), SerializeField, HideInInspector]
-        private Button          m_BackButton;
+        private Button m_BackButton;
 
         [GetComponentInChildren("Frame", true), SerializeField, HideInInspector]
-        private CanvasGroup     m_Frame;
+        private CanvasGroup m_Frame;
         [GetComponent(true), SerializeField, HideInInspector]
-        private Canvas          m_Canvas;
+        private Canvas m_Canvas;
 
         public void Initialize(Frontend frontend)
         {
-            Frontend   = frontend;
+            Frontend = frontend;
             m_Components = GetComponentsInChildren<GUIComponent>(true);
 
             for (int idx = 0, count = m_Components.Length; idx < count; idx++)
@@ -69,7 +68,7 @@
             }
 
 
-            Frontend    = null;
+            Frontend = null;
             m_Initialized = false;
 
             OnDeinitialized();
