@@ -7,4 +7,5 @@ Unity framework for point &amp; click adventure games.
   <li>Graph system for events and dialogues using <a href="https://github.com/Siccity/xNode" target="_Blank">XNode plugin</a></li>
   <li>Simple A* navigation system using nodes which can be placed to the scene</li>
   <li>Inventory and items management with preset combinations</li>
+  <li>Easy save system for saving scene objects and conditions</li>
 </ul>
