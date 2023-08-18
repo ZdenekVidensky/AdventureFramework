@@ -1,4 +1,4 @@
-using Sirenix.OdinInspector;
+//using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace TVB.Core.Localization
@@ -32,8 +32,8 @@ namespace TVB.Core.Localization
 
         public int TextID;
 
-        [HorizontalGroup("Split", 0.3f)]
-        [Button("Copy ID to clipboard")]
+        //[HorizontalGroup("Split", 0.3f)]
+        //[Button("Copy ID to clipboard")]
         private void CopyTextIDToClipboard()
         {
             GUIUtility.systemCopyBuffer = TextID.ToString();

@@ -1,6 +1,6 @@
 namespace TVB.Game.Navigation
 {
-    using Sirenix.OdinInspector;
+    //using Sirenix.OdinInspector;
     using System.Collections.Generic;
     using UnityEngine;
 
@@ -117,7 +117,7 @@ namespace TVB.Game.Navigation
 
         // EDITOR
 
-        [Button("Find and fill all NavMeshes neighbours")]
+        //[Button("Find and fill all NavMeshes neighbours")]
         private void FillNavMeshes()
         {
             m_NavMeshes = GetComponentsInChildren<NavMesh>(true);

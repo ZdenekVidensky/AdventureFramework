@@ -1,6 +1,6 @@
 ﻿namespace TVB.Core.Interactable
 {
-    using Sirenix.OdinInspector;
+    //using Sirenix.OdinInspector;
     using TVB.Core.Graph;
     using TVB.Core.Localization;
     using UnityEngine;
@@ -36,7 +36,7 @@
         public InteractiveGraph InteractiveGraph;
         [Tooltip("Text ID of action for this item to be displayed")]
         public int CustomTextID;
-        [DisableInEditorMode, DisableInPlayMode, ShowInInspector]
+        //[DisableInEditorMode, DisableInPlayMode, ShowInInspector]
         public string Text => TextDatabase.Localize[CustomTextID];
     }
 }

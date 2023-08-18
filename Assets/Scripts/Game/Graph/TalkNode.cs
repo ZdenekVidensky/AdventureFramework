@@ -1,6 +1,6 @@
 ﻿namespace TVB.Core.Graph
 {
-    using Sirenix.OdinInspector;
+    //using Sirenix.OdinInspector;
     using TVB.Core.Interactable;
     using TVB.Core.Localization;
     using UnityEngine;
@@ -15,7 +15,7 @@
         public int TextID;
         public bool PlayTalkAnimation = true;
 
-        [MultiLineProperty(5), DisableInEditorMode, DisableInPlayMode, ShowInInspector]
+        //[MultiLineProperty(5), DisableInEditorMode, DisableInPlayMode, ShowInInspector]
         public string Text => TextDatabase.Localize[TextID];
     }
 }

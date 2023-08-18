@@ -1,6 +1,6 @@
 namespace TVB.Core.Graph
 {
-    using Sirenix.OdinInspector;
+    //using Sirenix.OdinInspector;
     using TVB.Game;
     using UnityEngine;
 
@@ -13,7 +13,7 @@ namespace TVB.Core.Graph
 
         public Vector2 Destination;
 
-        [Button("Set Player position")]
+        //[Button("Set Player position")]
         private void SetPlayerPosition()
         {
             Player player = FindObjectOfType<Player>(true);

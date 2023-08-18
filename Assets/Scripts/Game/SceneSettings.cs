@@ -1,6 +1,6 @@
 namespace TVB.Game
 {
-    using Sirenix.OdinInspector;
+    //using Sirenix.OdinInspector;
     using TVB.Core.Localization;
     using UnityEngine;
 
@@ -10,7 +10,7 @@ namespace TVB.Game
         public string SceneName;
         public int SceneNameID;
 
-        [MultiLineProperty(5), DisableInEditorMode, DisableInPlayMode, ShowInInspector]
+        //[MultiLineProperty(5), DisableInEditorMode, DisableInPlayMode, ShowInInspector]
         public string DisplayName => TextDatabase.Localize[SceneNameID];
 
         [Header("Scales")]

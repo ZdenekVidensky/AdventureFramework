@@ -1,6 +1,6 @@
-﻿#if ODIN_INSPECTOR
+﻿/*#if ODIN_INSPECTOR
 using Sirenix.OdinInspector.Editor;
-#endif
+#endif*/
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -21,7 +21,7 @@ namespace XNodeEditor.Internal {
 		public K target;
 		public SerializedObject serializedObject;
 
-#if ODIN_INSPECTOR
+/*#if ODIN_INSPECTOR
 		private PropertyTree _objectTree;
 		public PropertyTree objectTree
 		{
@@ -41,7 +41,7 @@ namespace XNodeEditor.Internal {
 				return this._objectTree;
 			}
 		}
-#endif
+#endif*/
 
 		public static T GetEditor(K target, NodeEditorWindow window) {
 			if (target == null) return null;

@@ -1,4 +1,4 @@
-﻿using Sirenix.OdinInspector;
+﻿//using Sirenix.OdinInspector;
 using TVB.Core.GUI;
 using UnityEngine;
 
@@ -21,7 +21,7 @@ namespace TVB.Game.GUI
         private int ItemsPerRow;
 
 #if UNITY_EDITOR
-        [Button("Rearrange")]
+        //[Button("Rearrange")]
 #endif
         public void Rearrange()
         {

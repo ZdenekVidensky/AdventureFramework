@@ -1,6 +1,6 @@
 ﻿namespace TVB.Core.Interactable
 {
-    using Sirenix.OdinInspector;
+    //using Sirenix.OdinInspector;
     using TVB.Core.Graph;
     using TVB.Core.Localization;
     using TVB.Game;
@@ -15,15 +15,15 @@
         private int m_CustomTextID;
         [SerializeField]
         private int m_ActivePlaceTextID;
-        [DisableInEditorMode, DisableInPlayMode, ShowInInspector]
+        //[DisableInEditorMode, DisableInPlayMode, ShowInInspector]
         public string CustomTextID => TextDatabase.Localize[m_CustomTextID];
         [SerializeField]
         private InteractiveGraph m_InteractiveGraph;
         [SerializeField]
         private int m_ItemNameID;
-        [DisableInEditorMode, DisableInPlayMode, ShowInInspector]
+        //[DisableInEditorMode, DisableInPlayMode, ShowInInspector]
         public string ItemName => TextDatabase.Localize[m_ItemNameID];
-        [DisableInEditorMode, DisableInPlayMode, ShowInInspector]
+        //[DisableInEditorMode, DisableInPlayMode, ShowInInspector]
         public string ActivePlaceText => TextDatabase.Localize[m_ActivePlaceTextID];
 
         EInteractableAction IInteractable.ActionType => m_InteractableAction;
@@ -34,7 +34,7 @@
         Vector3 IInteractable.Position => transform.position;
 
 
-        [SerializeField, TableList]
+        [SerializeField/*, TableList*/]
         private InteractableWithItem[] m_InteractableWithItems;
 
         public void OnLeave()

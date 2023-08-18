@@ -1,6 +1,6 @@
 ﻿namespace TVB.Core.Graph
 {
-    using Sirenix.OdinInspector;
+    //using Sirenix.OdinInspector;
     using TVB.Game;
     using UnityEngine;
 
@@ -11,9 +11,9 @@
         [Input] public BaseInteractiveNode Input;
         [Output] public BaseInteractiveNode Output;
 
-        [PreviewField(75)]
+        //[PreviewField(75)]
         public InventoryItem Item;
-        [LabelWidth(120)]
+        //[LabelWidth(120)]
         public bool DestroyAfterTake = true;
     }
 }

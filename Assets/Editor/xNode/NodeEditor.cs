@@ -1,8 +1,8 @@
-#if ODIN_INSPECTOR
+/*#if ODIN_INSPECTOR
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
-#endif
+#endif*/
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -62,7 +62,7 @@ namespace XNodeEditor {
                 NodeEditorGUILayout.PortField(dynamicPort);
             }
 
-#if ODIN_INSPECTOR
+/*#if ODIN_INSPECTOR
             objectTree.BeginDraw(true);
             objectTree.EnumerateTree(includeChildren: false).ForEach(p =>
             {
@@ -73,16 +73,16 @@ namespace XNodeEditor {
             });
             //InspectorUtilities.EndDrawPropertyTree(objectTree);
             objectTree.EndDraw();
-#endif
+#endif*/
 
             serializedObject.ApplyModifiedProperties();
 
 #if ODIN_INSPECTOR
             // Call repaint so that the graph window elements respond properly to layout changes coming from Odin    
-            if (GUIHelper.RepaintRequested)
+            /*if (GUIHelper.RepaintRequested)
             {
                 GUIHelper.ClearRepaintRequest();
-            }
+            }*/
 #else
             window.Repaint();
 #endif
@@ -92,7 +92,7 @@ namespace XNodeEditor {
 
         public void DrawWithOdin()
         {
-            objectTree.BeginDraw(true);
+            /*objectTree.BeginDraw(true);
             objectTree.EnumerateTree(includeChildren: false).ForEach(p =>
             {
                 if (!drawnbyXNode.Contains(p.Name) && !excludes.Contains(p.Name))
@@ -100,7 +100,7 @@ namespace XNodeEditor {
                     p.Draw();
                 }
             });
-            objectTree.EndDraw();
+            objectTree.EndDraw();*/
         }
 #endif
 

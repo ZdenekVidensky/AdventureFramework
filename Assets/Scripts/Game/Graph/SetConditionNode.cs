@@ -1,6 +1,6 @@
 ﻿namespace TVB.Core.Graph
 {
-    using Sirenix.OdinInspector;
+    //using Sirenix.OdinInspector;
     using UnityEngine;
 
 
@@ -11,12 +11,12 @@
         [Input] public BaseInteractiveNode Input;
         [Output] public BaseInteractiveNode Output;
 
-        [LabelWidth(100)]
-        [HideIf("ConditionType", EConditionType.HasItem)]
+        /*[LabelWidth(100)]
+        [HideIf("ConditionType", EConditionType.HasItem)]*/
         public string ConditionName;
 
-        [ShowIf("ConditionType", EConditionType.Boolean)]
-        [LabelWidth(100)]
+        /*[ShowIf("ConditionType", EConditionType.Boolean)]
+        [LabelWidth(100)]*/
         public bool BooleanValue;
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace TVB.Core.GUI
 {
-    using Sirenix.OdinInspector;
+    //using Sirenix.OdinInspector;
     using TVB.Core.Attributes;
     using TVB.Core.Localization;
     using UnityEngine;
@@ -13,7 +13,7 @@
         [GetComponent, SerializeField, HideInInspector]
         private GUIText m_Text;
 
-        [MultiLineProperty(5), DisableInEditorMode, DisableInPlayMode, ShowInInspector]
+        //[MultiLineProperty(5), DisableInEditorMode, DisableInPlayMode, ShowInInspector]
         public string Text => TextDatabase.Localize[TextID];
 
         public string Translation

@@ -1,6 +1,6 @@
 ﻿namespace TVB.Core.Interactable
 {
-    using Sirenix.OdinInspector;
+    //using Sirenix.OdinInspector;
     using TVB.Core.Graph;
     using TVB.Core.Localization;
     using TVB.Game;
@@ -17,7 +17,7 @@
         [SerializeField]
         private ETalkableCharacter m_TalkableCharacter;
 
-        [DisableInEditorMode, DisableInPlayMode, ShowInInspector]
+        //[DisableInEditorMode, DisableInPlayMode, ShowInInspector]
         public string NameText => TextDatabase.Localize[m_NameTextID];
         [SerializeField]
         private EInteractableAction m_InteractableAction;
@@ -25,7 +25,7 @@
         private int m_CustomTextID;
         [SerializeField]
         private int m_ActivePlaceTextID;
-        [DisableInEditorMode, DisableInPlayMode, ShowInInspector]
+        //[DisableInEditorMode, DisableInPlayMode, ShowInInspector]
         public string CustomTextID => TextDatabase.Localize[m_CustomTextID];
         [SerializeField]
         private InteractiveGraph m_InteractiveGraph;
@@ -33,7 +33,7 @@
         private Animator m_Animator;
         [SerializeField]
         private InteractableWithItem[] m_InteractableWithItems;
-        [DisableInEditorMode, DisableInPlayMode, ShowInInspector]
+        //[DisableInEditorMode, DisableInPlayMode, ShowInInspector]
         public string ActivePlaceText => TextDatabase.Localize[m_ActivePlaceTextID];
 
         // STATIC MEMBERS

@@ -1,6 +1,6 @@
 ﻿namespace TVB.Game
 {
-    using Sirenix.OdinInspector;
+    //using Sirenix.OdinInspector;
     using System.Collections.Generic;
     using TVB.Core.Graph;
     using TVB.Core.Localization;
@@ -14,10 +14,10 @@
 
         public string ID;
         public int NameID;
-        [DisableInEditorMode, DisableInPlayMode, ShowInInspector]
+        //[DisableInEditorMode, DisableInPlayMode, ShowInInspector]
         public string Text => TextDatabase.Localize[NameID];
 
-        [PreviewField(80)]
+        //[PreviewField(80)]
         public Sprite Sprite;
 
         public List<InteractableWith> InteractableWithItems;
